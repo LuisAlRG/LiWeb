@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAutorTable extends Migration
+class CreateEmpleadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateAutorTable extends Migration
      */
     public function up()
     {
-        Schema::create('Autor', function (Blueprint $table) {
-        	//atributos
-            $table->id('idAutor');
+        Schema::create('Empleado', function (Blueprint $table) {
+            $table->id('idEmpleado');
+            $table->foreignId('idUser')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('nombre')->nullable();
-            $table->string('apellido');
+            $table->string('apellido')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateAutorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Autor');
+        Schema::dropIfExists('Empleado');
     }
 }
