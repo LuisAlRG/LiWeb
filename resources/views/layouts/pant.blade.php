@@ -7,6 +7,7 @@
     @yield('title')
     <!-- css -->
     <link rel="stylesheet" href="/css/principalStyle.css">
+    <link rel="stylesheet" href="/css/svgAnimaciones.css">
     @yield('style')
     <!-- librerias  -->
     <script src="/js/angular.min.js"></script>

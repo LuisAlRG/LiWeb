@@ -28,8 +28,11 @@ Route::get('/LiWeb',				function(){return "<h1>Not Done!!!</h1>";})->name('login
 Route::get('/LiWeb/MenuPrincipal',	function(){return view('menuPrincipal');})
 	->middleware(['auth']);
 
-Route::get('/LiWeb/Venta',			function(){return "<h1>Not Done!!!</h1>";})
+Route::get('/LiWeb/Venta',					[VentaController::class, 'ViewVentas'])
 	->middleware(['auth']);
+Route::post('/LiWeb/Venta/VerTodoVenta',	[VentaController::class, 'VerTodosVentas']);
+Route::post('/LiWeb/Venta/Consultar',	[VentaController::class, 'ConsultarVentas']);
+
 
 Route::get('/LiWeb/Libros',			function(){return "<h1>Not Done!!!</h1>";})
 	->middleware(['auth']);
