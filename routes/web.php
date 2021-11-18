@@ -21,4 +21,35 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+//Aplicacion web
+
+Route::get('/LiWeb',				function(){return "<h1>Not Done!!!</h1>";})->name('login');
+
+Route::get('/LiWeb/MenuPrincipal',	function(){return view('menuPrincipal');})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Venta',			function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Libros',			function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::post('/LiWeb/Libros/Modificar',	function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Libros/Autores',		function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Libros/Generos',		function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Libros/Editoriales',	function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Empleados',	function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
+Route::get('/LiWeb/Historial',	function(){return "<h1>Not Done!!!</h1>";})
+	->middleware(['auth']);
+
 require __DIR__.'/auth.php';
