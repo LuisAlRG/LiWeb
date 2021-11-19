@@ -18,7 +18,7 @@
 	<div>
         <h2> Salir de sesion </h2>
         <div class="btnLogOut">
-        <a href="LogIn.html">
+        <a href="Saliendo">
             <button >
                 <svg  viewBox="-20 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M29 10C29 5.58172 32.5817 2 37 2H90C94.4183 2 98 5.58172 98 10V90C98 94.4183 94.4183 98 90 98H37C32.5817 98 29 94.4183 29 90V10Z" fill="black"/>
@@ -40,7 +40,7 @@
 		<botonesDeRedireccion>
             <div>
                 <section>
-                    <a href="PantallaVenta.html">
+                    <a href="Venta">
                     <div>
                         <svg  viewBox="104 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect class="texto1D" y="15" width="100" height="15" fill="black" fill-opacity="0.5"/>
@@ -57,7 +57,7 @@
                     </a>
                 </section>
                 <section>
-                    <a href="PantallaLibros.html">
+                    <a href="Libros">
                     <div>
                         <svg  viewBox="0 0 200 145" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="26" y="132" width="143" height="6" fill="white"/>
@@ -94,7 +94,7 @@
                     </a>
                 </section>
                 <section>
-                    <a href="PantallaEmpleados.html">
+                    <a href="Empleados">
                     <div>
                         <svg viewBox="0 0 232 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g class="izquierdoE">
@@ -115,7 +115,7 @@
                     </a>
                 </section>
                 <section>
-                    <a href="PantallaHistorial.html">
+                    <a href="Historial">
                     <div>
                         <svg  viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path class="marcoR" d="M150 56C150 83.6142 127.614 106 100 106C72.3858 106 50 83.6142 50 56C50 28.3858 72.3858 6 100 6C127.614 6 150 28.3858 150 56ZM55 56C55 80.8528 75.1472 101 100 101C124.853 101 145 80.8528 145 56C145 31.1472 124.853 11 100 11C75.1472 11 55 31.1472 55 56Z" fill="white"/>

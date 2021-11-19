@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Funcionario;
+use App\Models\Administrador;
+
 
 class Empleado extends Model
 {

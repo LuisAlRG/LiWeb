@@ -45,7 +45,6 @@
 @endsection
 @section('botonesAccion')
 <div>
-<div>
     <div>
         <a href="PantallaVentaActiond.html">
         <button>Vender</button>

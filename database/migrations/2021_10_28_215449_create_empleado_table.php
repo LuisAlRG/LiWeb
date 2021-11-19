@@ -19,7 +19,7 @@ class CreateEmpleadoTable extends Migration
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('nombre')->nullable();
+            $table->string('nombre');
             $table->string('apellido')->nullable();
             $table->timestamps();
         });

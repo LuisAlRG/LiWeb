@@ -20,6 +20,8 @@ class AutorSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         Schema::enableForeignKeyConstraints();
+
+        
         $faker = Faker::create();
         for($i=0; $i<10; $i++){
         	$nombre = $faker->realText(10);

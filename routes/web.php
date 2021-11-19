@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\VentaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +25,11 @@ Route::get('/dashboard', function () {
 
 //Aplicacion web
 
-Route::get('/LiWeb',				function(){return "<h1>Not Done!!!</h1>";})->name('login');
+Route::get('/LiWeb',				[EmpleadoController::class,"ViewLogIn"])->name('login');
+Route::post('/LiWeb/Autenticar',	[EmpleadoController::class,"Autenticar"]);
+Route::get('/LiWeb/Saliendo',		[EmpleadoController::class,"Salir"]);
 
-Route::get('/LiWeb/MenuPrincipal',	function(){return view('menuPrincipal');})
+Route::get('/LiWeb/MenuPrincipal',	[EmpleadoController::class,"ViewMenoPrincipal"])
 	->middleware(['auth']);
 
 Route::get('/LiWeb/Venta',					[VentaController::class, 'ViewVentas'])
