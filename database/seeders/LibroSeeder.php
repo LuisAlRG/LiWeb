@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Libro;
+use Illuminate\Support\Facades\Schema;
 
 class LibroSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class LibroSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        DB::table('Editorial')->truncate();
-		Schema::enableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
+        //DB::table('Editorial')->truncate();
+		//Schema::enableForeignKeyConstraints();
         $libro = new Libro();
         $libro->titulo = "Calculo Multiples variables";
         $libro->precio = 5000;

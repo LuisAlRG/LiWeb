@@ -1,0 +1,74 @@
+@import 'w3';
+
+/*
+    Estilo del log in
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+body>div{
+    @extend .w3-container;
+    @extend .w3-row;
+
+    
+    
+    >logIn{
+        @extend .w3-padding;
+        overflow: hidden;
+        border: 2px solid green;
+        border-radius: 1em;
+        @extend .w3-display-middle;
+        @extend .w3-col;
+        @extend .l8;
+        @extend .m10;
+        @extend .s12;
+        @extend .w3-row;
+        >div#parteIzquierdo{
+            @extend .w3-col;
+            @extend .l6;
+            @extend .m6;
+            @extend .s12;
+
+            img{
+                width: 100%;
+            }
+        }
+        >div#parteDerecha{
+            @extend .w3-col;
+            @extend .l6;
+            @extend .m6;
+            @extend .s12;
+            >form{
+                >input{
+                    @extend .w3-input;
+                    @extend .w3-border;
+                    @extend .w3-round;
+                }
+                >input:last-child{
+                    margin-top: 12px;
+                    @extend .w3-button;
+                    @extend .my-green-color;
+                }
+            }
+            >button{
+                @extend .w3-button;
+                @extend .w3-round;
+                width: 100%;
+                @extend .my-green-color;
+            }
+            >button:hover{
+                @extend .my-green-color;
+            }
+
+        }
+    }
+}

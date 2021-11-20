@@ -19,6 +19,18 @@ class EmpleadoController extends Controller
     }
     // funciones de peticion 
     function Autenticar(Request $req){
+
+        if (isset($_POST["btnSubmit"]))
+        {
+            $secret = "6LcBh0cdAAAAAKAPnyuz_CnfI1661m_vwgD_AzxX";
+            $response = $_POST['g-recaptcha-response'];
+            $respuesta = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$response."&remoteip=127.0.0.1"));
+            if (!$respuesta->success)
+            {
+                return view('logIn',['mensajeServidor'=>'El captcha fue rechasado, vuelve a intentar']);
+            }
+        }
+
         $name = $req->input('nombreUsuario');
         $pass = $req->input('contrasena');
 
