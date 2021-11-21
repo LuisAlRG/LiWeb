@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EmpleadoSeeder::class);
         $this->call(AutorSeeder::class);
         $this->call(EditorialSeeder::class);
+        $this->call(GeneroSeeder::class);
         $this->call(LibroSeeder::class);
-
+        $this->call(VentaSeeder::class);
     }
 }

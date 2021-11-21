@@ -9,4 +9,5 @@ class Historial extends Model
 {
     use HasFactory;
     protected $table = 'Historial';
+    protected $primaryKey = 'idHistorial';
 }

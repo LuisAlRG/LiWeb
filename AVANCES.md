@@ -13,3 +13,7 @@ avance 3 del 18 11 21
     creacion de seeder esta completo el de autor, editorial, libros
     creacion de seeder Empleados que por ahora solo tiene uno para comprobar log in
     se comprobo y cumplio la posibilidad de iniciar secion con el usuario y cerrarlo
+
+avance 1 del 20 11 21
+    modificacion en las clases modelos por nesesidad de tener que cambiar el nombre del id ya que el default de laravel es "id" en ves de "id[modelo]"
+    se agrego mas seder probando el agregado de ventas, pero todavia no esta completo

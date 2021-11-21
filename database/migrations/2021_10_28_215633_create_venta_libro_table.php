@@ -26,7 +26,6 @@ class CreateVentaLibroTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->integer('cantidad');
-            $table->timestamps();
         });
     }
 

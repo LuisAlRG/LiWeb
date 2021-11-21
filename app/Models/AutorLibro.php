@@ -9,4 +9,5 @@ class AutorLibro extends Model
 {
     use HasFactory;
     protected $table = 'AutorLibro';
+    
 }

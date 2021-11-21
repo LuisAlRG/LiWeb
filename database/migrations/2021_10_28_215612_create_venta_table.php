@@ -21,7 +21,7 @@ class CreateVentaTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('cliente')->nullable();
-            $table->timestamp('fechaHora');
+            $table->timestamp('fechaHora')->useCurrent();
             $table->timestamps();
         });
     }

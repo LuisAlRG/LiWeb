@@ -9,4 +9,5 @@ class Funcionario extends Model
 {
     use HasFactory;
     protected $table = 'Funcionario';
+    
 }

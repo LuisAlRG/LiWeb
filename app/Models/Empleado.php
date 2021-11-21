@@ -12,6 +12,7 @@ class Empleado extends Model
 {
     use HasFactory;
     protected $table = 'Empleado';
+	protected $primaryKey = 'idEmpleado';
 
     public function user(){
     	return $this->belongsTo(User::class,'idUser');

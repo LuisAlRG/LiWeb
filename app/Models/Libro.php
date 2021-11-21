@@ -9,6 +9,7 @@ class Libro extends Model
 {
     use HasFactory;
     protected $table = 'Libro';
+	protected $primaryKey = 'idLibro';
 
     public function editorial(){
     	return $this->belongsTo(Editorial::class,'idEditorial');
@@ -26,15 +27,15 @@ class Libro extends Model
     	);
     	*/
     	return $this->belongsToMany(Genero::class,'GeneroLibro',
-    		'idLibro',
-    		'idGenero'
+    		'idGenero',
+			'idLibro'
     	);
     }
 
-    public function Autores(){
-        return $this->belongsToMany(Autor::class,'GeneroLibro',
-            'idLibro',
-            'idAutor'
+    public function autores(){
+        return $this->belongsToMany(Autor::class,'AutorLibro',
+            'idAutor',
+			'idLibro'
         );
     }
 }
