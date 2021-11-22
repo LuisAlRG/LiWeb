@@ -104,19 +104,12 @@ class VentaSeeder extends Seeder
             //requiere un libro vendido
             $venta->SaveLibroCant(random_int(1, 41),random_int(1, 5));
             //genera mas libro para relacionar
-            switch(random_int(0,5)){
-                case 5:
-                    $venta->SaveLibroCant(random_int(1, 41),random_int(1, 5));
-                case 4:
-                    $venta->SaveLibroCant(random_int(1, 41),random_int(1, 5));
-                case 3:
-                    $venta->SaveLibroCant(random_int(1, 41),random_int(1, 5));
-                case 2:
-                    $venta->SaveLibroCant(random_int(1, 41),random_int(1, 5));
-                case 1:
-                    $venta->SaveLibroCant(random_int(1, 41),random_int(1, 5));
-                case 0:
-                    break;
+            $maslibros = random_int(0,5);
+            while($maslibros > 0){
+                $idLibro = random_int(1,41);
+                $cantidadGenerado = random_int(1,5);
+                $venta->SaveLibroCant($idLibro, $cantidadGenerado);
+                $maslibros--;
             }
         }
 

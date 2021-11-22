@@ -49,4 +49,69 @@ class EmpleadoController extends Controller
         Auth::logout();
         return redirect('/LiWeb');
     }
+
+    function AderirUsuario(Request $req){
+        $nombre =   $req->input('nombreEmpleado');
+        $apellido = $req->input('apellidoEmpleado');
+        $password = $req->input('passEmpleado');
+        $rol =      $req->input('rolEmpleado');
+        $rol = (int) $rol;
+
+        $existe = User::where('name','=',$nombre)->get();
+        if($existe){
+            //revisar si concuerda con un usuario
+            foreach ($existe as $key => $value) {
+                if(Hash::check($pass, $value->password)){
+                    return 're';
+                }
+            }
+        }
+
+
+        $empleado = new Empleado();
+        $empleado->nombre = $nombre;
+        $empleado->apellido = $apellido;
+        $usuario = new User();
+        $usuario->name = $empleado->nombre;
+        $usuario->email = "liWeb".$indInc.$empleado->apellido."@192.168.1.150";
+        $usuario->password = Hash::make( $password );
+        $usuario->save();
+        $usuario->empleado()->save($empleado);
+        $empleado->ConvertirA($rol);
+        $empleado->save();
+
+
+        return 'ok';
+    }
+
+    function ModificarUsuario(Request $req){
+        $clave = $req->input('clave');
+        $nombre =   $req->input('nombreEmpleadoM');
+        $apellido = $req->input('apellidoEmpleadoM');
+        $password = $req->input('passEmpleadoM');
+        $rol =      $req->input('rolEmpleadoM');
+        $clave = (int) $clave;
+        $rol = (int) $rol;
+
+        $existe = User::where('name','=',$nombre)->get();
+        if($existe){
+            //revisar si concuerda con un usuario
+            foreach ($existe as $key => $value) {
+                if(Hash::check($pass, $value->password)){
+                    return 're';
+                }
+            }
+        }
+
+        $empleado = Empleado::find($clave);
+        $empleado->nombre = $nombre;
+        $empleado->apellido = $apellido;
+        $usuario = User::find($empleado->idUser);
+        $usuario->name = $empleado->nombre;
+        $usuario->password = Hash::make( $password );
+        $usuario->save();
+        $empleado->ConvertirA($rol);
+        $empleado->save();
+        return 'ok';
+    }
 }

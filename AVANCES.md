@@ -17,3 +17,10 @@ avance 3 del 18 11 21
 avance 1 del 20 11 21
     modificacion en las clases modelos por nesesidad de tener que cambiar el nombre del id ya que el default de laravel es "id" en ves de "id[modelo]"
     se agrego mas seder probando el agregado de ventas, pero todavia no esta completo
+
+avence 1 del 21 11 21
+    Modificacion en libro para que tuviesen autor y generos multiples
+    una pequena mejora en el seeder de venta
+    Lirbo tiene una megor forma de salvar un elemento
+    el logico de empleado (EmpleadoController) tiene la posibilidad de aderir empleado
+    sera un dia largo

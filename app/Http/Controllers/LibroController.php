@@ -58,12 +58,13 @@ class LibroController extends Controller
     		$autor = new Autor();
     		$autor->nombre = $nombreAutor;
     		$autor->apellido = $apellidoAutor;
+			$autor->save();
     	}
     	$genero = Genero::where('nombre',$nombreGenero)->get();
     	if(!$genero){
     		$genero = new Genero();
     		$genero->nombre = $nombreGenero;
-
+			$genero->save();
     	}
 
     	$nuevoLibro = new Libro();

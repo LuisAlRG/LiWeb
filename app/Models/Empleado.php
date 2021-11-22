@@ -43,7 +43,7 @@ class Empleado extends Model
     	//1 funcionario
     	//2 administrador
     	//3 gerente
-    	$contratado = True;
+    	$contratado = true;
     	$element = $this->funcionario();
 		if($element){
 			$contratado = $element->contratado;
@@ -65,19 +65,19 @@ class Empleado extends Model
     		case 2:
     			$admin = new Administrador();
     			$admin->contratado = $contratado;
-    			$admin->gerente = False;
+    			$admin->gerente = false;
 				$admin->idEmpleado = $this->idEmpleado;
 				$admin->save();
     		break;
     		case 3:
     			$admin = new Administrador();
     			$admin->contratado = $contratado;
-    			$admin->gerente = True;
+    			$admin->gerente = true;
 				$admin->idEmpleado = $this->idEmpleado;
 				$admin->save();
     		break;
     		default:
-    			return False;
+    			return false;
     	}
 
     	return True;

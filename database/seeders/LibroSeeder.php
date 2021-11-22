@@ -31,6 +31,7 @@ class LibroSeeder extends Seeder
         $libro->generos()->save($genero);
         $autor = Autor::find(1);
         $libro->autores()->save($autor);
+        
         // agregar otro
         $libro = new Libro();//2
         $libro->titulo = "Sistemas embedidos";
@@ -39,6 +40,14 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 20;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $genero = Genero::find(2);
+        $libro->generos()->save($genero);
+        $genero = Genero::find(13);
+        $libro->generos()->save($genero);
+        $autor = Autor::find(5);
+        $libro->autores()->save($autor);
+        $autor = Autor::find(6);
+        $libro->autores()->save($autor);
 
         $libro = new Libro();//3
         $libro->titulo = "Calculo infinitesimal";
@@ -47,6 +56,10 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 43;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $genero = Genero::find(13);
+        $libro->generos()->save($genero);
+        $autor = Autor::find(6);
+        $libro->autores()->save($autor);
 
         $libro = new Libro();//4
         $libro->titulo = "Deutsch Na Klar";
@@ -55,6 +68,10 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 18;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $genero = Genero::find(6);
+        $libro->generos()->save($genero);
+        $autor = Autor::find(9);
+        $libro->autores()->save($autor);
 
         $libro = new Libro();//5
         $libro->titulo = "Ecuaciones diferenciales";
@@ -63,6 +80,10 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 15;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $genero = Genero::find(13);
+        $libro->generos()->save($genero);
+        $autor = Autor::find(1);
+        $libro->autores()->save($autor);
 
         $libro = new Libro();//6
         $libro->titulo = "Programacion Arduino";
@@ -71,6 +92,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 20;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this-> AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//7
         $libro->titulo = "Programación Raspberry Pi";
@@ -79,6 +101,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 35;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//8
         $libro->titulo = "Vision Computacional";
@@ -87,6 +110,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 17;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//9
         $libro->titulo = "Redes Bayesianas";
@@ -95,6 +119,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 19;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//10
         $libro->titulo = "Teoría de Grafos";
@@ -103,6 +128,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 21;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//11
         $libro->titulo = "English for Everyone, Phrasal Verbs";
@@ -111,6 +137,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 5;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//12
         $libro->titulo = "Inteligencia Artificial";
@@ -119,6 +146,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 10;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//13
         $libro->titulo = "Ecuaciones de Maxwell";
@@ -127,6 +155,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 45;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//14
         $libro->titulo = "Electromagnetismo";
@@ -135,6 +164,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 23;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//15
         $libro->titulo = "English Idioms in Use";
@@ -143,6 +173,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 32;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//16
         $libro->titulo = "IELTS Academic 14";
@@ -151,6 +182,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 5;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//17
         $libro->titulo = "Filme y Cinemática";
@@ -159,6 +191,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 10;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//18
         $libro->titulo = "Arquitectura";
@@ -167,6 +200,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 10;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//19
         $libro->titulo = "Artes graficas";
@@ -175,6 +209,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 10;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//20
         $libro->titulo = "Fotografía";
@@ -183,6 +218,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 12;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//21
         $libro->titulo = "Arte Contemporanea";
@@ -191,6 +227,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 5;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//22
         $libro->titulo = "Química orgánica";
@@ -199,6 +236,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 10;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//23
         $libro->titulo = "Algoritmos y Estructura de datos";
@@ -207,6 +245,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 15;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//24
         $libro->titulo = "Psicología";
@@ -215,6 +254,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 19;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//25
         $libro->titulo = "Antropología";
@@ -223,6 +263,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 21;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//26
         $libro->titulo = "Mecánica";
@@ -231,6 +272,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 20;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//27
         $libro->titulo = "Bioingeniería";
@@ -239,6 +281,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 43;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//28
         $libro->titulo = "Telecomunicaciones";
@@ -247,6 +290,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 12;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//29
         $libro->titulo = "Criptografía";
@@ -255,6 +299,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 7;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//30
         $libro->titulo = "Base de datos";
@@ -263,6 +308,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 12;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//31
         $libro->titulo = "Desarrollo web";
@@ -271,6 +317,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 10;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//32
         $libro->titulo = "Programación en Haskell";
@@ -279,6 +326,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 19;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//33
         $libro->titulo = "Wolfram Mathematica, Manual";
@@ -287,6 +335,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 21;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//34
         $libro->titulo = "Cibernética";
@@ -295,6 +344,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 20;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//35
         $libro->titulo = "Zoología";
@@ -303,6 +353,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 15;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//36
         $libro->titulo = "Pre-Calculo";
@@ -311,6 +362,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 20;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//37
         $libro->titulo = "Álgebra Lineal";
@@ -319,6 +371,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 14;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//38
         $libro->titulo = "Ánalisis Complejo";
@@ -327,6 +380,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 9;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//39
         $libro->titulo = "Ecuaciones Diferenciables Parciales";
@@ -335,6 +389,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 7;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//40
         $libro->titulo = "Teoría de los números";
@@ -343,6 +398,7 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 8;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
 
         $libro = new Libro();//41
         $libro->titulo = "Topología";
@@ -351,5 +407,23 @@ class LibroSeeder extends Seeder
         $libro->cantidad = 20;
         $libro->idEditorial = random_int(1, 11);
         $libro->save();
+        $this->AderirGenerosYAutoresAleatorios($libro);
+    }
+
+    function AderirGenerosYAutoresAleatorios($libro){
+        $genero = Genero::find(13);
+        $libro->generos()->save($genero);
+        $masGeneros = random_int(0, 2);
+        for($i=0;$i<$masGeneros;$i++){
+            $genero = Genero::find(random_int(1, 12));
+            $libro->SaveGenero($genero);
+        }
+        $autor = Autor::find(3);
+        $libro->SaveAutor($autor);
+        $masAutores = random_int(0, 2);
+        for($i=0;$i<$masAutores;$i++){
+            $autor = Autor::find(random_int(1, 15));
+            $libro->SaveAutor($autor);
+        }
     }
 }

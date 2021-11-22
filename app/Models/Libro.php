@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\AutorLibro;
+use App\Models\AutorGenero;
 
 class Libro extends Model
 {
@@ -27,15 +29,35 @@ class Libro extends Model
     	);
     	*/
     	return $this->belongsToMany(Genero::class,'GeneroLibro',
-    		'idGenero',
-			'idLibro'
+    		'idLibro',
+			'idGenero'
     	);
     }
 
     public function autores(){
         return $this->belongsToMany(Autor::class,'AutorLibro',
-            'idAutor',
-			'idLibro'
+			'idLibro',
+			'idAutor'
         );
     }
+
+	public function SaveAutor($autor){
+		$existe = AutorLibro::where('idLibro','=',$this->idLibro)
+			->where('idAutor','=',$autor->idAutor)->first();
+		if($existe){
+			return 1;
+		}
+		$this->autores()->save($autor);
+		return 0;
+	}
+
+	public function SaveGenero($genero){
+		$existe = GeneroLibro::where('idLibro','=',$this->idLibro)
+			->where('idGenero','=',$genero->idGenero)->first();
+		if($existe){
+			return 1;
+		}
+		$this->generos()->save($genero);
+		return 0;
+	}
 }

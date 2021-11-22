@@ -48,7 +48,7 @@ class AutorSeeder extends Seeder
         $autor->nombre = "Grady";
         $autor->apellido = "Booch";
         $autor->save();
-        $autor = new Autor();
+        $autor = new Autor();//
         $autor->nombre = "Brend";
         $autor->apellido = "Bruegge";
         $autor->save();
