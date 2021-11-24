@@ -14,7 +14,7 @@
 @section('accinesInputs')
 <div>
     <form action="buscarVenta" method="post">
-
+        <input type="hidden" name="_token" value="{{ csrf_token() }} " ng-model="tokenUsr">
         <label for="clave">Clave de venta</label> 
         <input type="number" name="clave" id="claveID"
             ng-model="clave"
@@ -46,7 +46,7 @@
 @section('botonesAccion')
 <div>
     <div>
-        <a href="PantallaVentaActiond.html">
+        <a href="RealizarVenta">
         <button>Vender</button>
         </a>
     </div> 
@@ -65,6 +65,9 @@
 @endsection
 @section('tables')
 <tablaInfo>
+    <form action="/LiWeb/Venta/VerTodoVenta" method="post"> 
+    <input type="hidden" name="tokenUsr2" value="{{ csrf_token() }} " ng-model="tokenUsr2">
+    </form>
     <div>
         <section id="tableTop_Venta">
             <div class="cel1"> <span>#ID</span> </div>
@@ -75,17 +78,17 @@
         </section>
         <div id="cuerpoEntero">
             <section class="renglosElement_Venta">
-                <div class="cel1"> <span>@{{venta.id}}</span> </div>
-                <div class="cel2"> <span>@{{venta.cliente}}</span> </div>
-                <div class="cel3"> <span>@{{venta.responsable}}</span> </div>
-                <div class="cel4"> <span>@{{venta.fecha}}</span> </div>
+                <div class="cel1"> <span>@{{venta.idVenta}}</span> </div>
+                <div class="cel2"> <span>@{{FormatoCliente(venta.cliente)}}</span> </div>
+                <div class="cel3"> <span>@{{FormatoNombre(venta.responsable)}}</span> </div>
+                <div class="cel4"> <span>@{{FormatoFecha(venta.fechaHora)}}</span> </div>
                 <div class="cel5"> <span>@{{venta.vendidos}}</span> </div>
                 <div class="elementComplete">
                     <section>
-                        <p>id: @{{venta.id}}</p>
-                        <p>Cliente: @{{venta.cliente}}</p>
+                        <p>id: @{{venta.idVenta}}</p>
+                        <p>Cliente: @{{FormatoCliente(venta.cliente)}}</p>
                         <p>Empleado: @{{venta.responsable}}</p>
-                        <p>Fecha: @{{venta.fecha}}</p>
+                        <p>Fecha: @{{venta.fechaHora}}</p>
                         <p>Cantidad: @{{venta.vendidos}}</p>
                     </section>
                 </div>

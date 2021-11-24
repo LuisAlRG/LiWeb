@@ -18,16 +18,7 @@ class Libro extends Model
     }
 
     public function generos(){
-    	/*
-    	return $this->hasManyThrough(
-    		Genero::class,		//clase conecato
-    		GeneroLibro::class,	//clase intermedio
-    		'idLibro',			//clave foranea de la intermedio
-    		'idGenero',			//clave foranea de la intermedio
-    		'idLibro',			//id 
-    		'idGenero'
-    	);
-    	*/
+
     	return $this->belongsToMany(Genero::class,'GeneroLibro',
     		'idLibro',
 			'idGenero'
@@ -60,4 +51,6 @@ class Libro extends Model
 		$this->generos()->save($genero);
 		return 0;
 	}
+
+	
 }

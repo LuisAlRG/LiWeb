@@ -37,6 +37,12 @@ Route::get('/LiWeb/Venta',					[VentaController::class, 'ViewVentas'])
 Route::post('/LiWeb/Venta/VerTodoVenta',	[VentaController::class, 'VerTodosVentas']);
 Route::post('/LiWeb/Venta/Consultar',	[VentaController::class, 'ConsultarVentas']);
 
+Route::get('/LiWeb/RealizarVenta',		[VentaController::class, 'ViewVender'])
+->middleware(['auth']);
+Route::post('/LiWeb/RealizarVenta/VerTodoLibros',		[VentaController::class, 'VerTodosLibros']);
+
+Route::post('/LiWeb/Vender',						[VentaController::class, 'ViewVenderYa']);
+Route::post('/LiWeb/Vender/LibrosSeleccionados',	[VentaController::class, 'DesplegarLibrosSeleccionado']);
 
 Route::get('/LiWeb/Libros',			function(){return "<h1>Not Done!!!</h1>";})
 	->middleware(['auth']);

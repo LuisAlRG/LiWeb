@@ -24,3 +24,10 @@ avence 1 del 21 11 21
     Lirbo tiene una megor forma de salvar un elemento
     el logico de empleado (EmpleadoController) tiene la posibilidad de aderir empleado
     sera un dia largo
+
+avance 1 del 24 11 21
+    Implementacion de las pantallas de realizar ventas y vender al proyecto, sepuede seleccionar libros y pasarlo a la siguiente hoja
+    nota: buscar una manera de usar local storash para poder regresar a la pantalla, nada concreto aun
+    Modificaciones mayores en "VentaCOntroles" el cual es sobre la capasidad de regresar las pantallas realizar Ventas y Vender y poder insertar
+
+ 

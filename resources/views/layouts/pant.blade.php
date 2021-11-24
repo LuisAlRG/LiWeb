@@ -12,6 +12,7 @@
     <!-- librerias  -->
     <script src="/js/angular.min.js"></script>
     <script src="/js/jquery.min.js"></script>
+    
 </head>
 <body ng-app="allApp" ng-controller="allController">
     <!-- Parte Izquierdo-->
@@ -48,6 +49,7 @@
 </body>
 
 <!--script del final-->
+<script src="/js/Constantes.js"></script>
 @yield('script')
 
 
