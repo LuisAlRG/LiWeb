@@ -25,33 +25,73 @@ class Empleado extends Model
 		return $this->hasOne(Administrador::class,'idEmpleado');
     }
 
+	public function ventas(){
+		return $this->hasOne(Venta::class,'idEmpleado');
+	}
+
     public function QueEs(){
-    	$element = $this->funcionario();
-    	if($element){
+    	$element = $this->funcionario()->get();
+    	if(count($element)){
     		return 1;
     	}
-    	$element = $this->administrador();
-    	if($element){
-    		if($element->gerente)
+    	$element = $this->administrador()->get();
+    	if(count($element)){
+    		if($element[0]->gerente)
     			return 3;
     		return 2;
     	}
     	return -1;
     }
 
+	public function getContratado(){
+		$element = $this->funcionario()->get();
+    	if(count($element)){
+    		return $element[0]->contratado;
+    	}
+    	$element = $this->administrador()->get();
+    	if(count($element)){
+    		return $element[0]->contratado;
+    	}
+    	return false;
+	}
+
+	public function getResponsable(){
+		$element = $this->ventas()->get();
+		if(count($element)){
+			return true;
+		}
+		return false;
+	}
+
+	public function toggleContratado($boleano){
+		$element = $this->funcionario()->get();
+    	if(count($element)){
+    		$element[0]->contratado = !$boleano;
+			$element[0]->save();
+			return !$boleano;
+    	}
+    	$element = $this->administrador()->get();
+    	if(count($element)){
+    		$element[0]->contratado = !$boleano;
+			$element[0]->save();
+			return !$boleano;
+    	}
+    	return '1';
+	}
+
     public function ConvertirA($tipoDeUsuario){
     	//1 funcionario
     	//2 administrador
     	//3 gerente
     	$contratado = true;
-    	$element = $this->funcionario();
-		if($element){
-			$contratado = $element->contratado;
-    		$this->administrador()->delete();
+    	$element = $this->funcionario()->get();
+		if(count($element)){
+			$contratado = $element[0]->contratado;
+    		$this->funcionario()->delete();
     	}
-    	$element = $this->administrador();
-    	if($element){
-    		$contratado = $element->contratado;
+    	$element = $this->administrador()->get();
+    	if(count($element)){
+    		$contratado = $element[0]->contratado;
     		$this->administrador()->delete();
     	}
 
@@ -82,4 +122,15 @@ class Empleado extends Model
 
     	return True;
     }
+
+	public function BorrarPertenencia(){
+		$element = $this->funcionario()->get();
+		if(count($element)){
+    		$element[0]->delete();
+    	}
+    	$element = $this->administrador()->get();
+    	if(count($element)){
+    		$element[0]->delete();
+    	}
+	}
 }

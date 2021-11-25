@@ -161,6 +161,11 @@ app.controller('allController',function($scope,$http){
     $scope.PermitirTerminar = function(precioTotal,precipPagado){
         return (precipPagado - precioTotal) >= 0;
     }
+
+    $scope.OnSubmit = function(){
+        let nombreid = "aplicarVenta";
+        document.getElementById(nombreid).submit();
+    }
 });
 
 //funcion para saver si esta vacio o null

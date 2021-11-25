@@ -31,61 +31,142 @@ app.controller('allController',function($scope,$http){
     $scope.listEmpleado = [
         new Empleado(
             0,0,
-            "Luis Alfonso",
-            "Rodriguez Gonzalez",
-            "Luis Alfonso",
+            "Cargando",
+            "Empleado",
+            "claro que si",
             true,
             true,
-            "Gerente"
-        ),
-        new Empleado(1,1,
-            "Kenji",
-            "Gonzalez Hoshino",
-            "Kenji",
-            true,
-            false,
-            "Administrador"
-        ),
-        new Empleado(2,2,
-            "Jose Luis",
-            "Sanchez Sanchez",
-            "Jose Luis",
-            false,
-            false,
-            "Funcionario"
-        ),
-        new Empleado(3,3,
-            "Daniel Roman",
-            "Nuñez Aguirre",
-            "Daniel Roman",
-            true,
-            false,
             "Funcionario"
         )
     ]
-    for(let i=4;i<10;i++){
-        $scope.listEmpleado.push(
-            new Empleado(i,i,
-                "Nombre falso el "+(i-3)+"º",
-                "Appelido False",
-                "Nombre falso el "+(i-3)+"º",
-                true,
-                false,
-                "Funcionario"
-            )
+    
+    $http.post(DIRECCION_HTTPS+"/Empleados/VerTodoEmpleado",
+            {
+                _token:$scope.tokenUsr2
+            }
+        ).then(
+            function(rensopne){
+                let datos = rensopne.data;
+                console.log(datos);
+                $scope.listEmpleado = datos;
+            },
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                $scope.listEmpleado=[
+                    new Empleado(
+                        -1,-1,
+                        "No se pudo cargar",
+                        "A los Empleados",
+                        "lastima",
+                        false,
+                        false,
+                        "Funcionario"
+                    )
+                ];
+            }
         );
-    }
 
     $scope.indxSelecionado = 0;
+
+    $scope.roles=[
+        {nombre:"Funcionario", value:1},
+        {nombre:"Administrador", value:2},
+        {nombre:"Gerente", value:3}
+    ];
+
+    //formatos
+    $scope.FormatoRol = function(rol){
+        let cadena = "Error"
+        switch(rol){
+            case 1: cadena = "Funcionario"; break; //funcionario
+            case 2: cadena = "Administrador"; break; //administrador
+            case 3: cadena = "Gerente"; break; //gerente
+        }
+        return cadena;
+    }
     //funciones de llamada
-
-
     $scope.setIndxSelecionado = function(elIndex){
         $scope.indxSelecionado = elIndex;
+        $scope.mensajeBorrar = null;
     }
 
     $scope.OnContratarToggle = function (empleado) {
+        $("tablaInfo").prop("disabled",true);
+        $http.post(DIRECCION_HTTPS+"/Empleados/Contratado",
+            {
+                _token:$scope.tokenUsr2,
+                clave:empleado.idEmpleado,
+                contratado:empleado.contratado
+            }
+        ).then(
+            function(rensopne){
+                $("tablaInfo").prop("disabled",false);
+                let datos = rensopne.data;
+                console.log(datos);
+            },
+            function(response){
+                $("tablaInfo").prop("disabled",false);
+                let datos = response.data;
+                console.log(datos);
+            }
+        );
         empleado.contratado = !empleado.contratado;
+    }
+
+    $scope.OnInsertarEmpleado = function (){
+        let envio = {
+            _token: $("#tokenUsr2").val(),
+            nombreEmpleado: $scope.nombreEmpleado,
+            apellidoEmpleado: $scope.apellidoEmpleado,
+            passEmpleado: $scope.passEmpleado,
+            rolEmpleado: $scope.rolEmpleado.value
+        }
+        console.log(envio);
+        $http.post(DIRECCION_HTTPS+"/Empleados/Insertar",
+            envio
+        ).then(
+            function(rensopne){
+                let datos = rensopne.data;
+                console.log(datos);
+                if(datos == "re"){
+                    $scope.mensajeInsertar = "Contraseña repetida, intente con otra";
+                    return true;
+                }
+                $scope.listEmpleado.push(datos);
+            },
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                $scope.mensajeInsertar = "Error en la peticion, intentelo mas tarde";
+            }
+        );
+    }
+
+    $scope.OnBorrarEmpleado = function(clave, indexLista){
+        let envio = {
+            _token: $("#tokenUsr2").val(),
+            clave: clave
+        }
+        
+        $http.post(DIRECCION_HTTPS+"/Empleados/Borrar",
+            envio
+        ).then(
+            function(rensopne){
+                let datos = rensopne.data;
+                console.log(datos);
+                if(datos == "no"){
+                    $scope.mensajeBorrar = "Este empleado tiene ventas realizada, solo podemos despedirlos";
+                    return true;
+                }
+                $scope.listEmpleado.splice(indexLista,1);
+            },
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                $scope.mensajeInsertar = "Error en la peticion, intentelo mas tarde";
+            }
+        );
     }
 
     $scope.OnModificarEmpleado = function (empleado, thisindex) {

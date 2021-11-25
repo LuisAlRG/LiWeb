@@ -14,24 +14,24 @@
 @section('accinesInputs')
 <div>
     <form action="buscarLibro" id="buscarLibro" method="post">
-        
+    <input type="hidden" name="_token" value="{{ csrf_token() }} " id="tokenUsr1">
         <label for="clave">Clave del libro</label> 
         <input type="number" name="clave" id="clave"
             ng-model="clave"
         >
         <label for="tituloLibro">Titulo</label> <br>
         <input type="text" name="tituloLibro" id="tituloLibro"
-            ng-model="tituloLibro"
+            ng-model="tituloLibro" ng-disabled="DisableIfClave()"
         >
         <label for="precio">Precio</label>
         <input type="number" name="precio" id="precio"
-            ng-model="precio"
+            ng-model="precio" ng-disabled="DisableIfClave()"
         >
         <select name="categoria" id="categoria"
-            ng-model="categoria"
+            ng-model="categoria" ng-init="categoria = filtros[0]"
+            ng-options="filtro.nombre for filtro in filtros"
+            ng-disabled="DisableIfClave()"
         >
-            <option value="1">Mayor al precio</option>
-            <option value="2">Menor al precio</option>
         </select>
     </form>
 
@@ -43,8 +43,8 @@
         >
         <label for="responsable">Responsable</label>
         <input type="text" name="responsable" id="responsable"
-            ng-model="responsable" value="{{$responsable}}" disabled
-        >
+            value="{{$responsable}}" disabled
+        > 
 
         <input type="hidden" name="librosSelct" id="librosSelct"
             ng-model="librosSelct" 
@@ -58,7 +58,7 @@
 @endsection
 @section('botonesAccion')
 <div>
-    <div><button>Buscar</button></div> 
+    <div><button ng-click="OnBuscarLibro()">Buscar</button></div> 
     <div> <a href="PantallaVenta.html"> <button>Cancelar</button></a></div>
 </div>
 @endsection
@@ -88,6 +88,7 @@
                     
                     <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
                     ng-click="accionAderirSeleccion($index)"
+                    ng-show="libros.idLibro > 0"
                     >
                         <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                         <g class="cruzNegraG">
@@ -143,7 +144,7 @@
                 <div class="cel2"><span>@{{libros.titulo}}</span></div>
                 <div class="cel3"><span>@{{FormatoDosAutores(libros.autores)}}</span></div>
                 <div class="cel4"><span>@{{libros.editorial}}</span></div>
-                <div class="cel5"><span>@{{ (libros.precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }}</span></div>
+                <div class="cel5"><span>$@{{ (libros.precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }}</span></div>
                 <div class="cel6">
                     <!-- <img src="img/basure.svg" alt="Bote de basura" ng-click="libros.selected=false; accionRemoverSeleccion($index)">-->
                     <svg class="boteDeBasura" viewBox="-10 -10 380 510" fill="none" xmlns="http://www.w3.org/2000/svg"

@@ -77,6 +77,7 @@ class VentaController extends Controller
         $cliente = $req->input('cliente');
         $idEmpleado = $req->input('responsable');
         
+        $categoria = (int) $categoria ;
     }
 
     function ConsultarLirbos(Request $req){
@@ -84,13 +85,32 @@ class VentaController extends Controller
         $titulo = $req->input('tituloLibro');
         $precio = $req->input('precio');
         $filtro = $req->input('categoria');
+        $filtro = (int) $filtro;
 
-        
 
         if(is_numeric($clave)){
             $elemento = Libro::find($clave);
-            return $elemento;
+            if($elemento){
+                $elemento->autores = $elemento->autores()->get();
+                $elemento->editorial = $elemento->editorial()->get()[0]->nombre;
+            }
+            
+            return [0=>$elemento];
         }
+        $opt = "LIKE";
+        switch($filtro){
+            case 1: $opt=">="; break;
+            case 2: $opt="<="; break;
+        }
+        $elementos = Libro::where('titulo','like',"%".$titulo."%" )
+            ->where('precio',$opt,floatval($precio))->get();
+        if($elementos){
+            foreach($elementos as $key => $libro){
+                $libro->autores = $libro->autores()->get();
+                $libro->editorial = $libro->editorial()->get()[0]->nombre;
+            }
+        }
+        return $elementos;
     }
 
     // /Vender/LibrosSeleccionados
@@ -125,11 +145,37 @@ class VentaController extends Controller
         $cliente = $req->input('cliente');
         $listLibrosId = $req->input('librosSelct');
         $listLibrosCant = $req->input('librosCantidad');
+
+        //echo $listLibrosId.'<br>';
+        //echo $listLibrosCant.'<br>';
+
+        $listLibrosId =     explode(' ',$listLibrosId);
+        $listLibrosCant =   explode(' ',$listLibrosCant);
+
+
         $empleado = Auth::user();
         $empleado = $empleado->empleado()->get()[0];
 
         $nuevaVenta = new Venta();
         $nuevaVenta->idEmpleado = $empleado->idEmpleado;
         $nuevaVenta->cliente = $cliente;
+        $nuevaVenta->save();
+
+        foreach ($listLibrosId as $key => $LibroId) {
+            if( !is_numeric($LibroId) )
+                return 1;
+            $cantidasSel = $listLibrosCant[$key];
+            if( !is_numeric($cantidasSel))
+                return 2;
+            $elLibros = Libro::find((int)$LibroId);
+            if(!$elLibros)
+                return 3;
+            //echo $elLibros;
+            //echo $LibroId.'<br>';
+            //echo $cantidasSel.'<br>';
+            $nuevaVenta->SaveLibroCant((int)$LibroId,(int)$cantidasSel);
+            $libros[] = $elLibros;
+        }
+        return redirect('/LiWeb/Venta');
     }
 }

@@ -82,7 +82,7 @@
                 <div class="cel2"> <span>@{{FormatoCliente(venta.cliente)}}</span> </div>
                 <div class="cel3"> <span>@{{FormatoNombre(venta.responsable)}}</span> </div>
                 <div class="cel4"> <span>@{{FormatoFecha(venta.fechaHora)}}</span> </div>
-                <div class="cel5"> <span>@{{venta.vendidos}}</span> </div>
+                <div class="cel5"> <span>@{{getPrecioConFotmato(venta.vendidos)}}</span> </div>
                 <div class="elementComplete">
                     <section>
                         <p>id: @{{venta.idVenta}}</p>

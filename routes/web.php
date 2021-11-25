@@ -40,9 +40,11 @@ Route::post('/LiWeb/Venta/Consultar',	[VentaController::class, 'ConsultarVentas'
 Route::get('/LiWeb/RealizarVenta',		[VentaController::class, 'ViewVender'])
 ->middleware(['auth']);
 Route::post('/LiWeb/RealizarVenta/VerTodoLibros',		[VentaController::class, 'VerTodosLibros']);
+Route::post('/LiWeb/RealizarVenta/ConsultarLibros',		[VentaController::class, 'ConsultarLirbos']);
 
 Route::post('/LiWeb/Vender',						[VentaController::class, 'ViewVenderYa']);
 Route::post('/LiWeb/Vender/LibrosSeleccionados',	[VentaController::class, 'DesplegarLibrosSeleccionado']);
+Route::post('/LiWeb/AplicarVenta',		[VentaController::class, 'InsertarVenta']);
 
 Route::get('/LiWeb/Libros',			function(){return "<h1>Not Done!!!</h1>";})
 	->middleware(['auth']);
@@ -59,8 +61,14 @@ Route::get('/LiWeb/Libros/Generos',		function(){return "<h1>Not Done!!!</h1>";})
 Route::get('/LiWeb/Libros/Editoriales',	function(){return "<h1>Not Done!!!</h1>";})
 	->middleware(['auth']);
 
-Route::get('/LiWeb/Empleados',	function(){return "<h1>Not Done!!!</h1>";})
+Route::get('/LiWeb/Empleados',	[EmpleadoController::class,'ViewEmpleados'])
 	->middleware(['auth']);
+Route::post('/LiWeb/Empleados/VerTodoEmpleado',	[EmpleadoController::class,'VerTodoEmpleado']);
+Route::post('/LiWeb/Empleados/Contratado',		[EmpleadoController::class,'Contratar']);
+Route::post('/LiWeb/Empleados/Insertar',		[EmpleadoController::class,'AderirUsuario']);
+Route::post('/LiWeb/Empleados/Borrar',			[EmpleadoController::class,'BorrarEmpleado']);
+Route::post('/LiWeb/Empleados/Modificar',		[EmpleadoController::class,'ModificarUsuario']);
+
 
 Route::get('/LiWeb/Historial',	function(){return "<h1>Not Done!!!</h1>";})
 	->middleware(['auth']);

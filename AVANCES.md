@@ -30,4 +30,6 @@ avance 1 del 24 11 21
     nota: buscar una manera de usar local storash para poder regresar a la pantalla, nada concreto aun
     Modificaciones mayores en "VentaCOntroles" el cual es sobre la capasidad de regresar las pantallas realizar Ventas y Vender y poder insertar
 
- 
+avance 2 del 24 11 21
+    Nos enfocamos en la cuestion del control del empleado, ya existe la pantalla de empleado , y con ellos podemos: ver todos los empleados, contratar / despedir, e insertar
+    tambien se agrego la consulta de venta

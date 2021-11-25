@@ -13,12 +13,15 @@
 @endsection
 @section('accinesInputs')
 <form action="AplicarVenta" id="aplicarVenta" method="post">
-    <input type="hidden" name="_token" value="{{ csrf_token() }} " id="tokenUsr1" ng-model="tokenUsr1">
+    <input type="hidden" name="_token" value="{{ csrf_token() }} " id="tokenUsr1">
     <input type="hidden" name="librosSelct" id="librosSelct"
-        ng-model="librosSelct" value="{{$librosSelct}}"
+        value="{{$librosSelct}}"
     >
     <input type="hidden" name="librosCantidad" id="librosCantidad"
-        ng-model="librosCantidad" value="{{$librosCantidad}}"
+        value="{{$librosCantidad}}"
+    >
+    <input type="hidden" name="cliente" id="cliente"
+        value="{{$cliente}}"
     >
 </form>
 @endsection
@@ -60,7 +63,7 @@
                             <p>Id: @{{libros.idLibro}}</p>
                             <p>Titulo: @{{libros.titulo}}</p>
                             <p>Precio: @{{getPrecioConFotmato(libros.precio)}} </p>
-                            <p>Editorial: @{{getPrecioConFotmato(libros.precio)}}</p>
+                            <p>Editorial: @{{libros.editorial}}</p>
                             <p>Cantidad en inventario: @{{libros.cantidad}}</p>
                         </div>
                         <div>
@@ -109,7 +112,13 @@
     </section>
     <section id="aplicarVenta">
         <div>@{{" "}}</div>
-        <div><button ng-show="PermitirTerminar((precioTotal + (precioTotal*0.25)),pago)">Terminar</button></div>
+        <div>
+            <button ng-show="PermitirTerminar((precioTotal + (precioTotal*0.25)),pago)"
+                ng-click="OnSubmit()"
+            >
+                Terminar
+            </button>
+        </div>
     </section>
 </notaDePago>
 @endsection

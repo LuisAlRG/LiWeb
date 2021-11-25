@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Empleado;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,11 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class EmpleadoController extends Controller
 {
     //funcion de vistas
+    // /LiWeb
     function ViewLogIn(){
         return view('logIn',['mensajeServidor'=>null]);
     }
+    // /LiWeb/MenuPrincipal
     function ViewMenoPrincipal(){
         return view('menuPrincipal');
+    }
+    // /LiWeb/Empleados
+    function ViewEmpleados(){
+        return view('pantallaEmpleado');
     }
     // funciones de peticion 
     function Autenticar(Request $req){
@@ -43,13 +50,38 @@ class EmpleadoController extends Controller
                 }
             }
         }
-        return view('logIn',['mensajeServidor'=>'Usuario no encontrado']);
+        return view('logIn',['mensajeServidor'=>'Lo sentimos, intente de nuevo']);
     }
     function Salir(){
         Auth::logout();
         return redirect('/LiWeb');
     }
 
+    // /Empleados/VerTodoEmpleado
+    function VerTodoEmpleado(){
+        $empleados = Empleado::all();
+        if($empleados){
+            foreach($empleados as $key => $empleado){
+                //$empleado->rol = $empleado->QueEs();
+                //$empleado->contratado = $empleado->getContratado();
+                $empleado = $this->PrepararEmpleado($empleado);
+            }
+        }
+        return $empleados;
+    }
+
+    // /Empleados/Contratado
+    function Contratar(Request $req){
+        $clave =   $req->input('clave');
+        $contratado =   $req->input('contratado');
+        $clave = (int)$clave;
+        $empleado = Empleado::find($clave);
+        
+        return $empleado->toggleContratado($contratado);
+        
+    }
+
+    // /Empleados/Insertar
     function AderirUsuario(Request $req){
         $nombre =   $req->input('nombreEmpleado');
         $apellido = $req->input('apellidoEmpleado');
@@ -67,23 +99,26 @@ class EmpleadoController extends Controller
             }
         }
 
+        $contarID = Empleado::count();
 
         $empleado = new Empleado();
         $empleado->nombre = $nombre;
         $empleado->apellido = $apellido;
         $usuario = new User();
         $usuario->name = $empleado->nombre;
-        $usuario->email = "liWeb".$indInc.$empleado->apellido."@192.168.1.150";
+        $usuario->email = "liWeb".$contarID.$empleado->apellido."@192.168.1.150";
         $usuario->password = Hash::make( $password );
         $usuario->save();
         $usuario->empleado()->save($empleado);
         $empleado->ConvertirA($rol);
         $empleado->save();
 
+        $sentEmpleado = $this->PrepararEmpleado($empleado);
 
-        return 'ok';
+        return $sentEmpleado;
     }
 
+    // /Empleados/Modificar
     function ModificarUsuario(Request $req){
         $clave = $req->input('clave');
         $nombre =   $req->input('nombreEmpleadoM');
@@ -112,6 +147,29 @@ class EmpleadoController extends Controller
         $usuario->save();
         $empleado->ConvertirA($rol);
         $empleado->save();
+
         return 'ok';
+    }
+
+    // /Empleados/Borrar
+    function BorrarEmpleado(Request $req){
+        $clave = $req->input('clave');
+        $clave = (int)$clave;
+        $empleado = Empleado::find($clave);
+        if($empleado->getResponsable()){
+            return 'no';
+        }
+        $user = $empleado->user()->get();
+        $empleado->BorrarPertenencia();
+        $empleado->delete();
+        $user[0]->delete();
+        
+        return $empleado;
+    }
+
+    public function PrepararEmpleado($empleado){
+        $empleado->rol = $empleado->QueEs();
+        $empleado->contratado = $empleado->getContratado();
+        return $empleado;
     }
 }

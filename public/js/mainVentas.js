@@ -61,12 +61,15 @@ var marcador = null;
 
         //funciones
         $scope.FormatoFecha = function( laFecha ){
-            let cadena = (laFecha.split(' ')[0]).split('-');
-            let fechaY = cadena[0],
-                fechaM = cadena[1],
-                fechaD = cadena[2]
-            cadena = fechaD+'/'+fechaM+'/'+fechaY;
-            return cadena;
+            if(laFecha != undefined){
+                let cadena = (laFecha.split(' ')[0]).split('-');
+                let fechaY = cadena[0],
+                    fechaM = cadena[1],
+                    fechaD = cadena[2]
+                cadena = fechaD+'/'+fechaM+'/'+fechaY;
+                return cadena;
+            }
+            return "-"
         }
 
         $scope.FormatoNombre = function(nombreCompleto){
@@ -83,6 +86,10 @@ var marcador = null;
 
         $scope.setIndxSelecionado = function(elIndex){
             $scope.indxSelecionado = elIndex;
+        }
+
+        $scope.getPrecioConFotmato= function(precio){
+            return (precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',})
         }
 
         $scope.cambiarSelectedIndex = function(elIndex){
