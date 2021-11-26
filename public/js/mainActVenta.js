@@ -49,27 +49,27 @@ app.controller('allController',function($scope,$http){
     ];
 
     $http.post(DIRECCION_HTTPS+"/RealizarVenta/VerTodoLibros",
-            {
-                _token:$scope.tokenUsr3
-            }
-        ).then(
-            function(rensopne){
-                let datos = rensopne.data;
-                console.log(datos);
-                $scope.listLibros = datos;
-            },
-            function(response){
-                let datos = response.data;
-                console.log(datos);
-                $scope.listVenta=[
-                    new Libro(-1,1,//id libro id editorial
-                    "Hoy no es un buen dia para venta",//titulo
-                    440,//precio
-                    1,//edicion
-                    1//cantidad
-                )];
-            }
-        );
+        {
+            _token:$scope.tokenUsr3
+        }
+    ).then(
+        function(rensopne){
+            let datos = rensopne.data;
+            console.log(datos);
+            $scope.listLibros = datos;
+        },
+        function(response){
+            let datos = response.data;
+            console.log(datos);
+            $scope.listLibros=[
+                new Libro(-1,1,//id libro id editorial
+                "Hoy no es un buen dia para venta",//titulo
+                440,//precio
+                1,//edicion
+                1//cantidad
+            )];
+        }
+    );
 
     $scope.listLibrosSelect = [];
 
@@ -222,11 +222,3 @@ app.controller('allController',function($scope,$http){
         document.getElementById(nombreid).submit();
     }
 });
-
-//funcion para saver si esta vacio o null
-//sacado de https://stackoverflow.com/questions/10232366/how-to-check-if-a-variable-is-null-or-empty-string-or-all-whitespace-in-javascri
-function isEmptyOrSpaces(str){
-    if(str === undefined)
-        return true;
-    return str === null || str.match(/^ *$/) !== null;
-}

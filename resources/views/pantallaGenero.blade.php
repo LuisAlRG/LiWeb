@@ -1,20 +1,20 @@
 @extends('layouts.pant')
 
-@section('titleAll','Empleados')
+@section('titleAll','Generos')
 
 @section('title')
-	<title>LiWeb Empleados</title>
+	<title>LiWeb Generos</title>
 @endsection
 @section('style')
-    <link rel="stylesheet" href="/css/modeloEmpleados.css">
+    <link rel="stylesheet" href="/css/modeloAutores.css">
 @endsection
 @section('subtitle')
-	<p>Empleado</p>
+    <p>Libros</p>
+	<p>Generos</p>
 @endsection
 @section('accinesInputs')
 <div>
-    <form action="buscarEmpleados" method="post">
-        <input type="hidden" name="tokenUsr1" value="{{ csrf_token() }} " ng-model="tokenUsr1">
+    <form action="buscarGenero" method="post">
         <label for="clave">Clave</label>
         <input type="number" name="clave" id="clave"
             ng-model="clave"
@@ -23,75 +23,44 @@
         <input type="text" name="nombre" id="nombre"
             ng-model="nombre"
         > 
-        <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" id="apellido"
-            ng-model="apellido"
-        >
-        <label for="rolSelect">Rol</label>
-        <select name="rolSelect" id="rolSelect"
-            ng-model="rolSelect"
-        >
-            <option value="Todos">sin filltro</option>
-            <option value="Gerente">Gerente</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Funcionario">Funcionario</option>
-        </select>
     </form>
 </div>
 @endsection
 @section('botonesAccion')
 <div>
     <div> <button>Buscar</button></div>
-    <div> <a href="MenuPrincipal"> <button>Menu</button></a></div> 
+    <div> <a href="PantallaLibros.html"> <button>Regresar</button></a></div>
+    <div> <a href="MenuPrincipal.html"> <button>Menu</button></a></div> 
 </div>
 @endsection
 @section('tables')
 <tablaInfo>
-    <form action="/LiWeb/Empleados/VerTodoEmpleado" method="post"> 
-    <input type="hidden" name="tokenUsr2" value="{{ csrf_token() }} " id="tokenUsr2" ng-model="tokenUsr2">
-    </form>
     <div>
-        <section id="tableTop_Empleado">
-            <div class="cel1"> <span>Element</span> </div>
+        <section id="tableTop_Genero">
+            
+            <div class="cel1"> <span>Clave</span> </div>
             <div class="cel2"> <span>Nombre</span> </div>
-            <div class="cel3"> <span>Apellido</span> </div>
-            <div class="cel4"> <span>Rol</span> </div>
-            <div class="cel5"> <span>Contratado</span> </div>
+            <div class="cel3"> <span>Acciones</span> </div>
         </section>
         <div id="cuerpoEntero">
-
-            <section class="rowsElement_Empleado element@{{empleado.idEmpleado}}"
-            >
-                <div class="cel1"><span>@{{empleado.idEmpleado}}</span></div>
-                <div class="cel2"><span>@{{empleado.nombre}}</span></div>
-                <div class="cel3"><span>@{{empleado.apellido}}</span></div>
-                <div class="cel4"><span>@{{FormatoRol(empleado.rol)}}</span></div>
-                <div class="cel5"> 
-                    <label class="switch">
-                        <input type="checkbox" 
-                        ng-checked="empleado.contratado"
-                        ng-click="OnContratarToggle(empleado)"
-                        >
-                        <span class="slider round"></span>
-                    </label>
+            <section class="rowsElement_Genero element{{genero.idGenero}}">
+                <div class="cel1"><span>@{{genero.idGenero}}</span></div>
+                <div class="cel2"><span>@{{genero.nombre}}</span></div>
+                <div class="cel3">
+                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="#008000"/>
+                        <rect x="58.4264" y="39.4558" width="15" height="50" rx="7.5" transform="rotate(45 58.4264 39.4558)" fill="black" fill-opacity="0.4"/>
+                        <circle cx="66.9117" cy="41.5772" r="17.5" transform="rotate(45 66.9117 41.5772)" fill="black" fill-opacity="0.4"/>
+                        <rect x="76.1041" y="20.364" width="17" height="19" transform="rotate(45 76.1041 20.364)" fill="#008000"/>
+                        <rect x="55.4264" y="34.4558" width="15" height="50" rx="7.5" transform="rotate(45 55.4264 34.4558)" fill="white"/>
+                        <circle cx="63.9117" cy="36.5772" r="17.5" transform="rotate(45 63.9117 36.5772)" fill="white"/>
+                        <rect x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
+                    </svg>
                 </div>
-                <div class="elementComplete"
-                >
-                    <section>
-                        <p>ID: @{{empleado.idEmpleado}}</p>
-                        <p>Nombre: @{{empleado.nombre}}</p>
-                        <p>Apellido: @{{empleado.apellido}}</p>
-                        <p>Rol: @{{FormatoRol(empleado.rol)}}</p>
-                    </section>
-                    <section ng-show="mensajeBorrar">
-                        <p><span>@{{mensajeBorrar}}</span></p>
-                    </section>
+                <div class="opcionesAdm">
                     <section>
                         <div>
-                            <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                ng-click="OnModificar(libros.idLibro)"
-                                class = "modificarEmpleado"
-                            >
+                            <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle id="Ellipse 1" cx="50" cy="50" r="45" fill="#008000"/>
                                 <g id="LapizSombra">
                                 <path id="Polygon 1" d="M24.3015 82.6985L31.0258 57.603L49.397 75.9742L24.3015 82.6985Z" fill="black" fill-opacity="0.45"/>
@@ -107,18 +76,21 @@
                                 <rect id="Rectangle 4_2" x="31.6152" y="56.0711" width="5" height="45" transform="rotate(-135 31.6152 56.0711)" fill="white"/>
                                 <path id="Ellipse 2_2" d="M61.3137 19.3015C63.7517 16.8635 67.0583 15.4939 70.5061 15.4939C73.9539 15.4939 77.2605 16.8635 79.6985 19.3015C82.1365 21.7395 83.5061 25.0461 83.5061 28.4939C83.5061 31.9417 82.1365 35.2483 79.6985 37.6863L70.5061 28.4939L61.3137 19.3015Z" fill="white"/>
                                 </g>
-                            </svg> <br>
+                            </svg>
+                            <br>
                             Modificar
                         </div>
                         <div>
                             <svg class="boteDeBasura" viewBox="-10 -10 380 510" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                ng-click="OnBorrarEmpleado(empleado.idEmpleado,$index)"
+                            ng-click="libros.selected=false; accionRemoverSeleccion($index)"
                             >
                                 <path class="tapa" d="M0 110C0 87.9086 17.9086 70 40 70H310C332.091 70 350 87.9086 350 110V110H0V110Z" fill="black"/>
                                 <path class="tapa" d="M100 70C100 47.9086 117.909 30 140 30H210C232.091 30 250 47.9086 250 70V70H100V70Z" fill="black"/>
+                                
                                 <g class="cubo">
                                     <path  d="M25.7257 466.583L0 119H44L70.6987 456.504C71.3158 464.305 77.8264 470.321 85.6519 470.321H95.2566C103.826 470.321 110.653 463.155 110.239 454.596L94 119H152.375V455.321C152.375 463.605 159.091 470.321 167.375 470.321H175V499H60.6303C42.3025 499 27.0785 484.861 25.7257 466.583Z" fill="black"/>
                                     <path  d="M324.274 466.583L350 119H306L279.301 456.504C278.684 464.305 272.174 470.321 264.348 470.321H254.743C246.174 470.321 239.347 463.155 239.761 454.596L256 119H197.625V455.321C197.625 463.605 190.909 470.321 182.625 470.321H175V499H289.37C307.697 499 322.921 484.861 324.274 466.583Z" fill="black"/>
+                        
                                 </g>
                             </svg>
                             <br>
@@ -126,44 +98,26 @@
                         </div>
                     </section>
                 </div>
+                <div class="elementComplete">
+                    <section>
+                        <p>id: @{{genero.idGenero}}</p>
+                        <p>Nombre: @{{genero.nombre}}</p>
+                    </section>
+                </div>
             </section>
 
         </div>
         <div class="pieTabla">
-            <div>Nombre</div>
-            <div>Apellidos</div>
-            <div>Contraseña</div>
-            <div>Rol</div>
-            <div>Aderir</div>
-            <form action="aderirEmpleado" id="aEmpleado">
-            
+            <div>Genero</div>
+            <div>Aderrir</div>
+            <form name="aGenero" id="aGenero" action="aderirGenero">
                 <div>
-                    <input type="text" name="nombreEmpleado" id="nombreEmpleado"
-                        ng-model="nombreEmpleado" required
+                    <input type="text" name="nombreGeneroA" id="nombreGeneroA" required 
+                        ng-model = "nombreGeneroA"
                     >
                 </div>
                 <div>
-                    <input type="text" name="apellidoEmpleado" id="apellidoEmpleado"
-                        ng-model="apellidoEmpleado"
-                    >
-                </div>
-                <div>
-                    <input type="password" name="passEmpleado" id="passEmpleado"
-                        ng-model="passEmpleado" required
-                    >
-                </div>
-                <div>
-                    <select name="rolEmpleado" id="rolEmpleado" 
-                        ng-model="rolEmpleado" required
-                        ng-init="rolEmpleado = roles[0]"
-                        ng-options="rol.nombre for rol in roles"
-                    >
-                    </select>
-                </div>
-                <div>
-                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        ng-click="OnInsertarEmpleado()"
-                    >
+                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                         <g class="cruzNegraG">
                             <rect x="44" y="20" width="15" height="65" fill="black" fill-opacity="0.4"/>
@@ -175,13 +129,12 @@
                         </g>
                     </svg>
                 </div>
-                <p><span>@{{mensajeInsertar}}</span></p>
             </form>
         </div>
     </div>
 </tablaInfo>
 @endsection
 @section('script')
-    <script src="/js/ClasesLocales/Empleado.js"></script>
-    <script src="/js/mainEmpleados.js"></script>
+    <script src="/js/ClasesLocales/Genero.js"></script>
+    <script src="/js/mainGeneros.js"></script>
 @endsection

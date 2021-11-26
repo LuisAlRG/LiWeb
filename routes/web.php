@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\LibroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,8 @@ Route::get('/dashboard', function () {
 
 //Aplicacion web
 
-Route::get('/LiWeb',				[EmpleadoController::class,"ViewLogIn"])->name('login');
+Route::get('/LiWeb',				[EmpleadoController::class,"ViewLogIn"])
+	->name('login');
 Route::post('/LiWeb/Autenticar',	[EmpleadoController::class,"Autenticar"]);
 Route::get('/LiWeb/Saliendo',		[EmpleadoController::class,"Salir"]);
 
@@ -46,8 +48,9 @@ Route::post('/LiWeb/Vender',						[VentaController::class, 'ViewVenderYa']);
 Route::post('/LiWeb/Vender/LibrosSeleccionados',	[VentaController::class, 'DesplegarLibrosSeleccionado']);
 Route::post('/LiWeb/AplicarVenta',		[VentaController::class, 'InsertarVenta']);
 
-Route::get('/LiWeb/Libros',			function(){return "<h1>Not Done!!!</h1>";})
+Route::get('/LiWeb/Libros',			[LibroController::class,"ViewLibros"])
 	->middleware(['auth']);
+Route::post('/LiWeb/Libros/VerTodoLibros',			[LibroController::class,"VerTodosLibros"]);
 
 Route::post('/LiWeb/Libros/Modificar',	function(){return "<h1>Not Done!!!</h1>";})
 	->middleware(['auth']);

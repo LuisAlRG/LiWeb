@@ -57,7 +57,7 @@
         <button ng-click="showForm=false" ng-show="showForm" >Regresar</button>
     </div> 
     <div>
-        <a href="MenuPrincipal.html">
+        <a href="MenuPrincipal">
         <button>Menu</button>
         </a>
     </div> 

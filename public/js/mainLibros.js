@@ -69,105 +69,110 @@ var marcador = null;
         {'ng-click':"submitAderir()"}
     );
 
-    app.controller('allController',function($scope,$http){
-        //inicializaciones
+app.controller('allController',function($scope,$http){
+    //inicializaciones
 
-        let primerElemento = new Libro(1,2,//id libro id editorial
-            "El Poopero",//titulo
-            320,//precio
-            5,//edicion
-            5//cantidad
-        );
-        primerElemento.addListAutor = ["chayanne","Ilum Ticks","uno mas","otro mas", "Nunca acabara"];
-        primerElemento.setEditorial = "Nulle Illuminatus";
-        $scope.listLibros=[
-            primerElemento
-        ];
+    let primerElemento = new Libro(0,1,//id libro id editorial
+        "Cargando",//titulo
+        440,//precio
+        1,//edicion
+        1//cantidad
+    );
+    $scope.listLibros=[
+        primerElemento
+    ];
 
-        for(let i=1;i<15;i++){
-            let generarTitulo = "Programacion " + ((i%8==0)?"Estrcuturada":(i%6==0)?"Logica":(i%4==0)?"Para principiantes":(i%2==0)?"de C# y javascript":"para Proyectos");
-            let precioGenerado = Math.random()* (5001 - 200) + 200;
-
-            let objetoLibro = new Libro(i,i%8,
-                generarTitulo,
-                precioGenerado,
-                i%9,
-                10 + (i*(i%6))
-            )
-            objetoLibro.addListAutor = ["Luisito Rodriguez","Fransisco Imadero"];
-            objetoLibro.setEditorial = (i%2==0)?"Sumerville":"Prentice Hall";
-            $scope.listLibros.push(
-                objetoLibro
-            );
+    $http.post(DIRECCION_HTTPS+"/Libros/VerTodoLibros",
+        {
+            _token:$scope.tokenUsr2
         }
+    ).then(
+        function(rensopne){
+            let datos = rensopne.data;
+            console.log(datos);
+            $scope.listLibros = datos;
+        },
+        function(response){
+            let datos = response.data;
+            console.log(datos);
+            $scope.listLibros=[
+                new Libro(-1,1,//id libro id editorial
+                "Hoy no es un buen dia para venta",//titulo
+                440,//precio
+                1,//edicion
+                1//cantidad
+            )];
+        }
+    );
+
+    $scope.listVentaMostrado=[];
+
+    $scope.indxSelecionado = 0;
+    $scope.indxSelecionadoOp = 0;
+
+    $scope.filtros=[
+        {nombre:"Mayor al precio", value:1},
+        {nombre:"Menor al precio", value:2}
+    ];
+
+    $scope.listMostAutores=[
+        {
+            nombre:"No Cargados"
+        }
+    ];
+
+    $scope.listMostEditorial=[
+        {
+            nombre:"No cargado"
+        },
+    ];
+
+
+    //Formatos
+    $scope.FormatoDosAutores = function(autores){
+        let tresAutores = autores.slice(0,3);
+        let cadena = [];
+        tresAutores.forEach(autor => {
+            cadena.push(autor.nombre+" "+autor.apellido);
+        });
+        return cadena.join(", ");
+    }
+    $scope.FormatoAutorNombre = function(autor){
+        let cadena = "";
+        cadena += isEmptyOrSpaces(autor.nombre)?"":autor.nombre;
+        cadena += isEmptyOrSpaces(autor.apellido)?"":autor.apellido;
+        return cadena;
+    }
+
+    //funciones
     
-        $scope.listVentaMostrado=[];
 
-        $scope.indxSelecionado = 0;
-        $scope.indxSelecionadoOp = 0;
+    $scope.setIndxSelecionado = function(elIndex){
+        $scope.indxSelecionado = elIndex;
+    }
+    $scope.setIndxSelecionadoOp = function(elIndex){
+        $scope.indxSelecionadoOp = elIndex;
+    }
 
-        $scope.listMostAutores=[
-            {
-                nombre:"Rodriguez G. Luisito"
-            },
-            {
-                nombre:"Camilo Fernando"
-            },
-            {
-                nombre:"Bruegge"
-            },
-            {
-                nombre:"Stuart Russell"
-            }
-        ];
 
-        $scope.listMostEditorial=[
-            {
-                nombre:"PERSON: Prentice Hall"
-            },
-            {
-                nombre:"Macornigui"
-            },
-            {
-                nombre:"Editoriales Illuminatus"
-            },
-            {
-                nombre:"McGrawHill"
-            }
-        ];
+    $scope.cambiarSelectedIndex = function(elIndex){
+        return $scope.indxSelecionado == elIndex;
+    }
 
-        //funciones
-        $scope.formatoFecha = function( laFecha ){
-            let cdena = venta.fecha.getDate() +"/"+ venta.fecha.getMonth() +"/"+ venta.fecha.getFullYear() ;
-            return cdena;
+    //efecto de botones
+    $scope.submitAderir = function(){
+        let inParm ={
+            titulo: $scope.instTexto,
+            autor:  $scope.autorIn,
+            editorial:  $scope.editorialIn,
+            precio: $scope.instPrecio
         }
+        console.log(inParm);
+    }
 
-        $scope.setIndxSelecionado = function(elIndex){
-            $scope.indxSelecionado = elIndex;
-        }
-        $scope.setIndxSelecionadoOp = function(elIndex){
-            $scope.indxSelecionadoOp = elIndex;
-        }
-
-
-        $scope.cambiarSelectedIndex = function(elIndex){
-            return $scope.indxSelecionado == elIndex;
-        }
-
-        //efecto de botones
-        $scope.submitAderir = function(){
-            let inParm ={
-                titulo: $scope.instTexto,
-                autor:  $scope.autorIn,
-                editorial:  $scope.editorialIn,
-                precio: $scope.instPrecio
-            }
-            console.log(inParm);
-        }
-
-        $scope.OnModificar=function(numeroId){
-            console.log("si paso");
-            let nombreid = "goToModif" + numeroId;
-            document.getElementById(nombreid).submit();
-        }
-    });
+    $scope.OnModificar=function(numeroId){
+        console.log("si paso");
+        let nombreid = "goToModif" + numeroId;
+        document.getElementById(nombreid).submit();
+    }
+});

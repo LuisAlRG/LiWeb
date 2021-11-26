@@ -32,7 +32,7 @@
     <div><button>Con tarjeta</button></div>
     <div><button>Con credito</button></div>
     <div><button>Otro Metodo</button></div> 
-    <div> <a href="Menu"> <button>Cancelar</button></a> </div> 
+    <div> <a href="RealizarVenta"> <button>Cancelar</button></a> </div> 
     
 </div>
 @endsection

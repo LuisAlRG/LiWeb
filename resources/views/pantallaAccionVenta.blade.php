@@ -59,7 +59,7 @@
 @section('botonesAccion')
 <div>
     <div><button ng-click="OnBuscarLibro()">Buscar</button></div> 
-    <div> <a href="PantallaVenta.html"> <button>Cancelar</button></a></div>
+    <div> <a href="Venta"> <button>Cancelar</button></a></div>
 </div>
 @endsection
 @section('tables')

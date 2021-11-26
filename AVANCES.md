@@ -33,3 +33,7 @@ avance 1 del 24 11 21
 avance 2 del 24 11 21
     Nos enfocamos en la cuestion del control del empleado, ya existe la pantalla de empleado , y con ellos podemos: ver todos los empleados, contratar / despedir, e insertar
     tambien se agrego la consulta de venta
+
+avance 1 del 25 11 21
+    Agrege las pantallas de autor , editorial y genero al mismo que genere los controladores de autor y libro
+    ligeras modificaciones de estilos

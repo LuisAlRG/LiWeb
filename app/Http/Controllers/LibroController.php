@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Libro;
 
 class LibroController extends Controller
 {
@@ -15,9 +16,22 @@ class LibroController extends Controller
 	edicion
 	cantidad
 	*/
+	//funciones de vista
+	function ViewLibros(){
+		return view('pantallaLibro',['mensajeServidor'=>null]);
+	}
+	function ViewLibroModificar(){
+		return view('pantallaLibroMod',['mensajeServidor'=>null]);
+	}
     //funciones nesesario
     function VerTodosLibros(){
-    	return Libro::all();
+		$libros = Libro::all();
+		if($libros){
+            foreach($libros as $key => $libro){
+                $libro = $this->PrepararLibro($libro);
+            }
+        }
+    	return $libros;
     }
     function ConsultarLibro(){
 
@@ -81,4 +95,9 @@ class LibroController extends Controller
 
     }
 
+	//funciones para esa clase
+	function PrepararLibro($libro){
+		$libro->autores = $libro->autores()->get();
+        $libro->editorial = $libro->editorial()->get()[0]->nombre;
+	}
 }
