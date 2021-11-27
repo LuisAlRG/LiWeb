@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\AutorController;
+use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\EditorialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,17 +55,38 @@ Route::get('/LiWeb/Libros',			[LibroController::class,"ViewLibros"])
 	->middleware(['auth']);
 Route::post('/LiWeb/Libros/VerTodoLibros',			[LibroController::class,"VerTodosLibros"]);
 
-Route::post('/LiWeb/Libros/Modificar',	function(){return "<h1>Not Done!!!</h1>";})
+Route::post('/LiWeb/Libro',	[LibroController::class,'ViewLibroModificar'])
 	->middleware(['auth']);
+Route::post('/LiWeb/Libro/Modificar',		[LibroController::class,'ModificarLibro']);
+Route::post('/LiWeb/Libro/AderirAutor',		[LibroController::class,'AderirAutor']);
+Route::post('/LiWeb/Libro/QuitarAutor',		[LibroController::class,'QuitarAutor']);
+Route::post('/LiWeb/Libro/AderirGenero',	[LibroController::class,'AderirGenero']);
+Route::post('/LiWeb/Libro/QuitarGenero',	[LibroController::class,'QuitarGenero']);
 
-Route::get('/LiWeb/Libros/Autores',		function(){return "<h1>Not Done!!!</h1>";})
-	->middleware(['auth']);
 
-Route::get('/LiWeb/Libros/Generos',		function(){return "<h1>Not Done!!!</h1>";})
+Route::get('/LiWeb/Libros/Autores',				[AutorController::class,'ViewAutores'])
 	->middleware(['auth']);
+Route::post('/LiWeb/Libros/Autores/VerTodos',	[AutorController::class,'VerTodosAutores']);
+Route::post('/LiWeb/Libros/Autores/Consultar',	[AutorController::class,'ConsultarAutor']);
+Route::post('/LiWeb/Libros/Autores/Insertar',	[AutorController::class,'InsertarAutor']);
+Route::post('/LiWeb/Libros/Autores/Modificar',	[AutorController::class,'ModificarAutor']);
+Route::post('/LiWeb/Libros/Autores/Borrar',		[AutorController::class,'BorrarAutor']);
 
-Route::get('/LiWeb/Libros/Editoriales',	function(){return "<h1>Not Done!!!</h1>";})
+Route::get('/LiWeb/Libros/Generos',				[GeneroController::class,'ViewGenero'])
 	->middleware(['auth']);
+Route::post('/LiWeb/Libros/Generos/VerTodos',	[GeneroController::class,'VerTodoGeneros']);
+Route::post('/LiWeb/Libros/Generos/Consultar',	[GeneroController::class,'ConsultarGenero']);
+Route::post('/LiWeb/Libros/Generos/Insertar',	[GeneroController::class,'InsertarGenero']);
+Route::post('/LiWeb/Libros/Generos/Modificar',	[GeneroController::class,'ModificarGenero']);
+Route::post('/LiWeb/Libros/Generos/Borrar',		[GeneroController::class,'BorrarGenero']);
+
+Route::get('/LiWeb/Libros/Editoriales',				[EditorialController::class,'ViewEditorial'])
+	->middleware(['auth']);
+Route::post('/LiWeb/Libros/Editoriales/VerTodos',	[EditorialController::class,'VerTodosEditoriales']);
+Route::post('/LiWeb/Libros/Editoriales/Consultar',	[EditorialController::class,'ConsultarEditorial']);
+Route::post('/LiWeb/Libros/Editoriales/Insertar',	[EditorialController::class,'InsertarEditorial']);
+Route::post('/LiWeb/Libros/Editoriales/Modificar',	[EditorialController::class,'ModificarEditorial']);
+Route::post('/LiWeb/Libros/Editoriales/Borrar',		[EditorialController::class,'BorrarEditorial']);
 
 Route::get('/LiWeb/Empleados',	[EmpleadoController::class,'ViewEmpleados'])
 	->middleware(['auth']);

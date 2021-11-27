@@ -1,4 +1,5 @@
 const DIRECCION_HTTPS = "https://192.168.1.150/LiWeb";
+const ERROR_PETICION = "Error en la peticion, intentelo mas tarde, o recarge la paguina"
 
 //funcion para saber si esta vacio o null
 //sacado de https://stackoverflow.com/questions/10232366/how-to-check-if-a-variable-is-null-or-empty-string-or-all-whitespace-in-javascri

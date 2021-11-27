@@ -1,5 +1,6 @@
 var app = angular.module('allApp',[]);
 var marcador = null;
+const SECCION_ACTUAL = "/Empleados"
 
 $("tablaInfo>div>#cuerpoEntero>section").attr(
     {
@@ -40,7 +41,7 @@ app.controller('allController',function($scope,$http){
         )
     ]
     
-    $http.post(DIRECCION_HTTPS+"/Empleados/VerTodoEmpleado",
+    $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodoEmpleado",
             {
                 _token:$scope.tokenUsr2
             }
@@ -88,12 +89,20 @@ app.controller('allController',function($scope,$http){
     //funciones de llamada
     $scope.setIndxSelecionado = function(elIndex){
         $scope.indxSelecionado = elIndex;
+        $scope.mensajeInsertar = null;
+        $scope.mensajeModificar = null;
         $scope.mensajeBorrar = null;
+    }
+
+    $scope.MostrarSiMensage = function(){
+        return $scope.mensajeInsertar || 
+            $scope.mensajeModificar ||
+            $scope.mensajeBorrar;
     }
 
     $scope.OnContratarToggle = function (empleado) {
         $("tablaInfo").prop("disabled",true);
-        $http.post(DIRECCION_HTTPS+"/Empleados/Contratado",
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Contratado",
             {
                 _token:$scope.tokenUsr2,
                 clave:empleado.idEmpleado,
@@ -123,11 +132,11 @@ app.controller('allController',function($scope,$http){
             rolEmpleado: $scope.rolEmpleado.value
         }
         console.log(envio);
-        $http.post(DIRECCION_HTTPS+"/Empleados/Insertar",
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Insertar",
             envio
         ).then(
-            function(rensopne){
-                let datos = rensopne.data;
+            function(response){
+                let datos = response.data;
                 console.log(datos);
                 if(datos == "re"){
                     $scope.mensajeInsertar = "Contraseña repetida, intente con otra";
@@ -138,7 +147,7 @@ app.controller('allController',function($scope,$http){
             function(response){
                 let datos = response.data;
                 console.log(datos);
-                $scope.mensajeInsertar = "Error en la peticion, intentelo mas tarde";
+                $scope.mensajeInsertar = ERROR_PETICION;
             }
         );
     }
@@ -149,7 +158,7 @@ app.controller('allController',function($scope,$http){
             clave: clave
         }
         
-        $http.post(DIRECCION_HTTPS+"/Empleados/Borrar",
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Borrar",
             envio
         ).then(
             function(rensopne){

@@ -11,5 +11,15 @@ class Autor extends Model
     protected $table = 'Autor';
     protected $primaryKey = 'idAutor';
 
-    
+    public function autorLibro(){
+        return $this->hasMany(AutorLibro::class,'idAutor');
+    }
+
+    public function TieneLibro(){
+        $element = $this->autorLibro()->get();
+        if(count($element)){
+            return true;
+        }
+        return false;
+    }
 }

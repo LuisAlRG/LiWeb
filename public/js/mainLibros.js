@@ -97,7 +97,7 @@ app.controller('allController',function($scope,$http){
             console.log(datos);
             $scope.listLibros=[
                 new Libro(-1,1,//id libro id editorial
-                "Hoy no es un buen dia para venta",//titulo
+                "No se a podido Cargar, intente de nuevo mas tarde",//titulo
                 440,//precio
                 1,//edicion
                 1//cantidad

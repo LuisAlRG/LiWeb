@@ -56,9 +56,9 @@
 <div id="botonesPrincipal">
     <div><button id="btnConsultar" >Consultar</button></div>
     <p>Navegar a:</p>
-    <div> <a href="Autores"><button>Autores</button></a></div>
-    <div> <a href="Generos"><button>Generos</button></a> </div>
-    <div> <a href="Editoriales"> <button>Editoriales</button></a></div>
+    <div> <a href="Libros/Autores"><button>Autores</button></a></div>
+    <div> <a href="Libros/Generos"><button>Generos</button></a> </div>
+    <div> <a href="Libros/Editoriales"> <button>Editoriales</button></a></div>
     <div> <a href="MenuPrincipal"><button>Menú</button></a> </div>
 </div>
 <div id="botonesFormMode">

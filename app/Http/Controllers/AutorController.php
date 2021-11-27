@@ -17,7 +17,7 @@ class AutorController extends Controller
     function ViewAutores(){
         return view('pantallaAutor',['mensajeServidor'=>null]);
     }
-
+    
     function VerTodosAutores(){
         $autores = Autor::all();
         return $autores;
@@ -27,8 +27,8 @@ class AutorController extends Controller
         $clave = $req->input('clave');
         $nombre = $req->input('nombre');
         $apellido = $req->input('apellido');
-
         if(is_numeric($clave)){
+            $clave = (int) $clave;
             $elemento = Autor::find($clave);
             return [0=>$elemento];
         }
@@ -38,7 +38,7 @@ class AutorController extends Controller
         return $elementos;
     }
 
-    function InsertarAutor(){
+    function InsertarAutor(Request $req){
         $nombre = $req->input('nombre');
         $apellido = $req->input('apellido');
 
@@ -55,7 +55,7 @@ class AutorController extends Controller
         return $autor;
     }
 
-    function ModificarAutor(){
+    function ModificarAutor(Request $req){
         $clave = $req->input('clave');
         $nombre = $req->input('nombre');
         $apellido = $req->input('apellido');
@@ -77,11 +77,15 @@ class AutorController extends Controller
         return $autor;
     }
 
-    function EliminarAutor(){
+    function BorrarAutor(Request $req){
         $clave = $req->input('clave');
         $clave = (int) $clave;
         $autor = Autor::find($clave);
-        
+        if($autor->TieneLibro()){
+            return 'no';
+        }
+        $autor->delete();
+        return $autor;
     }
 
     

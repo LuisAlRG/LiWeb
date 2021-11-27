@@ -20,8 +20,18 @@ class LibroController extends Controller
 	function ViewLibros(){
 		return view('pantallaLibro',['mensajeServidor'=>null]);
 	}
-	function ViewLibroModificar(){
-		return view('pantallaLibroMod',['mensajeServidor'=>null]);
+	function ViewLibroModificar(Request $req){
+		$clave = $req->input('clave');
+		$clave = (int) $clave;
+		$libro = Libro::find($clave);
+		$editorial = $libro->editorial()->get()[0];
+		return view('pantallaLibroModificado',
+			[
+				'mensajeServidor'	=>null,
+				'libro'				=>$libro,
+				'editorial'			=>$editorial
+			]
+		);
 	}
     //funciones nesesario
     function VerTodosLibros(){
@@ -37,7 +47,6 @@ class LibroController extends Controller
 
     }
     function InsertarLibro(Request $req){
-    	
     	$tituloLibro = $req->input('tituloLibroA');
     	$completoAutor = $req->input('autorLibroA');
     	$nombreAutor = null;

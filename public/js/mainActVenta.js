@@ -106,10 +106,12 @@ app.controller('allController',function($scope,$http){
         }
             
     }
+
     $scope.MostrarLirbo= function(libro){
         let cantidad = libro.cantidad;
         return cantidad > 0;
     }
+    
     $scope.RecordarCantidad = function(libro){
         let cantidad = libro.cantidad;
         $scope.listLibrosSelect.array.forEach(libroSel => {
@@ -147,8 +149,8 @@ app.controller('allController',function($scope,$http){
         $http.post(DIRECCION_HTTPS+"/RealizarVenta/ConsultarLibros",
             envio
         ).then(
-            function(rensopne){
-                let datos = rensopne.data;
+            function(response){
+                let datos = response.data;
                 console.log(datos);
                 if(datos)
                     if(datos[0]){

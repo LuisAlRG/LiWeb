@@ -6,7 +6,7 @@
 	<title>LiWeb Generos</title>
 @endsection
 @section('style')
-    <link rel="stylesheet" href="/css/modeloAutores.css">
+    <link rel="stylesheet" href="/css/modeloGeneros.css">
 @endsection
 @section('subtitle')
     <p>Libros</p>
@@ -21,29 +21,28 @@
         >
         <label for="nombre">Nombre</label> 
         <input type="text" name="nombre" id="nombre"
-            ng-model="nombre"
+            ng-model="nombre" ng-disabled="DisableIfClave()"
         > 
     </form>
 </div>
 @endsection
 @section('botonesAccion')
 <div>
-    <div> <button>Buscar</button></div>
-    <div> <a href="PantallaLibros.html"> <button>Regresar</button></a></div>
-    <div> <a href="MenuPrincipal.html"> <button>Menu</button></a></div> 
+    <div> <button ng-click="OnBuscarAutor()">Buscar</button></div>
+    <div> <a href="../Libros"> <button>Regresar</button></a></div>
+    <div> <a href="../MenuPrincipal"> <button>Menu</button></a></div> 
 </div>
 @endsection
 @section('tables')
 <tablaInfo>
     <div>
         <section id="tableTop_Genero">
-            
             <div class="cel1"> <span>Clave</span> </div>
             <div class="cel2"> <span>Nombre</span> </div>
             <div class="cel3"> <span>Acciones</span> </div>
         </section>
         <div id="cuerpoEntero">
-            <section class="rowsElement_Genero element{{genero.idGenero}}">
+            <section class="rowsElement_Genero element@{{genero.idGenero}}">
                 <div class="cel1"><span>@{{genero.idGenero}}</span></div>
                 <div class="cel2"><span>@{{genero.nombre}}</span></div>
                 <div class="cel3">
@@ -56,6 +55,12 @@
                         <circle cx="63.9117" cy="36.5772" r="17.5" transform="rotate(45 63.9117 36.5772)" fill="white"/>
                         <rect x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
                     </svg>
+                </div>
+                <div class="mensageSections" ng-show="MostrarSiMensage();" >
+                    <section>
+                        <p><span>@{{mensajeModificar}}</span></p>
+                        <p><span>@{{mensajeBorrar}}</span></p>
+                    </section>
                 </div>
                 <div class="opcionesAdm">
                     <section>
@@ -82,7 +87,7 @@
                         </div>
                         <div>
                             <svg class="boteDeBasura" viewBox="-10 -10 380 510" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            ng-click="libros.selected=false; accionRemoverSeleccion($index)"
+                            ng-click="OnEliminarAutor(genero.idGenero,$index)"
                             >
                                 <path class="tapa" d="M0 110C0 87.9086 17.9086 70 40 70H310C332.091 70 350 87.9086 350 110V110H0V110Z" fill="black"/>
                                 <path class="tapa" d="M100 70C100 47.9086 117.909 30 140 30H210C232.091 30 250 47.9086 250 70V70H100V70Z" fill="black"/>
@@ -107,6 +112,9 @@
             </section>
 
         </div>
+        <section ng-show="mensajeModificar">
+            <p><span>@{{mensajeModificar}}</span></p>
+        </section>
         <div class="pieTabla">
             <div>Genero</div>
             <div>Aderrir</div>
@@ -117,7 +125,9 @@
                     >
                 </div>
                 <div>
-                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        ng-click="OnInsertarAutor()"
+                    >
                         <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                         <g class="cruzNegraG">
                             <rect x="44" y="20" width="15" height="65" fill="black" fill-opacity="0.4"/>
@@ -130,6 +140,9 @@
                     </svg>
                 </div>
             </form>
+            <section ng-show="mensajeInsertar">
+                <p><span>@{{mensajeInsertar}}</span></p>
+            </section>
         </div>
     </div>
 </tablaInfo>

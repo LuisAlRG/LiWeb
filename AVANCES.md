@@ -37,3 +37,9 @@ avance 2 del 24 11 21
 avance 1 del 25 11 21
     Agrege las pantallas de autor , editorial y genero al mismo que genere los controladores de autor y libro
     ligeras modificaciones de estilos
+
+avance 1 del 26 11 21
+    Las pantallas de Autor, Editorial y Genero funciona en su totalidad (consulta, modifica, Inserta y Borra), solo le falta retoques de diseño
+    Agregamos la pantalla de Modificacion de libro.
+    nota: investigar un poco mas de los midel ware para por fin poder hacer bien la tabla de istorial
+    nota2: midelware para bloquear el acceso a no funcionario para otras pantallas (Empleados y modificacion de libros)

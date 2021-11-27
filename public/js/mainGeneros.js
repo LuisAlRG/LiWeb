@@ -1,5 +1,7 @@
 var app = angular.module('allApp',[]);
 var marcador = null;
+const SECCION_ACTUAL = "/Libros/Generos";
+const ESPACIO_BACIO = "Escriba algo para considerarse como \"Generp\"";
 
 $("tablaInfo>div>#cuerpoEntero>section").attr(
     {
@@ -27,26 +29,34 @@ $("tablaInfo>div>div>section>div.opcionesAdm").attr(
     {'ng-if':"mostOpcionesAdm && indxSelecionadoOp == $index"}
 );
 
+$("tablaInfo>div>div>section>div.mensageSections").attr(
+    {'ng-if':"mostOpcionesAdm && indxSelecionadoOp == $index"}
+);
+
 $("div.opcionesAdm>section>div:nth-child(1)>svg").attr(
     {'ng-click':"OnModificarGenero(genero,$index)"}
 )
 app.controller('allController',function($scope,$http){
     //inicialisar valores globales
     $scope.listGenero = [
-        new Genero(0,"Novela"),
-        new Genero(1,"Romanse"),
-        new Genero(2,"Ciencia Fixion"),
-        new Genero(3,"Historico"),
-        new Genero(4,"De epoca"),
-        new Genero(5,"Terror"),
-        new Genero(6,"Manga")
-    ]
-    for(let i=0;i<8;i++){
-        
-        $scope.listGenero.push(
-            new Genero(i+7,"Genero no."+(i-1))
-        );
-    }
+        new Genero(0,"Cargando")
+    ];
+    $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodos",
+        {}
+    ).then(
+        function(rensopne){
+            let datos = rensopne.data;
+            console.log(datos);
+            $scope.listGenero = datos;
+        },
+        function(response){
+            let datos = response.data;
+            console.log(datos);
+            $scope.listGenero=[
+                new Genero(-1,"No se a podido cargar. Intente de nuevo mas tarde")
+            ];
+        }
+    );
 
     $scope.indxSelecionado = 0;
     $scope.indxSelecionadoOp = 0;
@@ -55,9 +65,113 @@ app.controller('allController',function($scope,$http){
 
     $scope.setIndxSelecionado = function(elIndex){
         $scope.indxSelecionado = elIndex;
+        $scope.mensajeInsertar = null;
+        $scope.mensajeModificar = null;
+        $scope.mensajeBorrar = null;
     }
     $scope.setIndxSelecionadoOp = function(elIndex){
         $scope.indxSelecionadoOp = elIndex;
+        $scope.mensajeInsertar = null;
+        $scope.mensajeModificar = null;
+        $scope.mensajeBorrar = null;
+    }
+
+    $scope.MostrarSiMensage = function(){
+        return $scope.mensajeInsertar || 
+            $scope.mensajeModificar ||
+            $scope.mensajeBorrar;
+    }
+
+    $scope.DisableIfClave = function(){
+        if($scope.clave === undefined)
+            return false;
+        return $scope.clave >0;
+    }
+
+    //Eventos
+    $scope.OnInsertarAutor = function(){
+        let enviar = {
+            nombre: $scope.nombreGeneroA
+        }
+        if( isEmptyOrSpaces(enviar.nombre) ){
+            $scope.mensajeInsertar = ESPACIO_BACIO;
+            return true;
+        }
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Insertar",
+            enviar
+        ).then(
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                if(datos == "re"){
+                    $scope.mensajeInsertar = "Genero ya ingresado. Tiene que tener alguna diferencia";
+                    return true;
+                }
+                $scope.listGenero.push(datos);
+                $scope.nombreGeneroA = "";
+            },
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                $scope.mensajeInsertar = ERROR_PETICION;
+            }
+        );
+    }
+
+    $scope.OnBuscarAutor = function(){
+        let enviar = {
+            clave:      $scope.clave,
+            nombre:     $scope.nombre
+        }
+        console.log(enviar);
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Consultar",
+            enviar
+        ).then(
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                if(datos)
+                    if(datos[0]){
+                        $scope.listGenero = datos;
+                        return 1;
+                    }
+                $scope.listGenero=[
+                    new Genero(0,"No hay generos con esta descripciones")
+                ];
+            },
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                $scope.listGenero=[
+                    new Genero(-1,"No se a podido cargar. Intente de nuevo mas tarde")
+                ];
+            }
+        );
+    }
+
+    $scope.OnEliminarAutor = function(idGenero,indexLista){
+        let enviar = {
+            clave: idGenero
+        }
+        console.log(enviar);
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Borrar",
+            enviar
+        ).then(
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                if(datos == "no"){
+                    $scope.mensajeBorrar = "El genero tiene libros relacionados, no se puede borrar sin borrar esos libros antes"
+                    return true;
+                }
+                $scope.listGenero.splice(indexLista,1);
+            },
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                $scope.mensajeBorrar = ERROR_PETICION;
+            }
+        );
     }
 
     $scope.OnModificarGenero = function(genero,thisindex){
@@ -89,25 +203,44 @@ app.controller('allController',function($scope,$http){
             columna3
         );
         $(claseElemento+">div.Quitable svg").click(function(){
-            let
-            clave =         parseInt($("#claveM").val()),
-            nombre =        $("#nombreGenerosM").val();
-            /*$http.get('modificarAutor',{}).then(
-                function(response){
-                    let datoRespuesta = response.data;
-                    if(datoRespuesta){
+            let enviar = {
+                clave:  parseInt($("#claveM").val()),
+                nombre:  $("#nombreGenerosM").val()
+            }
+            console.log(enviar);
+            if( isEmptyOrSpaces(enviar.nombre) ){
+                $scope.mensajeModificar = ESPACIO_BACIO;
+                return true;
+            }
+            $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Modificar",
+                enviar
+            ).then(
+                function(response) {
+                    let datos = response.data;
+                    console.log(datos);
+                    if(datos == "re"){
+                        $scope.mensajeModificar = "Nombre repetido, intente con otro";
+                        return true;
                     }
+                    $(".Quitable").remove();
+                    $scope.listGenero[thisindex].nombre= enviar.nombre;
+                    $(claseElemento + ">div").toggleClass("putItInvisible");
+                    $scope.$apply();
+                    $scope.mensajeModificar = null;
                 },
-                function(response){
-                    $scope.mensId = "Error de conexion al tratar de modificar";
+                function(response) {
+                    let datos = response.data;
+                    console.log(datos);
+                    $scope.mensajeModificar = ERROR_PETICION;
                 }
-            );*/
-            console.log([clave,nombre]);
+            );
+            /*
             $(".Quitable").remove();
-            $scope.listGenero[thisindex].idEditorial=clave;
-            $scope.listGenero[thisindex].nombre=nombre;
+            $scope.listGenero[thisindex].idEditorial= enviar.clave;
+            $scope.listGenero[thisindex].nombre= enviar.nombre;
             $(claseElemento + ">div").toggleClass("putItInvisible");
             $scope.$apply();
+            */
         });
     }
 });

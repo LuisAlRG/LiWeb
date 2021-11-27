@@ -1,5 +1,6 @@
 var app = angular.module('allApp',[]);
 var marcador = null;
+const SECCION_ACTUAL = "/Libros/Autores";
 
 $("tablaInfo>div>#cuerpoEntero>section").attr(
     {
@@ -26,6 +27,9 @@ $("tablaInfo>div>div>section>div.elementComplete").attr(
 $("tablaInfo>div>div>section>div.opcionesAdm").attr(
     {'ng-if':"mostOpcionesAdm && indxSelecionadoOp == $index"}
 );
+$("tablaInfo>div>div>section>div.mensageSections").attr(
+    {'ng-if':"mostOpcionesAdm && indxSelecionadoOp == $index"}
+);
 
 $("div.opcionesAdm>section>div:nth-child(1)>svg").attr(
     {'ng-click':"OnModificarAutor(autor,$index)"}
@@ -34,40 +38,145 @@ $("div.opcionesAdm>section>div:nth-child(1)>svg").attr(
 app.controller('allController',function($scope,$http){
     //inicialisar valores globales
     $scope.listAutores = [
-        new Autor(0,"Herman","Cortes")
-    ]
-    for(let i=1;i<15;i++){
-        let numeroAletorio = parseInt(Math.random() * 100);
-        let generarNombre1= ((numeroAletorio%8==0)?"Luis":(numeroAletorio%6==0)?"Fernando":(numeroAletorio%4==0)?"Memo":(numeroAletorio%2==0)?"Pedro":"Jose");
-        numeroAletorio = parseInt(Math.random() * 100);
-        let generarNombre2= ((numeroAletorio%8==0)?"de la Casa":(numeroAletorio%6==0)?"Carmino":(numeroAletorio%4==0)?"Gillermo":(numeroAletorio%2==0)?"Kristino":"");
-        numeroAletorio = parseInt(Math.random() * 100);
-        let generarApellido1= ((numeroAletorio%8==0)?"Rodriguez":(numeroAletorio%6==0)?"Gonzalez":(numeroAletorio%4==0)?"Manriquez":(numeroAletorio%2==0)?"Berzunsa":"");
-        numeroAletorio = parseInt(Math.random() * 100);
-        let generarApellido2= ((numeroAletorio%8==0)?"Gonzalez":(numeroAletorio%6==0)?"Aguilar":(numeroAletorio%4==0)?"Zapata":(numeroAletorio%2==0)?"":"Jonstar");
-        $scope.listAutores.push(
-            new Autor(
-                i,
-                generarNombre1+" "+generarNombre2,
-                generarApellido1+" "+generarApellido2
-            )
-        );
-    }
+        new Autor(0,"Cargando","Espere un momento")
+    ];
+    $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodos",
+        {
+            
+        }
+    ).then(
+        function(rensopne){
+            let datos = rensopne.data;
+            console.log(datos);
+            $scope.listAutores = datos;
+        },
+        function(response){
+            let datos = response.data;
+            console.log(datos);
+            $scope.listAutores=[
+                new Autor(-1,"No se a podido cargar","Intente de nuevo mas tarde")
+            ];
+        }
+    );
 
     $scope.indxSelecionado = 0;
     $scope.indxSelecionadoOp = 0;
     //funciones de llamada
-
-
     $scope.setIndxSelecionado = function(elIndex){
         $scope.indxSelecionado = elIndex;
+        $scope.mensajeInsertar = null;
+        $scope.mensajeModificar = null;
+        $scope.mensajeBorrar = null;
     }
     $scope.setIndxSelecionadoOp = function(elIndex){
         $scope.indxSelecionadoOp = elIndex;
+        $scope.mensajeInsertar = null;
+        $scope.mensajeModificar = null;
+        $scope.mensajeBorrar = null;
     }
 
+    $scope.MostrarSiMensage = function(){
+        return $scope.mensajeInsertar || 
+            $scope.mensajeModificar ||
+            $scope.mensajeBorrar;
+    }
+
+    $scope.DisableIfClave = function(){
+        if($scope.clave === undefined)
+            return false;
+        return $scope.clave >0;
+    }
+
+    //Eventos
+    $scope.OnInsertarAutor = function(){
+        let enviar = {
+            nombre: $scope.nombreAutorA,
+            apellido: $scope.apellidoAutorA
+        }
+        if( isEmptyOrSpaces(enviar.nombre) && isEmptyOrSpaces(enviar.apellido) ){
+            $scope.mensajeInsertar = "No puede dejar todos los espacios en blanco";
+            return true;
+        }
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Insertar",
+            enviar
+        ).then(
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                if(datos == "re"){
+                    $scope.mensajeInsertar = "Autor ya ingresado, o al menos tiene nombre y apellido igual. Tiene que tener alguna diferencia";
+                    return true;
+                }
+                $scope.listAutores.push(datos);
+                $scope.nombreAutorA = "";
+                $scope.apellidoAutorA = "";
+            },
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                $scope.mensajeInsertar = ERROR_PETICION;
+            }
+        );
+    }
     
-    $scope.OnModificarAutor = function(autor, thisindex){
+    $scope.OnBuscarAutor = function(){
+        let enviar = {
+            clave:      $scope.clave,
+            nombre:     $scope.nombre,
+            apellido:   $scope.apellido
+        }
+        console.log(enviar);
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Consultar",
+            enviar
+        ).then(
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                if(datos)
+                    if(datos[0]){
+                        $scope.listAutores = datos;
+                        return 1;
+                    }
+                $scope.listAutores=[
+                    new Autor(0,"No hay autores","con esta descripcion")
+                ];
+            },
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                $scope.listAutores=[
+                    new Autor(-1,"No se a podido cargar","Intente de nuevo mas tarde")
+                ];
+            }
+        );
+    }
+    
+    $scope.OnEliminarAutor = function(idAutor,indexLista){
+        let enviar = {
+            clave: idAutor
+        }
+        console.log(enviar);
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Borrar",
+            enviar
+        ).then(
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                if(datos == "no"){
+                    $scope.mensajeBorrar = "Este autor tiene libros relacionados, no se puede borrar sin borrar esos libros antes"
+                    return true;
+                }
+                $scope.listAutores.splice(indexLista,1);
+            },
+            function (response) {
+                let datos = response.data;
+                console.log(datos);
+                $scope.mensajeBorrar = ERROR_PETICION;
+            }
+        );
+    }
+    //accionRemoverSeleccion
+    $scope.OnModificarAutor = function(autor, indexLista){
         console.log(autor);
         let claseElemento = ".element"+autor.idAutor
         console.log(claseElemento);
@@ -98,27 +207,46 @@ app.controller('allController',function($scope,$http){
             columna4
         );
         $(claseElemento+">div.Quitable svg").click(function(){
-            let 
-            clave =     $("#claveM").val(),
-            nombre =        $("#nombreAutorM").val(),
-            apellido =      $("#apellidoAutorM").val()
-            /*$http.post('modificarAutor',{}).then(
-                function(response){
-                    let datoRespuesta = response.data;
-                    if(datoRespuesta){
-
+            let enviar = {
+                clave:      $("#claveM").val(),
+                nombre:     $("#nombreAutorM").val(),
+                apellido:   $("#apellidoAutorM").val()
+            };
+            console.log(enviar);
+            if( isEmptyOrSpaces(enviar.nombre) && isEmptyOrSpaces(enviar.apellido) ){
+                $scope.mensajeModificar = "No puede dejar todos los espacios en blanco";
+                return true;
+            }
+            $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Modificar",
+                enviar
+            ).then(
+                function(response) {
+                    let datos = response.data;
+                    console.log(datos);
+                    if(datos == "re"){
+                        $scope.mensajeModificar = "Nombre completo repetido, intente con otro";
+                        return true;
                     }
+                    $(".Quitable").remove();
+                    $scope.listAutores[indexLista].nombre = enviar.nombre;
+                    $scope.listAutores[indexLista].apellido = enviar.apellido;
+                    $(claseElemento + ">div").toggleClass("putItInvisible");
+                    $scope.$apply();
+                    $scope.mensajeModificar = null;
                 },
-                function(response){
-                    $scope.mensId = "Error de conexion al tratar de modificar";
+                function(response) {
+                    let datos = response.data;
+                    console.log(datos);
+                    $scope.mensajeModificar = ERROR_PETICION;
                 }
-            );*/
-            console.log([clave,nombre,apellido]);
+            );
+            /*
             $(".Quitable").remove();
             $scope.listAutores[thisindex].nombre = nombre;
             $scope.listAutores[thisindex].apellido = apellido;
             $(claseElemento + ">div").toggleClass("putItInvisible");
             $scope.$apply();
+            */
         });
     }
 });
