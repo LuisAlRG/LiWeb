@@ -81,8 +81,28 @@ class EmpleadoController extends Controller
         
     }
 
+    // /Empleados/Consultar
+    function ConsultarEmpleado(Request $req){
+        $clave = $req->input('clave');
+        $nombre = $req->input('nombre');
+        $apellido = $req->input('apellido');
+        $rolSelect = $req->input('rolSelect');
+        if(is_numeric($clave)){
+            $clave = (int)$clave;
+            $elemento = Empleado::find($clave);
+            $elemento = $this->PrepararEmpleado($elemento);
+            return [0=>$elemento];
+        }
+        $elementos = Empleado::where('nombre','LIKE','%'.$nombre.'%')
+            ->where('apellido','LIKE','%'.$apellido.'%')
+            ->get();
+        foreach($elementos as $key => $empleado){
+            $empleado = $this->PrepararEmpleado($empleado);
+        }
+        return $elementos;
+    }
     // /Empleados/Insertar
-    function AderirUsuario(Request $req){
+    function InsertarUsuario(Request $req){
         $nombre =   $req->input('nombreEmpleado');
         $apellido = $req->input('apellidoEmpleado');
         $password = $req->input('passEmpleado');

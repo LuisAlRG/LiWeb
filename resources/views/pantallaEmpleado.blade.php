@@ -21,27 +21,26 @@
         >
         <label for="nombre">Nombre</label> 
         <input type="text" name="nombre" id="nombre"
-            ng-model="nombre"
+            ng-model="nombre" ng-disabled="DisableIfClave()"
         > 
         <label for="apellido">Apellido</label>
         <input type="text" name="apellido" id="apellido"
-            ng-model="apellido"
+            ng-model="apellido" ng-disabled="DisableIfClave()"
         >
         <label for="rolSelect">Rol</label>
         <select name="rolSelect" id="rolSelect"
-            ng-model="rolSelect"
+            ng-disabled="DisableIfClave()"
+            ng-model="rolSelect" 
+            ng-init="rolSelect = filtroRoles[0]"
+            ng-options="rol.nombre for rol in filtroRoles"
         >
-            <option value="Todos">sin filltro</option>
-            <option value="Gerente">Gerente</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Funcionario">Funcionario</option>
         </select>
     </form>
 </div>
 @endsection
 @section('botonesAccion')
 <div>
-    <div> <button>Buscar</button></div>
+    <div> <button ng-click="OnBuscarEditorial()">Buscar</button></div>
     <div> <a href="MenuPrincipal"> <button>Menu</button></a></div> 
 </div>
 @endsection

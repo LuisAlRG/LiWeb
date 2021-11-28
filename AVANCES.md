@@ -49,3 +49,6 @@ avance 1 del 27 11 21
     Megorando un poco la calidad de las funciones en java script.
     nota: investigar un poco mas de los midel ware para por fin poder hacer bien la tabla de historial
     nota2: midelware para bloquear el acceso a no funcionario para otras pantallas (Empleados y modificacion de libros)
+
+avance 1 del 28 11 21  
+    se puede consultar en la pantalla de empleados

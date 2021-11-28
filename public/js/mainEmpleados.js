@@ -76,6 +76,13 @@ app.controller('allController',function($scope,$http){
         {nombre:"Gerente", value:3}
     ];
 
+    $scope.filtroRoles=[
+        {nombre:"Sin filtro", value:1},
+        {nombre:"Funcionario", value:2},
+        {nombre:"Administrador", value:3},
+        {nombre:"Funcionario", value:4},
+    ];
+
     //formatos
     $scope.FormatoRol = function(rol){
         let cadena = "Error"
@@ -100,6 +107,12 @@ app.controller('allController',function($scope,$http){
             $scope.mensajeBorrar;
     }
 
+    $scope.DisableIfClave = function(){
+        if($scope.clave === undefined)
+            return false;
+        return $scope.clave >0;
+    }
+
     $scope.OnContratarToggle = function (empleado) {
         $("tablaInfo").prop("disabled",true);
         $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Contratado",
@@ -122,18 +135,17 @@ app.controller('allController',function($scope,$http){
         );
         empleado.contratado = !empleado.contratado;
     }
-
+    //Eventos
     $scope.OnInsertarEmpleado = function (){
-        let envio = {
-            _token: $("#tokenUsr2").val(),
+        let enviar = {
             nombreEmpleado: $scope.nombreEmpleado,
             apellidoEmpleado: $scope.apellidoEmpleado,
             passEmpleado: $scope.passEmpleado,
             rolEmpleado: $scope.rolEmpleado.value
         }
-        console.log(envio);
+        console.log(enviar);
         $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Insertar",
-            envio
+            enviar
         ).then(
             function(response){
                 let datos = response.data;
@@ -152,9 +164,57 @@ app.controller('allController',function($scope,$http){
         );
     }
 
+    $scope.OnBuscarEditorial = function(){
+        let enviar = {
+            clave:      $scope.clave,
+            nombre:     $scope.nombre,
+            apellido:   $scope.apellido,
+            rolSelect:  $scope.rolSelect.value
+        }
+        console.log(enviar);
+        $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Consultar",
+            enviar
+        ).then(
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                if(datos)
+                    if(datos[0]){
+                        $scope.listEmpleado = datos;
+                        return 1;
+                    }
+                $scope.listEmpleado=[
+                    new Empleado(
+                        -1,-1,
+                        "No hay empleados",
+                        "No hay empleados con",
+                        "esta descripcio",
+                        false,
+                        false,
+                        "Funcionario"
+                    )
+                ];
+            },
+            function(response){
+                let datos = response.data;
+                console.log(datos);
+                $scope.listEmpleado=[
+                    new Empleado(
+                        -1,-1,
+                        "No se a podido cargar.",
+                        "No se a podido cargar.",
+                        "Intentelo de nuevo mas tarde",
+                        false,
+                        false,
+                        0
+                    )
+                ];
+            }
+        );
+    }
+
     $scope.OnBorrarEmpleado = function(clave, indexLista){
         let envio = {
-            _token: $("#tokenUsr2").val(),
             clave: clave
         }
         

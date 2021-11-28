@@ -94,7 +94,8 @@ Route::get('/LiWeb/Empleados',	[EmpleadoController::class,'ViewEmpleados'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Empleados/VerTodoEmpleado',	[EmpleadoController::class,'VerTodoEmpleado']);
 Route::post('/LiWeb/Empleados/Contratado',		[EmpleadoController::class,'Contratar']);
-Route::post('/LiWeb/Empleados/Insertar',		[EmpleadoController::class,'AderirUsuario']);
+Route::post('/LiWeb/Empleados/Consultar',		[EmpleadoController::class,'ConsultarEmpleado']);
+Route::post('/LiWeb/Empleados/Insertar',		[EmpleadoController::class,'InsertarUsuario']);
 Route::post('/LiWeb/Empleados/Borrar',			[EmpleadoController::class,'BorrarEmpleado']);
 Route::post('/LiWeb/Empleados/Modificar',		[EmpleadoController::class,'ModificarUsuario']);
 
