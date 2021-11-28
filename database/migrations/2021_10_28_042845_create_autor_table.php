@@ -17,7 +17,7 @@ class CreateAutorTable extends Migration
         	//atributos
             $table->id('idAutor');
             $table->string('nombre')->nullable();
-            $table->string('apellido');
+            $table->string('apellido')->nullable();
             $table->timestamps();
         });
     }

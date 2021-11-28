@@ -170,9 +170,10 @@ app.controller('allController',function($scope,$http){
         console.log(inParm);
     }
 
-    $scope.OnModificar=function(numeroId){
+    $scope.OnModificarLibro=function(numeroId){
         console.log("si paso");
         let nombreid = "goToModif" + numeroId;
+        console.log($("#thisLibroId").val());
         document.getElementById(nombreid).submit();
     }
 });

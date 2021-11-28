@@ -100,13 +100,13 @@
                 <div class="opcionesAdm">
                     <section>
                         <div>
-                            <form action="PantallaLibrosMod.html" method="post" id="goToModif@{{libros.idLibro}}">
+                            <form action="Libro" method="post" id="goToModif@{{libros.idLibro}}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }} ">
                                 <input type="hidden" name="thisLibroId" id="thisLibroId"
-                                    ng-model="thisLibroId"
-                                    value=@{{libros.idLibro}}
+                                    value = @{{libros.idLibro}}
                                 >
                             <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                ng-click="OnModificar(libros.idLibro)"
+                                ng-click="OnModificarLibro(libros.idLibro)"
                             >
                                 <circle id="Ellipse 1" cx="50" cy="50" r="45" fill="#008000"/>
                                 <g id="LapizSombra">

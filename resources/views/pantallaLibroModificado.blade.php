@@ -21,45 +21,17 @@
         <input type="text" name="libroNombre" id="libroNombre" value="{{$libro->titulo}}" disabled>
     </form>
 </div>
-<div>
-    <form action="buscarAutorLib" method="post">
-        <label for="autorClave">Clave Autor</label> 
-        <input type="number" name="autorClave" id="autorClave"
-            ng-model="autorClave" 
-        >
-        <label for="autorNombre">Nombre(s)</label>
-        <input type="text" name="autorNombre" id="autorNombre"
-            ng-model="autorNombre"
-        > 
-        <label for="autorApellido">Apellido(s)</label>
-        <input type="text" name="autorApellido" id="autorApellido"
-            ng-model="autorApellido"
-        > 
-    </form>
-</div>
-<div>
-    <form action="buscarGeneroLib" method="post">
-        <label for="generoClave">Clave Genero</label>
-        <input type="number" name="generoClave" id="generoClave"
-            ng-model="generoClave"
-        >
-        <label for="generoNombre">Nombre</label> 
-        <input type="text" name="generoNombre" id="generoNombre"
-            ng-model="generoNombre"
-        > 
-    </form>
-</div>
+
 @endsection
 @section('botonesAccion')
 <div>
-    <div> <button>Busqueda</button> </div> 
     <p>Elementos aderidos</p>
     <div><button>Autor(es)</button></div>
     <div><button>Genero(s)</button></div>
     <div><button>Regresar a libro</button></div>
     <p>Navegar a:</p>
-    <div> <a href="../Libros"> <button>Regresar</button> </a> </div>
-    <div> <a href="../MenuPrincipal"> <button>Menu</button> </a> </div>
+    <div> <a href="Libros"> <button>Regresar</button> </a> </div>
+    <div> <a href="MenuPrincipal"> <button>Menu</button> </a> </div>
 </div>
 @endsection
 @section('tables')
@@ -68,12 +40,13 @@
         <div>Modificar Libro</div>
     </section>
     
-    <form action="modificarLibro" method="post">
+    <form action="Libro" method="post">
+    <!--<input type="hidden" name="_token" value="{{ csrf_token() }} ">-->
     <div>
         <div>
             <label for="libroClaveM">Clave</label> 
             <input type="number" name="libroClaveM" id="libroClaveM" 
-                value = "{{$libro->idLibro}}"
+                value = "{{$libro->idLibro}}" disabled
             >
         </div>
         <div>
@@ -100,14 +73,30 @@
             <label for="claveEditorialM">Clave editorial</label>
             <input type="number" name="claveEditorialM" id="claveEditorialM"
                 value = "{{$editorial->idEditorial}}"
+                ng-model = "claveEditorialM"
+                ng-init = "claveEditorialM = {{$editorial->idEditorial}}"
+                ng-change = "OnDesplegarClaveEditorial($event,claveEditorialM)"
             >
             <label for="nombreEditorialM">Editorial (Nombre)</label>
-            <input type="text" name="nombreEditorialM" id="nombreEditorialM"
+            <input type="text" list="editorialNamesFound" name="nombreEditorialM" id="nombreEditorialM"
                 value = "{{$editorial->nombre}}"
+                ng-keyup = "OnBuscarEditorial('oNo',$event)"
             >
+            <datalist id="editorialNamesFound">
+                <option
+                    ng-repeat="editorial in listBusqEditorial" 
+                    value="@{{editorial.nombre}}"
+                >
+            </datalist>
+        </div>
+        <div ng-show="mensajeModificar">
+            <p><span>@{{mensajeModificar}}</span></p>
         </div>
         <div>
-            <button type="submit">Aplicar Modificacion</button>
+            <button type="button" ng-click="OnModificarLibro()">Aplicar Modificacion</button>
+        </div>
+        <div ng-show="mensajeCorrecto">
+            <p><span>@{{mensajeCorrecto}}</span></p>
         </div>
     </div>
     </form>
@@ -121,19 +110,24 @@
     </section>
     <div class="cuerpoEntero">
         <section>
-            <div>@{{autor.id}}</div>
+            <div>@{{autor.idAutor}}</div>
             <div>@{{autor.nombre}}</div>
             <div>@{{autor.apellido}}</div>
             <div>
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    ng-click="OnQuitarAutor({{$libro->idLibro}},autor.idAutor,$index)"
+                >
                     <circle cx="50" cy="50" r="45" fill="#008000"/>
                     <rect x="85" y="45" width="15" height="65" transform="rotate(90 85 45)" fill="black" fill-opacity="0.4"/>
                     <rect x="83" y="42" width="15" height="65" transform="rotate(90 83 42)" fill="white"/>
                 </svg>
             </div>
+            <section ng-show="mensajeQuitar">
+                <p><span>@{{mensajeQuitar}}</span></p>
+            </section>
             <div class="elementComplete">
                 <section>
-                    <p>ID: @{{autor.id}}</p>
+                    <p>ID: @{{autor.idAutor}}</p>
                     <p>Nombre: @{{autor.nombre}}</p>
                     <p>Apellido: @{{autor.apellido}}</p>
                 </section>
@@ -149,7 +143,7 @@
             <div>
                 <input type="number" name="idAutorB" id="idAutorB" 
                     ng-model="idAutorB"
-                    ng-keyup="onDesplegarClaveAutor($event,idAutorB)"
+                    ng-change="onDesplegarClaveAutor($event,idAutorB)"
                 >
             </div>
             <div>
@@ -168,7 +162,7 @@
             <div>
                 <input type="text" list="autorApellFound" name="apellidoAutorB" id="apellidoAutorB" required 
                     ng-model = "apellidoAutorB"
-                    ng-keyup="onBuscarAutorApellido(apellidoAutorB,$event)"
+                    ng-keyup = "onBuscarAutorApellido(apellidoAutorB,$event)"
                 >
                 <datalist id="autorApellFound">
                     <option
@@ -179,7 +173,7 @@
             </div>
             <div>
                 <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                
+                    ng-click="OnAderirAutor({{$libro->idLibro}})"
                 >
                     <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                     <g class="cruzNegraG">
@@ -193,6 +187,9 @@
                 </svg>
             </div>
         </form>
+        <section ng-show="mensajeAdicion">
+            <p><span>@{{mensajeAdicion}}</span></p>
+        </section>
     </div>
 </tbiAutor>
 <tbiGeneros>
@@ -206,12 +203,17 @@
             <div>@{{genero.idGenero}}</div>
             <div>@{{genero.nombre}}</div>
             <div>
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    ng-click="OnQuitarGenero({{$libro->idLibro}},genero.idGenero,$index)"
+                >
                     <circle cx="50" cy="50" r="45" fill="#008000"/>
                     <rect x="85" y="45" width="15" height="65" transform="rotate(90 85 45)" fill="black" fill-opacity="0.4"/>
                     <rect x="83" y="42" width="15" height="65" transform="rotate(90 83 42)" fill="white"/>
                 </svg>
             </div>
+            <section ng-show="mensajeQuitar">
+                <p><span>@{{mensajeQuitar}}</span></p>
+            </section>
             <div class="elementComplete">
                 <section>
                     <p>ID: @{{genero.idGenero}}</p>
@@ -225,13 +227,17 @@
         <div>Genero</div>
         <div>Aderrir</div>
         <form name="aGeneroOnLibro" id="aGeneroOnLibro" action="aderirGeneroOnLibro">
+            <input type="hidden" name="_token" value="{{ csrf_token() }} ">
             <div>
-                <input type="number" name="idGeneroB" id="idGeneroB">
+                <input type="number" name="idGeneroB" id="idGeneroB"
+                    ng-model="idGeneroB"
+                    ng-change="onDesplegarClaveGenero($event,idGeneroB)"
+                >
             </div>
             <div>
                 <input type="text" list="generoNamesFound" name="nombreGeneroB" id="nombreGeneroB" required 
                     ng-model = "nombreGeneroB"
-                    ng-keyup="onBuscarGenero(nombreGeneroB,$event)"
+                    ng-keyup = "onBuscarGenero(nombreGeneroB,$event)"
                 >
                 <datalist id="generoNamesFound">
                     <option
@@ -241,7 +247,9 @@
                 </datalist>
             </div>
             <div>
-                <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ng-click="OnAderirGenero({{$libro->idLibro}})"
+                >
                     <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                     <g class="cruzNegraG">
                         <rect x="44" y="20" width="15" height="65" fill="black" fill-opacity="0.4"/>
@@ -254,6 +262,9 @@
                 </svg>
             </div>
         </form>
+        <section ng-show="mensajeAdicion">
+            <p><span>@{{mensajeAdicion}}</span></p>
+        </section>
     </div>
 </tbiGeneros>
 @endsection

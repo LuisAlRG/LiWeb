@@ -41,9 +41,7 @@ app.controller('allController',function($scope,$http){
         new Autor(0,"Cargando","Espere un momento")
     ];
     $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodos",
-        {
-            
-        }
+        {}
     ).then(
         function(rensopne){
             let datos = rensopne.data;

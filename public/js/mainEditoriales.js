@@ -91,7 +91,7 @@ app.controller('allController',function($scope,$http){
     }
 
     //Eventos
-    $scope.OnInsertarAutor = function(){
+    $scope.OnInsertarEditorial = function(){
         let enviar = {
             nombre: $scope.nombreEditorialA
         }
@@ -120,7 +120,7 @@ app.controller('allController',function($scope,$http){
         );
     }
 
-    $scope.OnBuscarAutor = function(){
+    $scope.OnBuscarEditorial = function(){
         let enviar = {
             clave:      $scope.clave,
             nombre:     $scope.nombre
@@ -151,7 +151,7 @@ app.controller('allController',function($scope,$http){
         );
     }
 
-    $scope.OnEliminarAutor = function(idEditoriales,indexLista){
+    $scope.OnEliminarEditorial = function(idEditoriales,indexLista){
         let enviar = {
             clave: idEditoriales
         }

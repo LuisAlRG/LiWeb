@@ -58,8 +58,10 @@ Route::post('/LiWeb/Libros/VerTodoLibros',			[LibroController::class,"VerTodosLi
 Route::post('/LiWeb/Libro',	[LibroController::class,'ViewLibroModificar'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Libro/Modificar',		[LibroController::class,'ModificarLibro']);
+Route::post('/LiWeb/Libro/Autor',			[LibroController::class,'SuAutores']);
 Route::post('/LiWeb/Libro/AderirAutor',		[LibroController::class,'AderirAutor']);
 Route::post('/LiWeb/Libro/QuitarAutor',		[LibroController::class,'QuitarAutor']);
+Route::post('/LiWeb/Libro/Genero',			[LibroController::class,'SuGeneros']);
 Route::post('/LiWeb/Libro/AderirGenero',	[LibroController::class,'AderirGenero']);
 Route::post('/LiWeb/Libro/QuitarGenero',	[LibroController::class,'QuitarGenero']);
 
