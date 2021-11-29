@@ -68,7 +68,13 @@ body>div{
             >button:hover{
                 @extend .my-green-color;
             }
-
+            >p{
+                text-align: center;
+                span{
+                    text-align: center;
+                    color: rgb(165, 72, 0);
+                }
+            }
         }
     }
 }

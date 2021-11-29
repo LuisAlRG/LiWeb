@@ -17,6 +17,10 @@ class Libro extends Model
     	return $this->belongsTo(Editorial::class,'idEditorial');
     }
 
+	public function ventas(){
+		return $this->hasMany(VentaLibro::class,'idLibro');
+	}
+
     public function generos(){
 
     	return $this->belongsToMany(Genero::class,'GeneroLibro',

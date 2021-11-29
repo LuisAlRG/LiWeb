@@ -1366,6 +1366,12 @@ a {
   #parteIzquierdo > botonesDeAccion .btnLogOut > a > button {
     fill: lightgrey; }
 
+#parteDerecho > tablaInfo p {
+  text-align: center; }
+  #parteDerecho > tablaInfo p spam {
+    text-align: center;
+    color: #a54800; }
+
 #parteDerecho > tablaInfo > div {
   /* width */
   /* Track */

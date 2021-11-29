@@ -82,9 +82,7 @@
                         <p>Apellido: @{{empleado.apellido}}</p>
                         <p>Rol: @{{FormatoRol(empleado.rol)}}</p>
                     </section>
-                    <section ng-show="mensajeBorrar">
-                        <p><span>@{{mensajeBorrar}}</span></p>
-                    </section>
+                    
                     <section>
                         <div>
                             <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -123,6 +121,14 @@
                             <br>
                             Borrar
                         </div>
+                    </section>
+                    <section ng-show="mensajeBorrar">
+                        <p><span>@{{mensajeBorrar}}</span></p>
+                    </section>
+                </div>
+                <div class="mensaje putItInvisible" ng-show="mensajeModificar">
+                    <section ng-show="mensajeModificar">
+                        <p><span>@{{mensajeModificar}}</span></p>
                     </section>
                 </div>
             </section>

@@ -53,7 +53,11 @@ Route::post('/LiWeb/AplicarVenta',		[VentaController::class, 'InsertarVenta']);
 
 Route::get('/LiWeb/Libros',			[LibroController::class,"ViewLibros"])
 	->middleware(['auth']);
-Route::post('/LiWeb/Libros/VerTodoLibros',			[LibroController::class,"VerTodosLibros"]);
+Route::post('/LiWeb/Libros/VerTodoLibros',	[LibroController::class,"VerTodosLibros"]);
+Route::post('/LiWeb/Libros/Insertar',		[LibroController::class,"InsertarLibro"]);
+Route::post('/LiWeb/Libros/Consultar',		[LibroController::class,"ConsultarLibro"]);
+Route::post('/LiWeb/Libros/Borrar',			[LibroController::class,"BorrarLibro"]);
+
 
 Route::post('/LiWeb/Libro',	[LibroController::class,'ViewLibroModificar'])
 	->middleware(['auth']);

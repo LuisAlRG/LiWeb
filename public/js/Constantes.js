@@ -6,5 +6,5 @@ const ERROR_PETICION = "Error en la peticion, intentelo mas tarde, o recarge la 
 function isEmptyOrSpaces(str){
     if(str === undefined)
         return true;
-    return str === null || str.match(/^ *$/) !== null;
+    return str === null || str?.match(/^ *$/) !== null;
 }

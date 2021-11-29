@@ -50,7 +50,7 @@ class EmpleadoController extends Controller
                 }
             }
         }
-        return view('logIn',['mensajeServidor'=>'Lo sentimos, intente de nuevo']);
+        return view('logIn',['mensajeServidor'=>'Usuario o clave incorrecta, intente de nuevo']);
     }
     function Salir(){
         Auth::logout();
@@ -141,10 +141,10 @@ class EmpleadoController extends Controller
     // /Empleados/Modificar
     function ModificarUsuario(Request $req){
         $clave = $req->input('clave');
-        $nombre =   $req->input('nombreEmpleadoM');
-        $apellido = $req->input('apellidoEmpleadoM');
-        $password = $req->input('passEmpleadoM');
-        $rol =      $req->input('rolEmpleadoM');
+        $nombre =   $req->input('nombre');
+        $apellido = $req->input('apellido');
+        $password = $req->input('password');
+        $rol =      $req->input('rol');
         $clave = (int) $clave;
         $rol = (int) $rol;
 
@@ -152,7 +152,8 @@ class EmpleadoController extends Controller
         if($existe){
             //revisar si concuerda con un usuario
             foreach ($existe as $key => $value) {
-                if(Hash::check($pass, $value->password)){
+                if(Hash::check($password, $value->password)){
+                    if($value->idEmpleado != $clave)
                     return 're';
                 }
             }
@@ -162,8 +163,10 @@ class EmpleadoController extends Controller
         $empleado->nombre = $nombre;
         $empleado->apellido = $apellido;
         $usuario = User::find($empleado->idUser);
-        $usuario->name = $empleado->nombre;
-        $usuario->password = Hash::make( $password );
+        $usuario->name = $nombre;
+        if( isset($password) || !(trim($password) === '')){
+            $usuario->password = Hash::make( $password );
+        }
         $usuario->save();
         $empleado->ConvertirA($rol);
         $empleado->save();

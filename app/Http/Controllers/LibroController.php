@@ -48,14 +48,105 @@ class LibroController extends Controller
         }
     	return $libros;
     }
-    function ConsultarLibro(){
-	
+    function ConsultarLibro(Request $req){
+		$clave = $req->input('clave');
+		$edicion = $req->input('edicion');
+		$precio = $req->input('precio');
+		$categoria = $req->input('categoria');
+		$titulo = $req->input('titulo');
+		$nombreAutor = $req->input('autor');
+		$nombreEditorial = $req->input('editorial');
+		$nombreGenero = $req->input('genero');
+
+		$categoria = (int)$categoria;
+		
+		if(is_numeric($clave)){
+            $clave = (int) $clave;
+            $elemento = Libro::find($clave);
+            return [0=>$elemento];
+        }
+		if(is_numeric($precio)){
+			$precio = (int) $precio;
+		}
+		else{
+			$precio = 0;
+			$categoria = 1;
+		}
+		$opCategoria = '!=';
+		switch($categoria){
+			case 1: $opCategoria='>='; break; //mayor que
+			case 2: $opCategoria='<='; break; //menor que
+		}
+		
+		
+		$elementos = Libro::where('titulo','LIKE','%'.$titulo.'%')
+			->where('precio',$opCategoria,$precio)
+			->get();
+			
+		if(count($elementos)){
+            foreach($elementos as $key => $libro){
+				//echo $libro;
+				
+                $libro = $this->PrepararLibro($libro);
+            }
+        }
+		$elementos = $elementos->toArray();
+		$listaFinal = array_filter($elementos,function($var){
+			//primero revisar si hay autor con ese nombre o apellido
+			$pasableAutor = false;
+			if(isset($nombreAutor) || !(trim($nombreAutor??'') === '')){
+				$listAutor = $var->autores()->get();
+				foreach($listAutor as $key => $elAutor){
+					$pasableAutor = stripos($elAutor->nombre, $nombreAutor) || 
+					stripos($elAutor->apellido, $nombreAutor);
+					if($pasableAutor)
+						break;
+				}
+			}
+			else{
+				$pasableAutor = true;
+			}
+			//revisar si hay editorial con ese libro
+			$pasableEditorial = false;
+			if(isset($nombreEditorial) || !(trim($nombreEditorial??'') === '')){
+				$listEditorial = $var->editorial()->get();
+				foreach($listEditorial as $key => $elEditorial){
+					$pasableEditorial = stripos($elEditorial->nombre, $nombreEditorial);
+					if($pasableEditorial)
+						break;
+				}
+			}
+			else{
+				$pasableEditorial = true;
+			}
+			//revisar si hay generos con ese nombre
+			$pasableGenero = false;
+			if(isset($nombreGenero) || !(trim($nombreGenero??'') === '')){
+				$listGenero = $var->generos()->get();
+				foreach($listGenero as $key => $elGenero){
+					$pasableGenero  = stripos($elGenero->nombre, $nombreGenero);
+					if($pasableGenero)
+						break;
+				}
+			}
+			else{
+				$pasableGenero = true;
+			}
+			$pasable = $pasableAutor && $pasableEditorial && $pasableGenero;
+			return $pasable;
+		});
+		
+		return $listaFinal;
     }
 
     function InsertarLibro(Request $req){
-    	$tituloLibro = $req->input('tituloLibroA');
-    	$completoAutor = $req->input('autorLibroA');
-    	$nombreAutor = null;
+    	$tituloLibro = $req->input('titulo');
+    	$completoAutor = $req->input('autor');
+    	$nombreEditorial = $req->input('editorial');
+    	$nombreGenero = $req->input('genero');
+    	$precioLibro = $req->input('precio');
+    	$cantidad = 1;
+		$nombreAutor = "";
     	$apellidoAutor = "";
     	if(str_contains($completoAutor, '-')){
     		$completoAutor = explode("-",$completoAutor);
@@ -66,12 +157,8 @@ class LibroController extends Controller
     	else{
     		$nombreAutor = $completoAutor;
     	}
-    	$nombreEditorial = $req->input('editorialLibroA');
-    	$nombreGenero = $req->input('generoLibroA');
-    	$precioLibro = $req->input('precioLibroA');
-    	$cantidad = 1;
 
-    	$editorial = Editorial::where('nombre',$nombreEditorial)->get();
+    	$editorial = Editorial::where('nombre','=',$nombreEditorial)->first();
     	/*
 		DB::table('Editorial')
 			->where('nombre','like',$atributo)
@@ -82,14 +169,14 @@ class LibroController extends Controller
     		$editorial->nombre = $nombreEditorial;
     		$editorial->save();
     	}
-    	$autor = Autor::where('nomnre',$nombreAutor)->where('apellido',$apellidoAutor)->get();
+    	$autor = Autor::where('nombre','=',$nombreAutor)->where('apellido','=',$apellidoAutor)->first();
     	if(!$autor){
     		$autor = new Autor();
     		$autor->nombre = $nombreAutor;
     		$autor->apellido = $apellidoAutor;
 			$autor->save();
     	}
-    	$genero = Genero::where('nombre',$nombreGenero)->get();
+    	$genero = Genero::where('nombre','=',$nombreGenero)->first();
     	if(!$genero){
     		$genero = new Genero();
     		$genero->nombre = $nombreGenero;
@@ -102,6 +189,10 @@ class LibroController extends Controller
     	$nuevoLibro->precio = $precioLibro;
     	$nuevoLibro->edicion = 1;
     	$nuevoLibro->cantidad = 1;
+		$nuevoLibro->save();
+		$nuevoLibro->generos()->save($genero);
+		$nuevoLibro->autores()->save($autor);
+		return $nuevoLibro;
     }
 
     function ModificarLibro(Request $req){
@@ -162,8 +253,16 @@ class LibroController extends Controller
 		];
     }
 
-    function EliminarLibro(){
-
+    function BorrarLibro(Request $req){
+		$clave = $req->input('clave');
+        $clave = (int)$clave;
+		$libro = Libro::find($clave);
+		$tieneVenta = $libro->ventas()->get();
+		if(count($tieneVenta)){
+			return 'no';
+		}
+		$libro->delete();
+		return $libro;
     }
 
 	//pantalla modificar libro

@@ -52,3 +52,8 @@ avance 1 del 27 11 21
 
 avance 1 del 28 11 21  
     se puede consultar en la pantalla de empleados
+
+avance 2 del 28 11 21
+    Se agregaron algunas comprobaciones en las pantallad de empleado, autor, editorial y genero (que muestre algunos mensajes de error en pantalla)
+    pantalla libro ya puede hacer consulta y agregar nuevos libros con nuevos autor, editoria y Genero
+    

@@ -229,7 +229,7 @@ app.controller('allController',function($scope,$http){
                     $scope.listAutores[indexLista].nombre = enviar.nombre;
                     $scope.listAutores[indexLista].apellido = enviar.apellido;
                     $(claseElemento + ">div").toggleClass("putItInvisible");
-                    $scope.$apply();
+                    //$scope.$apply();
                     $scope.mensajeModificar = null;
                 },
                 function(response) {

@@ -154,6 +154,10 @@ app.controller('allController',function($scope,$http){
                     $scope.mensajeInsertar = "Contraseña repetida, intente con otra";
                     return true;
                 }
+                $scope.nombreEmpleado = undefined;
+                $scope.apellidoEmpleado = undefined;
+                $scope.passEmpleado = undefined;
+                $scope.rolEmpleado = $scope.roles[0];
                 $scope.listEmpleado.push(datos);
             },
             function(response){
@@ -289,29 +293,39 @@ app.controller('allController',function($scope,$http){
             columna5
         );
         $(claseElemento+">div.Quitable svg").click(function(){
-            let 
-            nombre=     $("#nombreEmpleadoM").val(),
-            apellido =  $("#apellidoEmpleadoM").val(),
-            password =  $("#passEmpleadoM").val(),
-            tipo =       $("#rolEmpleadoM").val();
-            /*$http.post('modificarAutor',{}).then(
+            let enviar = {
+                clave:      empleado.idEmpleado,
+                nombre:     $("#nombreEmpleadoM").val(),
+                apellido:   $("#apellidoEmpleadoM").val(),
+                password:   $("#passEmpleadoM").val(),
+                rol:        $("#rolEmpleadoM").val()
+            }
+            console.log(enviar);
+            $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Modificar",
+                enviar
+            ).then(
                 function(response){
-                    let datoRespuesta = response.data;
-                    if(datoRespuesta){
-
+                    let datos = response.data;
+                    console.log(datos);
+                    if(datos == "re"){
+                        $scope.mensajeModificar = "Nombre repetido, intente con otro";
+                        return true;
                     }
+                    $(".Quitable").remove();
+                    $scope.listEmpleado[thisindex].nombre =     enviar.nombre;
+                    $scope.listEmpleado[thisindex].apellido =   enviar.apellido;
+                    $scope.listEmpleado[thisindex].rol =        parseInt(enviar.rol);
+                    $(claseElemento + ">div").toggleClass("putItInvisible");
+                    //$scope.$apply();
+                    $scope.mensajeModificar = null;
                 },
                 function(response){
-                    $scope.mensId = "Error de conexion al tratar de modificar";
+                    let datos = response.data;
+                    console.log(datos);
+                    $scope.mensajeModificar = ERROR_PETICION;
                 }
-            );*/
-            console.log([clave,nombre,apellido,password,tipo]);
-            $(".Quitable").remove();
-            $scope.listEmpleado[thisindex].nombre = nombre;
-            $scope.listEmpleado[thisindex].apellido = apellido;
-            $scope.listEmpleado[thisindex].tipo = (tipo==1)?"Funcionario":(rol==2)?"Administrador":(rol==3)?"Gerente":"Error";
-            $(claseElemento + ">div").toggleClass("putItInvisible");
-            $scope.$apply();
+            );
+            
         });
     }
 });

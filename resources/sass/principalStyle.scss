@@ -122,6 +122,15 @@ form{
     @extend .l9;
     @extend .m9;
     >tablaInfo{
+
+        p{
+            text-align: center;
+            spam{
+                text-align: center;
+                color: rgb(165, 72, 0)
+            }
+        }
+
         >div{
             @extend .w3-margin;
             section{

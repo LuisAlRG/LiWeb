@@ -1346,3 +1346,8 @@ body > div > logIn {
     margin-top: 12px; }
   body > div > logIn > div#parteDerecha > button {
     width: 100%; }
+  body > div > logIn > div#parteDerecha > p {
+    text-align: center; }
+    body > div > logIn > div#parteDerecha > p span {
+      text-align: center;
+      color: #a54800; }

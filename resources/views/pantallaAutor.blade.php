@@ -66,12 +66,7 @@
                         <rect x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
                         </svg>
                 </div>
-                <div class="mensageSections" ng-show="MostrarSiMensage();" >
-                    <section>
-                        <p><span>@{{mensajeModificar}}</span></p>
-                        <p><span>@{{mensajeBorrar}}</span></p>
-                    </section>
-                </div>
+                
                 <div class="opcionesAdm">
                     <section>
                         <div>
@@ -114,12 +109,20 @@
                             Borrar
                         </div>
                     </section>
+                    <section ng-show="mensajeBorrar">
+                        <p><span>@{{mensajeBorrar}}</span></p>
+                    </section>
                 </div>
                 <div class="elementComplete">
                     <section>
                         <p>ID: @{{autor.idAutor}}</p>
                         <p>Nombre: @{{autor.nombre}}</p>
                         <p>Apellido: @{{autor.apellido}}</p>
+                    </section>
+                </div>
+                <div class="mensaje putItInvisible" ng-show="mensajeModificar">
+                    <section ng-show="mensajeModificar">
+                        <p><span>@{{mensajeModificar}}</span></p>
                     </section>
                 </div>
                 

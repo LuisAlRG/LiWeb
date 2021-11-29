@@ -225,7 +225,7 @@ app.controller('allController',function($scope,$http){
                     $(".Quitable").remove();
                     $scope.listGenero[thisindex].nombre= enviar.nombre;
                     $(claseElemento + ">div").toggleClass("putItInvisible");
-                    $scope.$apply();
+                    //$scope.$apply();
                     $scope.mensajeModificar = null;
                 },
                 function(response) {

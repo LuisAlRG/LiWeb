@@ -31,10 +31,10 @@
             ng-model="precio"
         >
         <select name="categoria" id="categoria"
-            ng-model="categoria"
+            ng-model="categoria" 
+            ng-init="categoria = filtros[0]"
+            ng-options="filtro.nombre for filtro in filtros"
         >
-            <option value="1">Mayor al precio</option>
-            <option value="2">Menor al precio</option>
         </select>
 
         <label for="tituloL">Titulo</label>
@@ -49,6 +49,10 @@
         <input type="text" name="editorialL" id="editorialL"
             ng-model="editorialL"
         >
+        <label for="generoL">Genero</label>
+        <input type="text" name="generoL" id="generoL"
+            ng-model="generoL"
+        >
     </form>
 </div>
 @endsection
@@ -62,7 +66,7 @@
     <div> <a href="MenuPrincipal"><button>Menú</button></a> </div>
 </div>
 <div id="botonesFormMode">
-    <div> <button id="btnFormAplicar"> Buscar </button> </div>
+    <div> <button id="btnFormAplicar" ng-click="OnBuscarLibro()"> Buscar </button> </div>
     <div> <button id="btnCancelarCons"> Cancelar </button> </div>
 </div>
 @endsection
@@ -96,7 +100,7 @@
                     <rect x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
                 </svg>
             </div>
-
+                
                 <div class="opcionesAdm">
                     <section>
                         <div>
@@ -129,7 +133,7 @@
                         </div>
                         <div>
                             <svg class="boteDeBasura" viewBox="-10 -10 380 510" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            ng-click="libros.selected=false; accionRemoverSeleccion($index)"
+                            ng-click="OnEliminarLibro(libros.idLibro,$index)"
                             >
                                 <path class="tapa" d="M0 110C0 87.9086 17.9086 70 40 70H310C332.091 70 350 87.9086 350 110V110H0V110Z" fill="black"/>
                                 <path class="tapa" d="M100 70C100 47.9086 117.909 30 140 30H210C232.091 30 250 47.9086 250 70V70H100V70Z" fill="black"/>
@@ -144,8 +148,17 @@
                             Borrar
                         </div>
                     </section>
+                    <section ng-show="mensajeBorrar">
+                            <p><span>@{{mensajeBorrar}}</span></p>
+                    </section>
+                </div>
+                <div class="mensaje putItInvisible" ng-show="mensajeModificar">
+                    <section ng-show="mensajeModificar">
+                        <p><span>@{{mensajeModificar}}</span></p>
+                    </section>
                 </div>
                 <div class="elementComplete">
+                    
                     <section>
                         <div>
                             <p>Id: @{{libros.idLibro}}</p>
@@ -154,6 +167,7 @@
                             <p>Editorial: @{{libros.editorial}}</p>
                             <p>Cantidad en inventario: @{{libros.cantidad}}</p>
                         </div>
+                        
                         <div>
                             <p>Autores:</p>
                             <ul>
@@ -174,7 +188,8 @@
             <div>Genero</div>
             <div>Precio</div>
             <div>Aderir</div> <br>
-            <form action="aderirLibro" id="aLibro">
+            <form action="Libro" method="post" id="aLibro">
+                
                 <div>
                     <input type="text" name="tituloLibroA" id="tituloLibroA"
                         ng-model="tituloLibroA"
@@ -219,7 +234,9 @@
                     >
                 </div>
                 <div>
-                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        ng-click="OnInsertarLibro()"
+                    >
                         <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                         <g class="cruzNegraG">
                             <rect x="44" y="20" width="15" height="65" fill="black" fill-opacity="0.4"/>
@@ -231,6 +248,10 @@
                         </g>
                     </svg>
                 </div>
+                <!--Elementos ocultos para ir a modificacion directa-->
+                <input type="hidden" name="_token" value="{{ csrf_token() }} ">
+                <input type="hidden" name="thisLibroId" id="newLibroId">
+                <!---->
             </form>
     </div>
     </div>

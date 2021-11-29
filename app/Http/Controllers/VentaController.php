@@ -78,6 +78,12 @@ class VentaController extends Controller
         $idEmpleado = $req->input('responsable');
         
         $categoria = (int) $categoria ;
+        if(is_numeric($clave)){
+            $clave = (int) $clave;
+            $elemento = Libro::find($clave);
+            return [0=>$elemento];
+        }
+        
     }
 
     function ConsultarLirbos(Request $req){
