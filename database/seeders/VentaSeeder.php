@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Venta;
 use App\Models\Libro;
 use App\Models\Empleado;
+use App\Models\Historial;
 use App\Models\VentaLibro;
 
 class VentaSeeder extends Seeder
@@ -30,12 +31,22 @@ class VentaSeeder extends Seeder
         //Ecuaciones diferenciales
         $venta->SaveLibroCant(3,1);
 
+        $historial = new Historial();
+        $historial->idEmpleado = $venta->idEmpleado;
+        $historial->operacion = "Realizo una venta";
+        $historial->save();
+
         $venta = new Venta();
         $venta->idEmpleado=3;
         $venta->cliente="Karla";
         $venta->save();
         //Inteligencia Artificial
         $venta->SaveLibroCant(12,10);
+
+        $historial = new Historial();
+        $historial->idEmpleado = $venta->idEmpleado;
+        $historial->operacion = "Realizo una venta";
+        $historial->save();
 
         $venta = new Venta();
         $venta->idEmpleado=4;
@@ -48,6 +59,11 @@ class VentaSeeder extends Seeder
         //Mecánica
         $venta->SaveLibroCant(26,1);
 
+        $historial = new Historial();
+        $historial->idEmpleado = $venta->idEmpleado;
+        $historial->operacion = "Realizo una venta";
+        $historial->save();
+
         $venta = new Venta();
         $venta->idEmpleado=6;
         $venta->cliente="Lic. Tadeo";
@@ -57,6 +73,10 @@ class VentaSeeder extends Seeder
         //Desarrollo web"
         $venta->SaveLibroCant(31,5);
 
+        $historial = new Historial();
+        $historial->idEmpleado = $venta->idEmpleado;
+        $historial->operacion = "Realizo una venta";
+        $historial->save();
  
         $venta = new Venta();
         $venta->idEmpleado=7;
@@ -73,6 +93,11 @@ class VentaSeeder extends Seeder
         $venta->SaveLibroCant(19,3);
         //Filme y Cinemática
         $venta->SaveLibroCant(17,1);
+
+        $historial = new Historial();
+        $historial->idEmpleado = $venta->idEmpleado;
+        $historial->operacion = "Realizo una venta";
+        $historial->save();
 
         //generar 10 mas aleatorio
         for($i=0; $i<10; $i++){
@@ -111,6 +136,10 @@ class VentaSeeder extends Seeder
                 $venta->SaveLibroCant($idLibro, $cantidadGenerado);
                 $maslibros--;
             }
+            $historial = new Historial();
+            $historial->idEmpleado = $venta->idEmpleado;
+            $historial->operacion = "Realizo una venta";
+            $historial->save();
         }
 
     }

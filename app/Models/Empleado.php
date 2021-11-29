@@ -29,6 +29,10 @@ class Empleado extends Model
 		return $this->hasOne(Venta::class,'idEmpleado');
 	}
 
+	public function historial(){
+		return $this->hasMany(Historial::class,'IdEmpleado');
+	}
+
     public function QueEs(){
     	$element = $this->funcionario()->get();
     	if(count($element)){

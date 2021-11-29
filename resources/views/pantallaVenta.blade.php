@@ -21,10 +21,12 @@
         > 
         <label for="fecha">Fecha</label> <br>
         <input type="date" name="fecha" id="fechaVal" 
-            ng-model="fecha"
+            ng-model="fecha" ng-disabled="DisableIfClave()"
         >
         <select name="categoria" id="categoriaType"
-            ng-model="categoria"
+            ng-model="categoria" ng-disabled="DisableIfClave()"
+            ng-init="categoria = filtros[0]"
+            ng-options="filtro.nombre for filtro in filtros "
         >
         <option value="exact">Exactamente la fecha</option>
         <option value="menor">Antes de fecha</option>
@@ -34,17 +36,20 @@
         </select>
         <label for="cliente">Cliente</label>
         <input type="text" name="cliente" id="clienteName"
-            ng-model="cliente"
+            ng-model="cliente" ng-disabled="DisableIfClave()"
         >
         <label for="responsable">Responsable</label>
         <input type="text" name="responsable" id="responsableName"
-            ng-model="responsable"
+            ng-model="responsable" ng-disabled="DisableIfClave()"
         >
     </form>
 </div>
 @endsection
 @section('botonesAccion')
 <div>
+    <div>
+        <button ng-click="OnBuscarVenta()" ng-show="showForm" >Buscar</button>
+    </div> 
     <div>
         <a href="RealizarVenta">
         <button>Vender</button>

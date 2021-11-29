@@ -23,15 +23,15 @@
         <div id="edicionSection">
         <label for="edicion">Edicion</label>
         <input type="number" name="edicion" id="edicion"
-            ng-model="edicion"
+            ng-model="edicion" ng-disabled="DisableIfClave()"
         > 
         </div>
         <label for="precio">Precio</label>
         <input type="number" name="precio" id="precio"
-            ng-model="precio"
+            ng-model="precio" ng-disabled="DisableIfClave()"
         >
         <select name="categoria" id="categoria"
-            ng-model="categoria" 
+            ng-model="categoria" ng-disabled="DisableIfClave()"
             ng-init="categoria = filtros[0]"
             ng-options="filtro.nombre for filtro in filtros"
         >
@@ -39,19 +39,19 @@
 
         <label for="tituloL">Titulo</label>
         <input type="text" name="tituloL" id="tituloL"
-            ng-model="tituloL"
+            ng-model="tituloL" ng-disabled="DisableIfClave()"
         >
         <label for="autorL">Autor</label>
         <input type="text" name="autorL" id="autorL"
-            ng-model="autorL"
+            ng-model="autorL" ng-disabled="DisableIfClave()"
         >
         <label for="editorialL">Editorial</label>
         <input type="text" name="editorialL" id="editorialL"
-            ng-model="editorialL"
+            ng-model="editorialL" ng-disabled="DisableIfClave()"
         >
         <label for="generoL">Genero</label>
         <input type="text" name="generoL" id="generoL"
-            ng-model="generoL"
+            ng-model="generoL" ng-disabled="DisableIfClave()"
         >
     </form>
 </div>

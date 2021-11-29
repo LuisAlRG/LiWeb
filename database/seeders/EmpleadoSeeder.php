@@ -7,6 +7,7 @@ use App\Models\Empleado;
 use App\Models\User;
 use App\Models\Administrador;
 use App\Models\Funcionario;
+use App\Models\Historial;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
@@ -55,6 +56,11 @@ class EmpleadoSeeder extends Seeder
         $empleado->save();
         $indInc++;
 
+        $historial = new Historial();
+        $historial->idEmpleado = 1;
+        $historial->operacion = "Agrego a un Empleado";
+        $historial->save();
+
         $empleado = new Empleado();
         $empleado->nombre = "Luis Alfonso";
         $empleado->apellido = "Rodriguez Gonzalez";
@@ -74,6 +80,11 @@ class EmpleadoSeeder extends Seeder
         $empleado->save();
         $indInc++;
 
+        $historial = new Historial();
+        $historial->idEmpleado = 1;
+        $historial->operacion = "Agrego a un Empleado";
+        $historial->save();
+
         $empleado = new Empleado();
         $empleado->nombre = "Jose Luis";
         $empleado->apellido = "Sanchez Sanchez";
@@ -90,6 +101,11 @@ class EmpleadoSeeder extends Seeder
         $empleado->save();
         $indInc++;
 
+        $historial = new Historial();
+        $historial->idEmpleado = 1;
+        $historial->operacion = "Agrego a un Empleado";
+        $historial->save();
+
         $empleado = new Empleado();
         $empleado->nombre = "Brian";
         $empleado->apellido = "Miranda Aguirre";
@@ -105,6 +121,11 @@ class EmpleadoSeeder extends Seeder
         $empleado->administrador()->save($admin);
         $empleado->save();
         $indInc++;
+
+        $historial = new Historial();
+        $historial->idEmpleado = 1;
+        $historial->operacion = "Agrego a un Empleado";
+        $historial->save();
 
         $empleado = new Empleado();
         $empleado->nombre = "Barney";
@@ -123,6 +144,11 @@ class EmpleadoSeeder extends Seeder
         $empleado->save();
         $indInc++;
 
+        $historial = new Historial();
+        $historial->idEmpleado = 1;
+        $historial->operacion = "Agrego a un Empleado";
+        $historial->save();
+
         $empleado = new Empleado();
         $empleado->nombre = "Thomas";
         $empleado->apellido = "Tren";
@@ -138,5 +164,10 @@ class EmpleadoSeeder extends Seeder
         $empleado->administrador()->save($admin);
         $empleado->save();
         $indInc++;
+
+        $historial = new Historial();
+        $historial->idEmpleado = 1;
+        $historial->operacion = "Agrego a un Empleado";
+        $historial->save();
     }
 }

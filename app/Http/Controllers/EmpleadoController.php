@@ -87,6 +87,7 @@ class EmpleadoController extends Controller
         $nombre = $req->input('nombre');
         $apellido = $req->input('apellido');
         $rolSelect = $req->input('rolSelect');
+        $rolSelect = (int)$rolSelect;
         if(is_numeric($clave)){
             $clave = (int)$clave;
             $elemento = Empleado::find($clave);
@@ -96,10 +97,20 @@ class EmpleadoController extends Controller
         $elementos = Empleado::where('nombre','LIKE','%'.$nombre.'%')
             ->where('apellido','LIKE','%'.$apellido.'%')
             ->get();
+        $empleadosSent=[];
         foreach($elementos as $key => $empleado){
             $empleado = $this->PrepararEmpleado($empleado);
+            if($rolSelect>0)
+            {
+                if( $empleado->QueEs() == $rolSelect)
+                    $empleadosSent[] = $empleado;
+            }
+            else{
+                $empleadosSent[] = $empleado;
+            }
         }
-        return $elementos;
+
+        return $empleadosSent;
     }
     // /Empleados/Insertar
     function InsertarUsuario(Request $req){

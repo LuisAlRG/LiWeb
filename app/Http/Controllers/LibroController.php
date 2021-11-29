@@ -9,6 +9,8 @@ use App\Models\Genero;
 use App\Models\Editorial;
 use App\Models\AutorLibro;
 use App\Models\GeneroLibro;
+use App\Models\Historial;
+use Illuminate\Support\Facades\Auth;
 
 class LibroController extends Controller
 {
@@ -49,12 +51,12 @@ class LibroController extends Controller
     	return $libros;
     }
     function ConsultarLibro(Request $req){
-		$clave = $req->input('clave');
-		$edicion = $req->input('edicion');
-		$precio = $req->input('precio');
-		$categoria = $req->input('categoria');
-		$titulo = $req->input('titulo');
-		$nombreAutor = $req->input('autor');
+		$clave = 		$req->input('clave');
+		$edicion = 		$req->input('edicion');
+		$precio = 		$req->input('precio');
+		$categoria = 	$req->input('categoria');
+		$titulo = 		$req->input('titulo');
+		$nombreAutor = 	$req->input('autor');
 		$nombreEditorial = $req->input('editorial');
 		$nombreGenero = $req->input('genero');
 
@@ -97,8 +99,8 @@ class LibroController extends Controller
 			if(isset($nombreAutor) || !(trim($nombreAutor??'') === '')){
 				$listAutor = $var->autores()->get();
 				foreach($listAutor as $key => $elAutor){
-					$pasableAutor = stripos($elAutor->nombre, $nombreAutor) || 
-					stripos($elAutor->apellido, $nombreAutor);
+					$pasableAutor = str_contains($elAutor->nombre, $nombreAutor) || 
+					str_contains($elAutor->apellido, $nombreAutor);
 					if($pasableAutor)
 						break;
 				}
@@ -111,7 +113,7 @@ class LibroController extends Controller
 			if(isset($nombreEditorial) || !(trim($nombreEditorial??'') === '')){
 				$listEditorial = $var->editorial()->get();
 				foreach($listEditorial as $key => $elEditorial){
-					$pasableEditorial = stripos($elEditorial->nombre, $nombreEditorial);
+					$pasableEditorial = str_contains($elEditorial->nombre, $nombreEditorial);
 					if($pasableEditorial)
 						break;
 				}
@@ -124,7 +126,7 @@ class LibroController extends Controller
 			if(isset($nombreGenero) || !(trim($nombreGenero??'') === '')){
 				$listGenero = $var->generos()->get();
 				foreach($listGenero as $key => $elGenero){
-					$pasableGenero  = stripos($elGenero->nombre, $nombreGenero);
+					$pasableGenero  = str_contains($elGenero->nombre, $nombreGenero);
 					if($pasableGenero)
 						break;
 				}
@@ -192,6 +194,16 @@ class LibroController extends Controller
 		$nuevoLibro->save();
 		$nuevoLibro->generos()->save($genero);
 		$nuevoLibro->autores()->save($autor);
+
+		$usuario = Auth::user();
+		if($usuario){
+			$empleado = $usuario->empleado->first();
+			$historial = new Historial();
+			$historial->idEmpleado = $empleado->idEmpleado;
+			$historial->operacion = "Agrego libro: ".$nuevoLibro->nuevoLibro;
+			$historial->save();
+		}
+
 		return $nuevoLibro;
     }
 
@@ -246,6 +258,16 @@ class LibroController extends Controller
 		}
 		$libro->idEditorial = $idEditorial;
 		$libro->save();
+
+		$usuario = Auth::user();
+		if($usuario){
+			$empleado = $usuario->empleado->first();
+			$historial = new Historial();
+			$historial->idEmpleado = $empleado->idEmpleado;
+			$historial->operacion = "Modifico libro: ".$libro->titulo;
+			$historial->save();
+		}
+
 		$editorial = $libro->editorial()->get()[0];
 		return [
 			'libro'				=>$libro,
@@ -254,6 +276,7 @@ class LibroController extends Controller
     }
 
     function BorrarLibro(Request $req){
+		
 		$clave = $req->input('clave');
         $clave = (int)$clave;
 		$libro = Libro::find($clave);
@@ -262,6 +285,17 @@ class LibroController extends Controller
 			return 'no';
 		}
 		$libro->delete();
+
+		$usuario = Auth::user();
+		if($usuario){
+			$empleado = $usuario->empleado->first();
+			$historial = new Historial();
+			$historial->idEmpleado = $empleado->idEmpleado;
+			$historial->operacion = "Elimino libro: ".$libro->titulo;
+			$historial->save();
+		}
+        
+
 		return $libro;
     }
 

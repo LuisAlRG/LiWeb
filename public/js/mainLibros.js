@@ -167,6 +167,12 @@ app.controller('allController',function($scope,$http){
         return $scope.indxSelecionado == elIndex;
     }
 
+    $scope.DisableIfClave = function(){
+        if($scope.clave === undefined)
+            return false;
+        return $scope.clave >0;
+    }
+
     //Eventos
     $scope.OnInsertarLibro = function(){
         $scope.setIndxSelecionado(0);

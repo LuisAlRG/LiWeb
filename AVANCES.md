@@ -57,3 +57,9 @@ avance 2 del 28 11 21
     Se agregaron algunas comprobaciones en las pantallad de empleado, autor, editorial y genero (que muestre algunos mensajes de error en pantalla)
     pantalla libro ya puede hacer consulta y agregar nuevos libros con nuevos autor, editoria y Genero
     
+avance 1 del 29 11 21
+    Se agrego la pantalla de Historial gunto con ello, se modificaron los controles importantes para que dejase una marca en el historial
+    consultar historial es posible
+    consultar venta es posible
+    tambien avisar que se agrego el archivo logico de historial "HistorialController"
+    unos cuantos cambion en los archivos js

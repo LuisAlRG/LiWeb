@@ -8,6 +8,7 @@ use App\Http\Controllers\LibroController;
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\EditorialController;
+use App\Http\Controllers\HistorialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,7 +105,10 @@ Route::post('/LiWeb/Empleados/Borrar',			[EmpleadoController::class,'BorrarEmple
 Route::post('/LiWeb/Empleados/Modificar',		[EmpleadoController::class,'ModificarUsuario']);
 
 
-Route::get('/LiWeb/Historial',	function(){return "<h1>Not Done!!!</h1>";})
+Route::get('/LiWeb/Historial',	[HistorialController::class,'ViewHistorial'])
 	->middleware(['auth']);
+Route::post('/LiWeb/Historial/VerTodo',	[HistorialController::class,'VerHitorial'])
+	->middleware(['auth']);
+Route::post('/LiWeb/Historial/Consultar',	[HistorialController::class,'ConsultarHistorial']);
 
 require __DIR__.'/auth.php';

@@ -21,7 +21,7 @@ class CreateHistorialTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('operacion');
-            $table->timestamp('fechaHora');
+            $table->timestamp('fechaHora')->useCurrent();;
             $table->timestamps();
         });
     }

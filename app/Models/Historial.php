@@ -9,5 +9,9 @@ class Historial extends Model
 {
     use HasFactory;
     protected $table = 'Historial';
-    protected $primaryKey = 'idHistorial';
+    
+    public function empleado(){
+        return $this->belongsTo(Empleado::class,'idEmpleado');
+    }
+
 }

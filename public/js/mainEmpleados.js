@@ -77,10 +77,10 @@ app.controller('allController',function($scope,$http){
     ];
 
     $scope.filtroRoles=[
-        {nombre:"Sin filtro", value:1},
-        {nombre:"Funcionario", value:2},
-        {nombre:"Administrador", value:3},
-        {nombre:"Funcionario", value:4},
+        {nombre:"Sin filtro", value:0},
+        {nombre:"Funcionario", value:1},
+        {nombre:"Administrador", value:2},
+        {nombre:"Gerente", value:3},
     ];
 
     //formatos

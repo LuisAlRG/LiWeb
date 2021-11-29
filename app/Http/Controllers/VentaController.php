@@ -75,15 +75,51 @@ class VentaController extends Controller
         $fecha = $req->input('fecha');
         $categoria = $req->input('categoria');
         $cliente = $req->input('cliente');
-        $idEmpleado = $req->input('responsable');
+        $responsable = $req->input('responsable');
         
-        $categoria = (int) $categoria ;
+        
         if(is_numeric($clave)){
             $clave = (int) $clave;
-            $elemento = Libro::find($clave);
+            $elemento = Venta::find($clave);
+            if($elemento){
+                    $elemento->vendidos = $elemento->PrecioTotal();
+                    $elemento->responsable = $elemento->getResponsable();
+                
+            }
             return [0=>$elemento];
         }
-        
+
+        if(!$responsable){
+            $responsable='';
+        }
+
+        $categoria = (int) $categoria;
+        $operacionCategoria = 'LIKE';
+        switch($categoria){
+            case 1: $operacionCategoria = '<>'; break;//igual a la fecha
+            case 2: $operacionCategoria = '<='; break;//antes de la fecha
+            case 3: $operacionCategoria = '>='; break;//despues de la fecha
+        }
+        $ventas = Venta::where('cliente','LIKE','%'.$cliente.'%');
+        if($fecha){
+            $ventas = $ventas->where('fechaHora',$operacionCategoria,$fecha);
+        }
+        $ventas = $ventas->get();
+        $ventasSent = [];
+        if($ventas){
+            foreach($ventas as $key => $venta){
+                $venta->vendidos = $venta->PrecioTotal();
+                $venta->responsable = $venta->getResponsable();
+                if(str_contains($venta->responsable,$responsable)){
+                    $ventasSent[] = $venta;
+                }
+                else if($responsable == ''){
+                    $ventasSent[] = $venta;
+                }
+            }
+        }
+
+        return $ventasSent;
     }
 
     function ConsultarLirbos(Request $req){
