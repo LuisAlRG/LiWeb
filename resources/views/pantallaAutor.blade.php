@@ -48,10 +48,7 @@
             <div class="cel4"> <span>Actions</span> </div>
         </section>
         <div id="cuerpoEntero">
-
-            <section class="rowsElement_Autor element@{{autor.idAutor}}"
-            >
-                
+            <section class="rowsElement_Autor element@{{autor.idAutor}}">
                 <div class="cel1"><span>@{{autor.idAutor}}</span></div>
                 <div class="cel2"><span>@{{autor.nombre}}</span></div>
                 <div class="cel3"><span>@{{autor.apellido}}</span></div>
@@ -66,13 +63,10 @@
                         <rect x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
                         </svg>
                 </div>
-                
                 <div class="opcionesAdm">
                     <section>
                         <div>
-                            <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                               
-                            >
+                            <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle id="Ellipse 1" cx="50" cy="50" r="45" fill="#008000"/>
                                 <g id="LapizSombra">
                                 <path id="Polygon 1" d="M24.3015 82.6985L31.0258 57.603L49.397 75.9742L24.3015 82.6985Z" fill="black" fill-opacity="0.45"/>
@@ -125,7 +119,6 @@
                         <p><span>@{{mensajeModificar}}</span></p>
                     </section>
                 </div>
-                
             </section>
             
         </div>

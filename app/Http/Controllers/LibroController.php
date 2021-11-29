@@ -25,7 +25,16 @@ class LibroController extends Controller
 	*/
 	//funciones de vista
 	function ViewLibros(){
-		return view('pantallaLibro',['mensajeServidor'=>null]);
+		$ruta = '';
+        $usuario = Auth::user();
+        $empleado = $usuario->empleado()->first();
+
+        $puesto = $empleado->QueEs();
+        if($puesto == 1){
+            $ruta = 'funcionario.';
+        }
+
+		return view($ruta.'pantallaLibro',['mensajeServidor'=>null]);
 	}
 	function ViewLibroModificar(Request $req){
 		$clave = $req->input('thisLibroId');
@@ -197,7 +206,7 @@ class LibroController extends Controller
 
 		$usuario = Auth::user();
 		if($usuario){
-			$empleado = $usuario->empleado->first();
+			$empleado = $usuario->empleado()->first();
 			$historial = new Historial();
 			$historial->idEmpleado = $empleado->idEmpleado;
 			$historial->operacion = "Agrego libro: ".$nuevoLibro->nuevoLibro;

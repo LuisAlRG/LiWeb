@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Libro;
 use App\Models\Venta;
+use App\Models\Historial;
 use Illuminate\Support\Facades\Auth;
 
 class VentaController extends Controller
@@ -119,6 +120,8 @@ class VentaController extends Controller
             }
         }
 
+
+
         return $ventasSent;
     }
 
@@ -218,6 +221,16 @@ class VentaController extends Controller
             $nuevaVenta->SaveLibroCant((int)$LibroId,(int)$cantidasSel);
             $libros[] = $elLibros;
         }
+
+        $usuario = Auth::user();
+		if($usuario){
+			$empleado = $usuario->empleado()->first();
+			$historial = new Historial();
+			$historial->idEmpleado = $empleado->idEmpleado;
+			$historial->operacion = "Realizo una venta, clave:".$nuevaVenta->idVenta;
+			$historial->save();
+		}
+
         return redirect('/LiWeb/Venta');
     }
 }

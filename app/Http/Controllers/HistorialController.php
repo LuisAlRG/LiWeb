@@ -21,7 +21,7 @@ class HistorialController extends Controller
         $caso = $empleado->QueEs();
         $historial = [];
         if($caso < 2){
-            $historial = $empleado.historial()->get();
+            $historial = $empleado->historial()->get();
         }
         else{
             $historial = Historial::all();
@@ -42,6 +42,15 @@ class HistorialController extends Controller
             case 3: $nombreOperacion='empleado'; break;
         }
         $historial = Historial::where('operacion','LIKE','%'.$nombreOperacion.'%');
+
+        //revisar si el usuario es funcionario
+        $usuario = Auth::user();
+        $empleado = $usuario->empleado()->first();
+        $caso = $empleado->QueEs();
+        if($caso == 1){
+            $historial = $historial->where('idEmpleado','=',$empleado->idEmpleado);
+        }
+
         if($fechaMin){
             $historial = $historial->where('fechaHora','>=',$fechaMin);
         }

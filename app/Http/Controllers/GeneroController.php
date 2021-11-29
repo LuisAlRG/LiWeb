@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Genero;
+use Illuminate\Support\Facades\Auth;
 
 class GeneroController extends Controller
 {
@@ -14,7 +15,15 @@ class GeneroController extends Controller
      */
     //funciones de vista
     function ViewGenero(){
-        return view('pantallaGenero',['mensajeServidor'=>null]);
+        $ruta = '';
+        $usuario = Auth::user();
+        $empleado = $usuario->empleado()->first();
+
+        $puesto = $empleado->QueEs();
+        if($puesto == 1){
+            $ruta = 'funcionario.';
+        }
+        return view($ruta.'pantallaGenero',['mensajeServidor'=>null]);
     }
 
     function VerTodoGeneros(){

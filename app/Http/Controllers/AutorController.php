@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Autor;
+use Illuminate\Support\Facades\Auth;
 
 class AutorController extends Controller
 {
@@ -15,7 +16,15 @@ class AutorController extends Controller
      */
     //funciones de vistas
     function ViewAutores(){
-        return view('pantallaAutor',['mensajeServidor'=>null]);
+        $ruta = '';
+        $usuario = Auth::user();
+        $empleado = $usuario->empleado()->first();
+
+        $puesto = $empleado->QueEs();
+        if($puesto == 1){
+            $ruta = 'funcionario.';
+        }
+        return view($ruta.'pantallaAutor',['mensajeServidor'=>null]);
     }
     
     function VerTodosAutores(){

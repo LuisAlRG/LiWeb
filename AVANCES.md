@@ -63,3 +63,7 @@ avance 1 del 29 11 21
     consultar venta es posible
     tambien avisar que se agrego el archivo logico de historial "HistorialController"
     unos cuantos cambion en los archivos js
+
+avance 2 del 29 11 21
+    Se agrego la diferensacion entre ser un empleado funcionario y un empleado administrador, un funcionario ya no puede ver la pantalla de Empleados y el historial solo muestra su propia informacion, no el de los demas.
+    se agregaron mas pantallas para el caso especial de funcionario, para evitar asi tener opciones administrativas (Modificar y borrar elemento)

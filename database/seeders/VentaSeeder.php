@@ -33,7 +33,7 @@ class VentaSeeder extends Seeder
 
         $historial = new Historial();
         $historial->idEmpleado = $venta->idEmpleado;
-        $historial->operacion = "Realizo una venta";
+        $historial->operacion = "Realizo una venta, clave:".$venta->idVenta;
         $historial->save();
 
         $venta = new Venta();
@@ -45,7 +45,7 @@ class VentaSeeder extends Seeder
 
         $historial = new Historial();
         $historial->idEmpleado = $venta->idEmpleado;
-        $historial->operacion = "Realizo una venta";
+        $historial->operacion = "Realizo una venta, clave:".$venta->idVenta;
         $historial->save();
 
         $venta = new Venta();
@@ -61,7 +61,7 @@ class VentaSeeder extends Seeder
 
         $historial = new Historial();
         $historial->idEmpleado = $venta->idEmpleado;
-        $historial->operacion = "Realizo una venta";
+        $historial->operacion = "Realizo una venta, clave:".$venta->idVenta;
         $historial->save();
 
         $venta = new Venta();
@@ -75,7 +75,7 @@ class VentaSeeder extends Seeder
 
         $historial = new Historial();
         $historial->idEmpleado = $venta->idEmpleado;
-        $historial->operacion = "Realizo una venta";
+        $historial->operacion = "Realizo una venta, clave:".$venta->idVenta;
         $historial->save();
  
         $venta = new Venta();
@@ -96,7 +96,7 @@ class VentaSeeder extends Seeder
 
         $historial = new Historial();
         $historial->idEmpleado = $venta->idEmpleado;
-        $historial->operacion = "Realizo una venta";
+        $historial->operacion = "Realizo una venta, clave:".$venta->idVenta;
         $historial->save();
 
         //generar 10 mas aleatorio
@@ -138,7 +138,7 @@ class VentaSeeder extends Seeder
             }
             $historial = new Historial();
             $historial->idEmpleado = $venta->idEmpleado;
-            $historial->operacion = "Realizo una venta";
+            $historial->operacion = "Realizo una venta, clave:".$venta->idVenta;
             $historial->save();
         }
 

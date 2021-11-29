@@ -65,7 +65,11 @@
                     </section>
                 </div>
             </section>
-
+            <section id="mensajeVacio" ng-show="listHistorial.length == 0">
+                <div class="cel1">
+                    <span> @{{mensajeVacio}} </span>
+                </div>
+            </section>
         </div>
     </div>
 </tablaInfo>

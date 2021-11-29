@@ -35,24 +35,24 @@ Route::get('/LiWeb',				[EmpleadoController::class,"ViewLogIn"])
 Route::post('/LiWeb/Autenticar',	[EmpleadoController::class,"Autenticar"]);
 Route::get('/LiWeb/Saliendo',		[EmpleadoController::class,"Salir"]);
 
-Route::get('/LiWeb/MenuPrincipal',	[EmpleadoController::class,"ViewMenoPrincipal"])
+Route::get('/LiWeb/MenuPrincipal',	[EmpleadoController::class,"ViewMenuPrincipal"])
 	->middleware(['auth']);
 
 Route::get('/LiWeb/Venta',					[VentaController::class, 'ViewVentas'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Venta/VerTodoVenta',	[VentaController::class, 'VerTodosVentas']);
-Route::post('/LiWeb/Venta/Consultar',	[VentaController::class, 'ConsultarVentas']);
+Route::post('/LiWeb/Venta/Consultar',		[VentaController::class, 'ConsultarVentas']);
 
-Route::get('/LiWeb/RealizarVenta',		[VentaController::class, 'ViewVender'])
+Route::get('/LiWeb/RealizarVenta',			[VentaController::class, 'ViewVender'])
 ->middleware(['auth']);
-Route::post('/LiWeb/RealizarVenta/VerTodoLibros',		[VentaController::class, 'VerTodosLibros']);
-Route::post('/LiWeb/RealizarVenta/ConsultarLibros',		[VentaController::class, 'ConsultarLirbos']);
+Route::post('/LiWeb/RealizarVenta/VerTodoLibros',	[VentaController::class, 'VerTodosLibros']);
+Route::post('/LiWeb/RealizarVenta/ConsultarLibros',	[VentaController::class, 'ConsultarLirbos']);
 
 Route::post('/LiWeb/Vender',						[VentaController::class, 'ViewVenderYa']);
 Route::post('/LiWeb/Vender/LibrosSeleccionados',	[VentaController::class, 'DesplegarLibrosSeleccionado']);
-Route::post('/LiWeb/AplicarVenta',		[VentaController::class, 'InsertarVenta']);
+Route::post('/LiWeb/AplicarVenta',					[VentaController::class, 'InsertarVenta']);
 
-Route::get('/LiWeb/Libros',			[LibroController::class,"ViewLibros"])
+Route::get('/LiWeb/Libros',					[LibroController::class,"ViewLibros"])
 	->middleware(['auth']);
 Route::post('/LiWeb/Libros/VerTodoLibros',	[LibroController::class,"VerTodosLibros"]);
 Route::post('/LiWeb/Libros/Insertar',		[LibroController::class,"InsertarLibro"]);
@@ -60,7 +60,7 @@ Route::post('/LiWeb/Libros/Consultar',		[LibroController::class,"ConsultarLibro"
 Route::post('/LiWeb/Libros/Borrar',			[LibroController::class,"BorrarLibro"]);
 
 
-Route::post('/LiWeb/Libro',	[LibroController::class,'ViewLibroModificar'])
+Route::post('/LiWeb/Libro',					[LibroController::class,'ViewLibroModificar'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Libro/Modificar',		[LibroController::class,'ModificarLibro']);
 Route::post('/LiWeb/Libro/Autor',			[LibroController::class,'SuAutores']);
@@ -95,7 +95,7 @@ Route::post('/LiWeb/Libros/Editoriales/Insertar',	[EditorialController::class,'I
 Route::post('/LiWeb/Libros/Editoriales/Modificar',	[EditorialController::class,'ModificarEditorial']);
 Route::post('/LiWeb/Libros/Editoriales/Borrar',		[EditorialController::class,'BorrarEditorial']);
 
-Route::get('/LiWeb/Empleados',	[EmpleadoController::class,'ViewEmpleados'])
+Route::get('/LiWeb/Empleados',					[EmpleadoController::class,'ViewEmpleados'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Empleados/VerTodoEmpleado',	[EmpleadoController::class,'VerTodoEmpleado']);
 Route::post('/LiWeb/Empleados/Contratado',		[EmpleadoController::class,'Contratar']);
@@ -105,9 +105,9 @@ Route::post('/LiWeb/Empleados/Borrar',			[EmpleadoController::class,'BorrarEmple
 Route::post('/LiWeb/Empleados/Modificar',		[EmpleadoController::class,'ModificarUsuario']);
 
 
-Route::get('/LiWeb/Historial',	[HistorialController::class,'ViewHistorial'])
+Route::get('/LiWeb/Historial',				[HistorialController::class,'ViewHistorial'])
 	->middleware(['auth']);
-Route::post('/LiWeb/Historial/VerTodo',	[HistorialController::class,'VerHitorial'])
+Route::post('/LiWeb/Historial/VerTodo',		[HistorialController::class,'VerHitorial'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Historial/Consultar',	[HistorialController::class,'ConsultarHistorial']);
 

@@ -146,9 +146,9 @@ form{
                     }*/
                     text-align: center;
                     @extend .w3-col;
-                    @extend .l2;
-                    @extend .m2;
-                    @extend .s2;
+                    @extend .l12;
+                    @extend .m12;
+                    @extend .s12;
                 }
                 >div.putItInvisible{
                     visibility: hidden;

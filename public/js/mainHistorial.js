@@ -2,7 +2,7 @@ var app = angular.module('allApp',[]);
 var marcador = null;
 const SECCION_ACTUAL = "/Historial"
 
-$("tablaInfo>div>#cuerpoEntero>section").attr(
+$("tablaInfo>div>#cuerpoEntero>section.rowsElement_Historial").attr(
     {
         'ng-repeat':"historial in listHistorial track by $index",
         'ng-init':"mostElemento=false"
@@ -41,10 +41,14 @@ app.controller('allController',function($scope,$http){
             let datos = rensopne.data;
             console.log(datos);
             $scope.listHistorial = datos;
+            if($scope.listHistorial.length <1){
+                $scope.mensajeVacio = "No hay historial de actividades";
+            }
         },
         function(response){
             let datos = response.data;
             console.log(datos);
+            /*
             $scope.listHistorial = [
                 {id:-1,
                     idEmp:1,
@@ -55,6 +59,9 @@ app.controller('allController',function($scope,$http){
                     fecha:"21-10-21 g"
                 }
             ];
+            */
+           $scope.listHistorial = [];
+           $scope.mensajeVacio = "Error de peticion, Reitente mas tarde";
         }
     );
 
@@ -119,30 +126,16 @@ app.controller('allController',function($scope,$http){
                         $scope.listHistorial = datos;
                         return 1;
                     }
-                $scope.listHistorial = [
-                    {id:0,
-                        idEmp:1,
-                        nombreEmp:"Sistema",
-                        puestoEmp:1,
-                        operacion:"Avisando que no hay historial de usted",
-                        filtro:"Sistema",
-                        fecha:"21-10-21 g"
-                    }
-                ];
+                $scope.listHistorial = [];
+                if($scope.listHistorial.length <1){
+                    $scope.mensajeVacio = "No hay historial de actividades con esa descipciones";
+                }
             },
             function(response){
                 let datos = response.data;
                 console.log(datos);
-                $scope.listHistorial = [
-                    {id:-1,
-                        idEmp:1,
-                        nombreEmp:"Sistema",
-                        puestoEmp:1,
-                        operacion:"Avisando que uvo un error de peticion y recomienda volver mas tarde",
-                        filtro:"Sistema",
-                        fecha:"21-10-21 g"
-                    }
-                ];
+                $scope.listHistorial = [];
+                $scope.mensajeVacio = "Error de peticion, Reitente mas tarde";
             }
         );
     }

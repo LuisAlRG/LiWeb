@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Editorial;
+use Illuminate\Support\Facades\Auth;
 
 class EditorialController extends Controller
 {
@@ -14,7 +15,15 @@ class EditorialController extends Controller
      */
     //funciones de vistas
     function ViewEditorial(){
-        return view('pantallaEditorial',['mensajeServidor'=>null]);
+        $ruta = '';
+        $usuario = Auth::user();
+        $empleado = $usuario->empleado()->first();
+
+        $puesto = $empleado->QueEs();
+        if($puesto == 1){
+            $ruta = 'funcionario.';
+        }
+        return view($ruta.'pantallaEditorial',['mensajeServidor'=>null]);
     }
 
     function VerTodosEditoriales(){

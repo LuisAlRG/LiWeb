@@ -17,8 +17,17 @@ class EmpleadoController extends Controller
         return view('logIn',['mensajeServidor'=>null]);
     }
     // /LiWeb/MenuPrincipal
-    function ViewMenoPrincipal(){
-        return view('menuPrincipal');
+    function ViewMenuPrincipal(){
+        $ruta = '';
+        $usuario = Auth::user();
+        $empleado = $usuario->empleado()->first();
+
+        $puesto = $empleado->QueEs();
+        if($puesto == 1){
+            $ruta = 'funcionario.';
+        }
+
+        return view( $ruta.'menuPrincipal' );
     }
     // /LiWeb/Empleados
     function ViewEmpleados(){
@@ -124,7 +133,7 @@ class EmpleadoController extends Controller
         if($existe){
             //revisar si concuerda con un usuario
             foreach ($existe as $key => $value) {
-                if(Hash::check($pass, $value->password)){
+                if(Hash::check($password, $value->password)){
                     return 're';
                 }
             }
