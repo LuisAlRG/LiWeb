@@ -1,0 +1,305 @@
+@import 'w3';
+
+/*
+    tablaInfo
+    Aqui estan el estilo de la tabla de Ventas Simples
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+#parteIzquierdo{
+    >accionesInputs{
+        >div>form{
+            @extend .w3-row;
+            >div#claveSection{
+                @extend .w3-col;
+                @extend .l6;
+                @extend .m12;
+                @extend .s6;
+            }
+            >div#edicionSection{
+                @extend .w3-col;
+                @extend .l6;
+                @extend .m12;
+                @extend .s6;
+            }
+        }
+    }
+}
+
+#parteDerecho{
+    >tablaInfo{
+        >div{
+            section, div>section.rowsElement_Libro, section#rowsNewElement_Libro{
+                >.cel1{ //id
+                    @extend .l1;
+                    @extend .m1;
+                    @extend .s2;
+                }
+                >.cel2{ //titulo
+                    @extend .l3;
+                    @extend .m4;
+                    @extend .s4;
+                }
+                >.cel3{ //autor
+                    @extend .l3;
+                    @extend .m3;
+                    @extend .w3-hide-small;
+                    
+                }
+                >.cel4{ //editorial
+                    @extend .l2;
+                    @extend .w3-hide-medium;
+                    @extend .w3-hide-small;
+                }
+                >.cel5{ //cantidad
+                    @extend .l2;
+                    @extend .m2;
+                    @extend .s3;
+                }
+                >.cel6{ // acciones
+                    @extend .l1;
+                    @extend .m2;
+                    @extend .s3;
+                }
+            }
+
+            //estilo del encabezado
+            >section#tableTop_Libro{
+                @extend .w3-row;
+                @extend .my-green-color;
+                border-bottom: 1px solid black;
+                margin-right: 16px;
+
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+                
+                >div{
+                    @extend .w3-col;
+                    border-left: 1px solid black;
+                    min-height: 3.5em;
+                    height: 3.5em;
+                    
+                }
+                :first-child{
+                    border-left: 0px none green;
+                }
+            }
+            >section#tableTop_Libro.fixingLibrosTop{
+                >div{
+                    height: 3.5em;
+                }
+            }
+            //estilo del cuerpo de la taba
+            >div#cuerpoEntero{
+                height: 250px;
+                
+                //estido de renglon de la tabla
+                >section.rowsElement_Libro{
+                    @extend .w3-row;
+                    border-bottom: 1px solid black;
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                    }
+                    >.cel6{
+                        button#aderirElemento{
+                            @extend .w3-button;
+                            @extend .w3-round-xxlarge;
+                            @extend .my-green-color;
+                        }
+                        svg{
+                            max-height: 4em ;
+                        }
+                    }
+                    >.elementComplete{
+                        
+                        
+                        section{
+                            
+                            >div{
+                                display: block;
+                                @extend .w3-col;
+                                @extend .l6;
+                                @extend .m6;
+                                @extend .s12;
+                                max-height: fit-content;
+                            }
+                        }
+                    }
+                    >.opcionesAdm{
+                        
+                    }
+                }
+            }
+            >div#cuerpoEntero.fixingLibrosCuerpo{
+                height: 480px;
+            }
+
+            >div#pieTabla{
+                >section{
+                    @extend .w3-row;
+                    border-top: 1px solid black;
+                    border-bottom: 1px solid black;
+                    >form{
+
+                    
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                        input{
+                            width: 90%;
+                        }
+                        span{
+                            color: red;
+                        }
+                    }
+                    >.cel1{ //id
+                        @extend .l1;
+                        @extend .m1;
+                        @extend .s2;
+                    }
+                    >.cel2{ //titulo
+                        @extend .l3;
+                        @extend .m4;
+                        @extend .s4;
+                    }
+                    >.cel3{ //autor
+                        @extend .l3;
+                        @extend .m3;
+                        @extend .w3-hide-small;
+                        
+                    }
+                    >.cel4{ //editorial
+                        @extend .l2;
+                        @extend .w3-hide-medium;
+                        @extend .w3-hide-small;
+                    }
+                    >.cel5{ //cantidad
+                        @extend .l2;
+                        @extend .m2;
+                        @extend .s3;
+                    }
+                    >.cel6{ // acciones
+                        @extend .l1;
+                        @extend .m2;
+                        @extend .s3;
+                        svg{
+                            max-height: 4em ;
+                        }
+                    }
+                    }
+                }
+            }
+        }
+    }
+    >especialVenta{
+        section{
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            @extend .w3-row;
+            >*{
+                height: 3em;
+            }
+            span{
+                @extend .w3-col;
+                @extend .l8;
+                @extend .m8;
+                @extend .s8;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+            button{
+                @extend .w3-col;
+                @extend .l4;
+                @extend .m4;
+                @extend .s4;
+                @extend .w3-button;
+                @extend .w3-round-xlarge;
+                @extend .my-green-color;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.25em;
+            }
+        }
+    }
+
+}
+
+tablaInfo>div{
+    .col-libro{
+        >div:nth-child(1){//titulo
+            @extend .l3;
+            @extend .m2;
+            @extend .s4;
+        }
+        >div:nth-child(2){//Autor
+            @extend .l3;
+            @extend .m2;
+            @extend .s4;
+        }
+        >div:nth-child(3){//Editorial
+            @extend .l2;
+            @extend .m2;
+            @extend .s4;
+        }
+        >div:nth-child(4){//Genero
+            @extend .l2;
+            @extend .m2;
+            @extend .s4;
+        }
+        >div:nth-child(5){//Precio
+            @extend .l1;
+            @extend .m2;
+            @extend .s4;
+        }
+        >div:nth-child(6){//accion
+            @extend .l1;
+            @extend .m2;
+            @extend .s4;
+            svg{
+                max-height: 4em ;
+            }
+        }
+    }
+    .pieTabla{
+        border-top: 1px solid gray;
+        border-bottom: 1px solid black;
+        @extend .w3-row;
+        >div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            @extend .w3-col;
+        }
+        @extend .col-libro;
+        form{
+            >div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 3.5em;
+                max-height: 5em;
+                text-align: center;
+                @extend .w3-col;
+            }
+            @extend .col-libro;
+        }
+    }
+}

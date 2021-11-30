@@ -42,31 +42,31 @@ app.controller('allController',function($scope,$http){
     ]
     
     $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodoEmpleado",
-            {
-                _token:$scope.tokenUsr2
-            }
-        ).then(
-            function(rensopne){
-                let datos = rensopne.data;
-                console.log(datos);
-                $scope.listEmpleado = datos;
-            },
-            function(response){
-                let datos = response.data;
-                console.log(datos);
-                $scope.listEmpleado=[
-                    new Empleado(
-                        -1,-1,
-                        "No se pudo cargar",
-                        "A los Empleados",
-                        "lastima",
-                        false,
-                        false,
-                        "Funcionario"
-                    )
-                ];
-            }
-        );
+        {
+            _token:$scope.tokenUsr2
+        }
+    ).then(
+        function(rensopne){
+            let datos = rensopne.data;
+            console.log(datos);
+            $scope.listEmpleado = datos;
+        },
+        function(response){
+            let datos = response.data;
+            console.log(datos);
+            $scope.listEmpleado=[
+                new Empleado(
+                    -1,-1,
+                    "No se pudo cargar",
+                    "A los Empleados",
+                    "lastima",
+                    false,
+                    false,
+                    "Funcionario"
+                )
+            ];
+        }
+    );
 
     $scope.indxSelecionado = 0;
 

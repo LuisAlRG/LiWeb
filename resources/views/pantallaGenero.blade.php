@@ -28,7 +28,7 @@
 @endsection
 @section('botonesAccion')
 <div>
-    <div> <button ng-click="OnBuscarAutor()">Buscar</button></div>
+    <div> <button ng-click="OnBuscarGenero()">Buscar</button></div>
     <div> <a href="../Libros"> <button>Regresar</button></a></div>
     <div> <a href="../MenuPrincipal"> <button>Menu</button></a></div> 
 </div>
@@ -82,7 +82,7 @@
                         </div>
                         <div>
                             <svg class="boteDeBasura" viewBox="-10 -10 380 510" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            ng-click="OnEliminarAutor(genero.idGenero,$index)"
+                            ng-click="OnEliminarGenero(genero.idGenero,$index)"
                             >
                                 <path class="tapa" d="M0 110C0 87.9086 17.9086 70 40 70H310C332.091 70 350 87.9086 350 110V110H0V110Z" fill="black"/>
                                 <path class="tapa" d="M100 70C100 47.9086 117.909 30 140 30H210C232.091 30 250 47.9086 250 70V70H100V70Z" fill="black"/>
@@ -125,7 +125,7 @@
                 </div>
                 <div>
                     <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        ng-click="OnInsertarAutor()"
+                        ng-click="OnInsertarGenero()"
                     >
                         <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                         <g class="cruzNegraG">

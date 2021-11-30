@@ -207,7 +207,7 @@ app.controller('allController',function($scope,$http){
         }
         //revisar si no hay errores
         if(!isEmptyOrSpaces($scope.mensajeInsertar)){
-            $scope.mensajeInsertar = "No se puede modificar libro por los siguiente(s) problema(s): \n"+
+            $scope.mensajeInsertar = "No se puede insertar libro por los siguiente(s) problema(s): \n"+
                 $scope.mensajeInsertar;
             return true;
         }
@@ -220,7 +220,7 @@ app.controller('allController',function($scope,$http){
                 let datos = response.data;
                 console.log(datos);
                 if(datos == "re"){
-                    $scope.mensajeInsertar = "Editorial ya ingresado. Tiene que tener alguna diferencia";
+                    $scope.mensajeInsertar = "Libro ya ingresado. Tiene que tener alguna diferencia";
                     return true;
                 }
                 $scope.listLibros.push(datos);

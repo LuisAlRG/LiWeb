@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/modeloLibros.css">
 @endsection
 @section('subtitle')
-	<p>Lirbos</p>
+    <p>Libros</p>
 @endsection
 @section('accinesInputs')
 <div>

@@ -67,3 +67,7 @@ avance 1 del 29 11 21
 avance 2 del 29 11 21
     Se agrego la diferensacion entre ser un empleado funcionario y un empleado administrador, un funcionario ya no puede ver la pantalla de Empleados y el historial solo muestra su propia informacion, no el de los demas.
     se agregaron mas pantallas para el caso especial de funcionario, para evitar asi tener opciones administrativas (Modificar y borrar elemento)
+
+avance 3 del 29 11 21
+    ligeras correcciones de codigo en Javascript (nombres mal implementados, referencias de otro texto de un elemento fuera de su caso)
+    Modificaciones de pantalla, correccion ortografica .

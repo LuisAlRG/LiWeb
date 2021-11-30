@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/modeloLibros.css">
 @endsection
 @section('subtitle')
-	<p>Lirbos</p>
+	<p>Libros</p>
 @endsection
 @section('accinesInputs')
 <div>
@@ -253,7 +253,11 @@
                 <input type="hidden" name="thisLibroId" id="newLibroId">
                 <!---->
             </form>
+            <section ng-show="mensajeInsertar">
+                <p><span>@{{mensajeInsertar}}</span></p>
+            </section>
         </div>
+
     </div>
 </tablaInfo>
 @endsection

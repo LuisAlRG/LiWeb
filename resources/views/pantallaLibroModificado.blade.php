@@ -172,7 +172,7 @@
                 </datalist>
             </div>
             <div>
-                <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
+                <svg width="30px" viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
                     ng-click="OnAderirAutor({{$libro->idLibro}})"
                 >
                     <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
@@ -227,7 +227,7 @@
         <div>Genero</div>
         <div>Aderrir</div>
         <form name="aGeneroOnLibro" id="aGeneroOnLibro" action="aderirGeneroOnLibro">
-            <input type="hidden" name="_token" value="{{ csrf_token() }} ">
+            
             <div>
                 <input type="number" name="idGeneroB" id="idGeneroB"
                     ng-model="idGeneroB"
@@ -261,6 +261,7 @@
                     </g>
                 </svg>
             </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }} ">
         </form>
         <section ng-show="mensajeAdicion">
             <p><span>@{{mensajeAdicion}}</span></p>

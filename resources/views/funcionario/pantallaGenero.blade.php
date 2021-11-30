@@ -28,7 +28,7 @@
 @endsection
 @section('botonesAccion')
 <div>
-    <div> <button ng-click="OnBuscarAutor()">Buscar</button></div>
+    <div> <button ng-click="OnBuscarGenero()">Buscar</button></div>
     <div> <a href="../Libros"> <button>Regresar</button></a></div>
     <div> <a href="../MenuPrincipal"> <button>Menu</button></a></div> 
 </div>
@@ -66,7 +66,7 @@
                 </div>
                 <div>
                     <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        ng-click="OnInsertarAutor()"
+                        ng-click="OnInsertarGenero()"
                     >
                         <circle class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
                         <g class="cruzNegraG">
