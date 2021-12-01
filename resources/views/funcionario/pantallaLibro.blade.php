@@ -84,14 +84,14 @@
         <div id="cuerpoEntero" class="fixingLibrosCuerpo">
 
             <section class="rowsElement_Libro">
-            <div class="cel1"> <span>@{{libros.idLibro}}</span> </div>
-            <div class="cel2"><span>@{{libros.titulo}}</span></div>
-            <div class="cel3"><span>@{{FormatoDosAutores(libros.autores)}}</span></div>
-            <div class="cel4"><span>@{{libros.editorial}}</span></div>
-            <div class="cel5"><span>$@{{ (libros.precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }}</span></div>
-            <div class="cel6">
-                
-            </div>
+                <div class="cel1"> <span>@{{libros.idLibro}}</span> </div>
+                <div class="cel2"><span>@{{libros.titulo}}</span></div>
+                <div class="cel3"><span>@{{FormatoDosAutores(libros.autores)}}</span></div>
+                <div class="cel4"><span>@{{libros.editorial}}</span></div>
+                <div class="cel5"><span>$@{{ (libros.precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }}</span></div>
+                <div class="cel6">
+                    
+                </div>
                 <div class="elementComplete">
                     <section>
                         <div>
@@ -110,7 +110,11 @@
                     </section>
                 </div>
             </section>
-
+            <section id="mensajeVacio" ng-show="listLibros.length == 0">
+                <div class="cel1">
+                    <span> @{{mensajeVacio}} </span>
+                </div>
+            </section>
         </div>
         <div class="pieTabla">
             <div>Titulo</div>

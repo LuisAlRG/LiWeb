@@ -35,6 +35,8 @@ Route::get('/LiWeb',				[EmpleadoController::class,"ViewLogIn"])
 Route::post('/LiWeb/Autenticar',	[EmpleadoController::class,"Autenticar"]);
 Route::get('/LiWeb/Saliendo',		[EmpleadoController::class,"Salir"]);
 
+Route::get('/LiWeb/SobreNosotros',	function(){return view('sobreNosotros');});
+
 Route::get('/LiWeb/MenuPrincipal',	[EmpleadoController::class,"ViewMenuPrincipal"])
 	->middleware(['auth']);
 
@@ -48,7 +50,8 @@ Route::get('/LiWeb/RealizarVenta',			[VentaController::class, 'ViewVender'])
 Route::post('/LiWeb/RealizarVenta/VerTodoLibros',	[VentaController::class, 'VerTodosLibros']);
 Route::post('/LiWeb/RealizarVenta/ConsultarLibros',	[VentaController::class, 'ConsultarLirbos']);
 
-Route::post('/LiWeb/Vender',						[VentaController::class, 'ViewVenderYa']);
+Route::post('/LiWeb/Vender',						[VentaController::class, 'ViewVenderYa'])
+->middleware(['auth']);
 Route::post('/LiWeb/Vender/LibrosSeleccionados',	[VentaController::class, 'DesplegarLibrosSeleccionado']);
 Route::post('/LiWeb/AplicarVenta',					[VentaController::class, 'InsertarVenta']);
 
@@ -109,6 +112,7 @@ Route::get('/LiWeb/Historial',				[HistorialController::class,'ViewHistorial'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Historial/VerTodo',		[HistorialController::class,'VerHitorial'])
 	->middleware(['auth']);
-Route::post('/LiWeb/Historial/Consultar',	[HistorialController::class,'ConsultarHistorial']);
+Route::post('/LiWeb/Historial/Consultar',	[HistorialController::class,'ConsultarHistorial'])
+->middleware(['auth']);
 
 require __DIR__.'/auth.php';

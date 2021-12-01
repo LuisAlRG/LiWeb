@@ -39,7 +39,7 @@ $("#btnCancelarCons").attr(
     }
 );
 
-$("tablaInfo>div>div#cuerpoEntero>section").attr(
+$("tablaInfo>div>div#cuerpoEntero>section.rowsElement_Libro").attr(
     {
         'ng-repeat':"libros in listLibros track by $index",
         'ng-init':"mostElemento = false; mostOpcionesAdm = false;"
@@ -81,8 +81,8 @@ app.controller('allController',function($scope,$http){
         1//cantidad
     );
     $scope.listLibros=[
-        primerElemento
     ];
+    $scope.mensajeVacio = "Cargando, espere un momento.";
 
     $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodoLibros",
         {}
@@ -91,17 +91,13 @@ app.controller('allController',function($scope,$http){
             let datos = rensopne.data;
             console.log(datos);
             $scope.listLibros = datos;
+            $scope.mensajeVacio = "No hay elementos";
         },
         function(response){
             let datos = response.data;
             console.log(datos);
-            $scope.listLibros=[
-                new Libro(-1,1,//id libro id editorial
-                "No se a podido Cargar, intente de nuevo mas tarde",//titulo
-                440,//precio
-                1,//edicion
-                1//cantidad
-            )];
+            $scope.mensajeVacio = "No se pudo cargar, intente de nuevo mas tarde";
+            $scope.listLibros=[];
         }
     );
 
@@ -265,24 +261,14 @@ app.controller('allController',function($scope,$http){
                         $scope.listLibros = datos;
                         return 1;
                     }
-                $scope.listLibros=[
-                    new Libro(0,1,//id libro id editorial
-                    "No hay libros con esta descripciones",//titulo
-                    440,//precio
-                    1,//edicion
-                    1//cantidad
-                )];
+                $scope.mensajeVacio = "No hay libros con esta descripciones";
+                $scope.listLibros=[];
             },
             function (response) {
                 let datos = response.data;
                 console.log(datos);
-                $scope.listLibros=[
-                    new Libro(-1,1,//id libro id editorial
-                    "No se a podido Cargar, intente de nuevo mas tarde",//titulo
-                    440,//precio
-                    1,//edicion
-                    1//cantidad
-                )];
+                $scope.mensajeVacio = "No se a podido cargar, intente de nuevo mas tarde";
+                $scope.listLibros=[];
             }
         );
     }

@@ -2,7 +2,7 @@ var app = angular.module('allApp',[]);
 var marcador = null;
 const SECCION_ACTUAL = "/Libros/Autores";
 
-$("tablaInfo>div>#cuerpoEntero>section").attr(
+$("tablaInfo>div>#cuerpoEntero>section.rowsElement_Libro").attr(
     {
         'ng-repeat':"autor in listAutores track by $index",
         'ng-init':"mostElemento=false; mostOpcionesAdm = false;"
@@ -38,8 +38,8 @@ $("div.opcionesAdm>section>div:nth-child(1)>svg").attr(
 app.controller('allController',function($scope,$http){
     //inicialisar valores globales
     $scope.listAutores = [
-        new Autor(0,"Cargando","Espere un momento")
     ];
+    $scope.mensajeVacio = "Cargando, espere un momento."
     $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodos",
         {}
     ).then(
@@ -47,13 +47,13 @@ app.controller('allController',function($scope,$http){
             let datos = rensopne.data;
             console.log(datos);
             $scope.listAutores = datos;
+            $scope.mensajeVacio = "Tabla vacia."
         },
         function(response){
             let datos = response.data;
             console.log(datos);
-            $scope.listAutores=[
-                new Autor(-1,"No se a podido cargar","Intente de nuevo mas tarde")
-            ];
+            $scope.mensajeVacio = "Cargando, espere un momento."
+            $scope.listAutores = [];
         }
     );
 
@@ -135,16 +135,14 @@ app.controller('allController',function($scope,$http){
                         $scope.listAutores = datos;
                         return 1;
                     }
-                $scope.listAutores=[
-                    new Autor(0,"No hay autores","con esta descripcion")
-                ];
+                $scope.mensajeVacio = "No hay autores con esta descripcion."
+                $scope.listAutores = [];
             },
             function (response) {
                 let datos = response.data;
                 console.log(datos);
-                $scope.listAutores=[
-                    new Autor(-1,"No se a podido cargar","Intente de nuevo mas tarde")
-                ];
+                $scope.mensajeVacio = "No se a podido cargar, intente de nuevo mas tarde"
+                $scope.listAutores = [];
             }
         );
     }

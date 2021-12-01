@@ -21,10 +21,10 @@ class HistorialController extends Controller
         $caso = $empleado->QueEs();
         $historial = [];
         if($caso < 2){
-            $historial = $empleado->historial()->get();
+            $historial = $empleado->historial()->orderBy('fechaHora', 'asc')->get();
         }
         else{
-            $historial = Historial::all();
+            $historial = Historial::orderBy('fechaHora', 'asc')->get();
         }
         $historial = $this->PrepararHistorial($historial);
         return $historial;

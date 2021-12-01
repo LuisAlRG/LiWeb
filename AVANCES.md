@@ -71,3 +71,9 @@ avance 2 del 29 11 21
 avance 3 del 29 11 21
     ligeras correcciones de codigo en Javascript (nombres mal implementados, referencias de otro texto de un elemento fuera de su caso)
     Modificaciones de pantalla, correccion ortografica .
+
+avance 1 del 30 11 21
+    Megora en el despliege de algunas tablas (Autores, editoriales, y Genero)
+    Cambie los seeder para que las ventas einserciones fuesen con fechas aleatorias
+    Cambio en las busquedas de libro para que seen busqueda de similitud en vez de exactitud
+    agrege la pantalla de acerca de nosostros.

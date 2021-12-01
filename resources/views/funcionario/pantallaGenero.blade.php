@@ -54,6 +54,11 @@
                     </section>
                 </div>
             </section>
+            <section id="mensajeVacio" ng-show="listAutores.length == 0">
+                <div class="cel1">
+                    <span> @{{mensajeVacio}} </span>
+                </div>
+            </section>
         </div>
         <div class="pieTabla">
             <div>Genero</div>

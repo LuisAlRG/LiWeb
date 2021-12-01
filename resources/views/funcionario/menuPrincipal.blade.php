@@ -33,6 +33,11 @@
                 </svg>
             </button>
         </a>
+        <a href="SobreNosotros">
+            <button>
+            acerca de
+            </button>
+        </a>
     	</div>
     </div>
 @endsection

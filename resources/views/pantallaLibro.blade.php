@@ -84,23 +84,26 @@
         <div id="cuerpoEntero" class="fixingLibrosCuerpo">
 
             <section class="rowsElement_Libro">
-            <div class="cel1"> <span>@{{libros.idLibro}}</span> </div>
-            <div class="cel2"><span>@{{libros.titulo}}</span></div>
-            <div class="cel3"><span>@{{FormatoDosAutores(libros.autores)}}</span></div>
-            <div class="cel4"><span>@{{libros.editorial}}</span></div>
-            <div class="cel5"><span>$@{{ (libros.precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }}</span></div>
-            <div class="cel6">
-                <svg viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" fill="#008000"/>
-                    <rect x="58.4264" y="39.4558" width="15" height="50" rx="7.5" transform="rotate(45 58.4264 39.4558)" fill="black" fill-opacity="0.4"/>
-                    <circle cx="66.9117" cy="41.5772" r="17.5" transform="rotate(45 66.9117 41.5772)" fill="black" fill-opacity="0.4"/>
-                    <rect x="76.1041" y="20.364" width="17" height="19" transform="rotate(45 76.1041 20.364)" fill="#008000"/>
-                    <rect x="55.4264" y="34.4558" width="15" height="50" rx="7.5" transform="rotate(45 55.4264 34.4558)" fill="white"/>
-                    <circle cx="63.9117" cy="36.5772" r="17.5" transform="rotate(45 63.9117 36.5772)" fill="white"/>
-                    <rect x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
-                </svg>
-            </div>
-                
+                <div class="cel1"> <span>@{{libros.idLibro}}</span> </div>
+                <div class="cel2"><span>@{{libros.titulo}}</span></div>
+                <div class="cel3"><span>@{{FormatoDosAutores(libros.autores)}}</span></div>
+                <div class="cel4"><span>@{{libros.editorial}}</span></div>
+                <div class="cel5"><span>$@{{ (libros.precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }}</span></div>
+                <div class="cel6">
+                    <svg viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle  class="fondoG" cx="50" cy="50" r="45" fill="#008000"/>
+                        <g class="cruzNegraG">
+                        <rect x="58.4264" y="39.4558" width="15" height="50" rx="7.5" transform="rotate(45 58.4264 39.4558)" fill="black" fill-opacity="0.4"/>
+                        <circle cx="66.9117" cy="41.5772" r="17.5" transform="rotate(45 66.9117 41.5772)" fill="black" fill-opacity="0.4"/>
+                        </g>
+                        <rect  class="fondoG" x="76.1041" y="20.364" width="17" height="19" transform="rotate(45 76.1041 20.364)" fill="#008000"/>
+                        <g class="cruzBlancaG">
+                        <rect x="55.4264" y="34.4558" width="15" height="50" rx="7.5" transform="rotate(45 55.4264 34.4558)" fill="white"/>
+                        <circle cx="63.9117" cy="36.5772" r="17.5" transform="rotate(45 63.9117 36.5772)" fill="white"/>
+                        </g>
+                        <rect class="fondoG" x="73.1041" y="15.364" width="17" height="19" transform="rotate(45 73.1041 15.364)" fill="#008000"/>
+                    </svg>
+                </div>
                 <div class="opcionesAdm">
                     <section>
                         <div>
@@ -112,15 +115,15 @@
                             <svg  viewBox="-10 -10 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 ng-click="OnModificarLibro(libros.idLibro)"
                             >
-                                <circle id="Ellipse 1" cx="50" cy="50" r="45" fill="#008000"/>
-                                <g id="LapizSombra">
+                                <circle class="fondoG" id="Ellipse 1" cx="50" cy="50" r="45" fill="#008000"/>
+                                <g class="cruzNegraG">
                                 <path id="Polygon 1" d="M24.3015 82.6985L31.0258 57.603L49.397 75.9742L24.3015 82.6985Z" fill="black" fill-opacity="0.45"/>
                                 <rect id="Rectangle 2" x="44.8076" y="69.2635" width="10" height="45" transform="rotate(-135 44.8076 69.2635)" fill="black" fill-opacity="0.45"/>
                                 <rect id="Rectangle 3" x="50.4645" y="74.9203" width="5" height="45" transform="rotate(-135 50.4645 74.9203)" fill="black" fill-opacity="0.45"/>
                                 <rect id="Rectangle 4" x="35.6152" y="60.0711" width="5" height="45" transform="rotate(-135 35.6152 60.0711)" fill="black" fill-opacity="0.45"/>
                                 <path id="Ellipse 2" d="M65.3137 23.3015C67.7517 20.8635 71.0583 19.4939 74.5061 19.4939C77.9539 19.4939 81.2605 20.8635 83.6985 23.3015C86.1365 25.7395 87.5061 29.0461 87.5061 32.4939C87.5061 35.9417 86.1365 39.2483 83.6985 41.6863L74.5061 32.4939L65.3137 23.3015Z" fill="black" fill-opacity="0.45"/>
                                 </g>
-                                <g id="Lapiz">
+                                <g class="cruzBlancaG">
                                 <path id="Polygon 1_2" d="M20.3015 78.6985L27.0258 53.603L45.397 71.9742L20.3015 78.6985Z" fill="white"/>
                                 <rect id="Rectangle 2_2" x="40.8076" y="65.2635" width="10" height="45" transform="rotate(-135 40.8076 65.2635)" fill="white"/>
                                 <rect id="Rectangle 3_2" x="46.4645" y="70.9203" width="5" height="45" transform="rotate(-135 46.4645 70.9203)" fill="white"/>
@@ -158,7 +161,6 @@
                     </section>
                 </div>
                 <div class="elementComplete">
-                    
                     <section>
                         <div>
                             <p>Id: @{{libros.idLibro}}</p>
@@ -173,13 +175,21 @@
                             <ul>
                                 <li ng-repeat="autor in libros.autores"> @{{FormatoAutorNombre(autor)}}</li>
                             </ul>
+                            <p>Autores:</p>
+                            <ul>
+                                <li ng-repeat="genero in libros.genero"> @{{genero.nombre}}</li>
+                            </ul>
                         </div>
                         
                         
                     </section>
                 </div>
             </section>
-
+            <section id="mensajeVacio" ng-show="listLibros.length == 0">
+                <div class="cel1">
+                    <span> @{{mensajeVacio}} </span>
+                </div>
+            </section>
         </div>
         <div class="pieTabla">
             <div>Titulo</div>

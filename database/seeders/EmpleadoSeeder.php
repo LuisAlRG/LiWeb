@@ -59,6 +59,7 @@ class EmpleadoSeeder extends Seeder
         $historial = new Historial();
         $historial->idEmpleado = 1;
         $historial->operacion = "Agrego a un Empleado";
+        $historial->fechaHora = "2018-02-01 00:00:00";
         $historial->save();
 
         $empleado = new Empleado();
@@ -83,6 +84,7 @@ class EmpleadoSeeder extends Seeder
         $historial = new Historial();
         $historial->idEmpleado = 1;
         $historial->operacion = "Agrego a un Empleado";
+        $historial->fechaHora = "2018-02-01 00:00:00";
         $historial->save();
 
         $empleado = new Empleado();
@@ -104,6 +106,7 @@ class EmpleadoSeeder extends Seeder
         $historial = new Historial();
         $historial->idEmpleado = 1;
         $historial->operacion = "Agrego a un Empleado";
+        $historial->fechaHora = "2018-02-01 00:00:00";
         $historial->save();
 
         $empleado = new Empleado();
@@ -125,6 +128,7 @@ class EmpleadoSeeder extends Seeder
         $historial = new Historial();
         $historial->idEmpleado = 1;
         $historial->operacion = "Agrego a un Empleado";
+        $historial->fechaHora = "2018-02-01 00:00:00";
         $historial->save();
 
         $empleado = new Empleado();
@@ -169,5 +173,12 @@ class EmpleadoSeeder extends Seeder
         $historial->idEmpleado = 1;
         $historial->operacion = "Agrego a un Empleado";
         $historial->save();
+    }
+
+    function GenerarFecha(){
+        $dia = random_int(1,28);
+        $mes = random_int(1,11);
+        $anio = random_int(2018,2021);
+        return $anio.'-'.$mes.'-'.$dia.' 00:00:00';
     }
 }

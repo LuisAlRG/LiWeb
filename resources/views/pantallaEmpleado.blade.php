@@ -16,8 +16,8 @@
     <form action="buscarEmpleados" method="post">
         <input type="hidden" name="tokenUsr1" value="{{ csrf_token() }} " ng-model="tokenUsr1">
         <label for="clave">Clave</label>
-        <input type="number" name="clave" id="clave"
-            ng-model="clave"
+        <input type="number" name="clave" id="clave" min="0"
+            ng-model="clave" 
         >
         <label for="nombre">Nombre</label> 
         <input type="text" name="nombre" id="nombre"
@@ -70,6 +70,7 @@
                         <input type="checkbox" 
                         ng-checked="empleado.contratado"
                         ng-click="OnContratarToggle(empleado)"
+                        
                         >
                         <span class="slider round"></span>
                     </label>
@@ -132,7 +133,11 @@
                     </section>
                 </div>
             </section>
-
+            <section id="mensajeVacio" ng-show="listEmpleado.length == 0">
+                <div class="cel1">
+                    <span> @{{mensajeVacio}} </span>
+                </div>
+            </section>
         </div>
         <div class="pieTabla">
             <div>Nombre</div>

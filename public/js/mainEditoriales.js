@@ -3,7 +3,7 @@ var marcador = null;
 const SECCION_ACTUAL = "/Libros/Editoriales";
 const ESPACIO_BACIO = "Escriba algo para considerarse como una \"Editorial\"";
 
-$("tablaInfo>div>#cuerpoEntero>section").attr(
+$("tablaInfo>div>#cuerpoEntero>section.rowsElement_Editoriales").attr(
     {
         'ng-repeat':"editorial in listEditorial track by $index",
         'ng-init':"mostElemento=false"
@@ -39,9 +39,8 @@ $("div.opcionesAdm>section>div:nth-child(1)>svg").attr(
 
 app.controller('allController',function($scope,$http){
     //inicialisar valores globales
-    $scope.listEditorial = [
-        new Editorial(0,"Cargando")
-    ];
+    $scope.listEditorial = [];
+    $scope.mensajeVacio = "Cargando, espere un momento.";
 
     $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodos",
         {}
@@ -50,13 +49,14 @@ app.controller('allController',function($scope,$http){
             let datos = rensopne.data;
             console.log(datos);
             $scope.listEditorial = datos;
+            $scope.mensajeVacio = "Tabla vacia.";
         },
         function(response){
             let datos = response.data;
             console.log(datos);
-            $scope.listEditorial=[
-                new Editorial(-1,"No se a podido cargar. Intente de nuevo mas tarde")
-            ];
+            
+            $scope.mensajeVacio = "No se a podido cargar. Intente de nuevo mas tarde.";
+            $scope.listEditorial = [];
         }
     );
 
@@ -137,16 +137,13 @@ app.controller('allController',function($scope,$http){
                         $scope.listEditorial = datos;
                         return 1;
                     }
-                $scope.listEditorial=[
-                    new Editorial(0,"No hay editoriales con esta descripciones")
-                ];
+                    $scope.mensajeVacio = "No hay editoriales con esta descripcion."
             },
             function (response) {
                 let datos = response.data;
                 console.log(datos);
-                $scope.listEditorial=[
-                    new Editorial(-1,"No se a podido cargar. Intente de nuevo mas tarde")
-                ];
+                $scope.mensajeVacio = "No se a podido cargar. Intente de nuevo mas tarde.";
+                $scope.listEditorial = [];
             }
         );
     }

@@ -36,6 +36,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
         
         // agregar otro
@@ -58,6 +59,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//3
@@ -75,6 +77,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//4
@@ -92,6 +95,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//5
@@ -109,6 +113,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//6
@@ -123,6 +128,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//7
@@ -137,6 +143,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//8
@@ -151,6 +158,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//9
@@ -165,6 +173,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//10
@@ -179,6 +188,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//11
@@ -193,6 +203,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//12
@@ -207,6 +218,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//13
@@ -221,6 +233,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//14
@@ -235,6 +248,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//15
@@ -249,6 +263,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = 2;
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//16
@@ -263,6 +278,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//17
@@ -277,6 +293,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//18
@@ -291,6 +308,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//19
@@ -305,6 +323,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//20
@@ -319,6 +338,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//21
@@ -333,6 +353,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//22
@@ -347,6 +368,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//23
@@ -361,6 +383,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//24
@@ -375,6 +398,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//25
@@ -389,6 +413,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//26
@@ -403,6 +428,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//27
@@ -417,6 +443,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//28
@@ -431,6 +458,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//29
@@ -445,6 +473,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//30
@@ -459,6 +488,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//31
@@ -473,6 +503,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//32
@@ -487,6 +518,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//33
@@ -501,6 +533,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//34
@@ -515,6 +548,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//35
@@ -529,6 +563,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//36
@@ -543,6 +578,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//37
@@ -557,6 +593,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//38
@@ -571,6 +608,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//39
@@ -585,6 +623,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//40
@@ -599,6 +638,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
 
         $libro = new Libro();//41
@@ -613,6 +653,7 @@ class LibroSeeder extends Seeder
         $historial = new Historial();
 		$historial->idEmpleado = random_int(3, 5);
 		$historial->operacion = "Agrego libro: ".$libro->titulo;
+        $historial->fechaHora = $this->GenerarFecha();
 		$historial->save();
     }
 
@@ -631,5 +672,12 @@ class LibroSeeder extends Seeder
             $autor = Autor::find(random_int(1, 15));
             $libro->SaveAutor($autor);
         }
+    }
+
+    function GenerarFecha(){
+        $dia = random_int(1,28);
+        $mes = random_int(1,11);
+        $anio = random_int(2018,2021);
+        return $anio.'-'.$mes.'-'.$dia.' 00:00:00';
     }
 }

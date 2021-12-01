@@ -59,7 +59,8 @@ class LibroController extends Controller
         }
     	return $libros;
     }
-    function ConsultarLibro(Request $req){
+/*
+    function ConsultarLibro1(Request $req){
 		$clave = 		$req->input('clave');
 		$edicion = 		$req->input('edicion');
 		$precio = 		$req->input('precio');
@@ -74,6 +75,7 @@ class LibroController extends Controller
 		if(is_numeric($clave)){
             $clave = (int) $clave;
             $elemento = Libro::find($clave);
+			$elemento = $this->PrepararLibro($elemento);
             return [0=>$elemento];
         }
 		if(is_numeric($precio)){
@@ -149,6 +151,77 @@ class LibroController extends Controller
 		
 		return $listaFinal;
     }
+*/
+	function ConsultarLibro(Request $req){
+		$clave = 		$req->input('clave');
+		$edicion = 		$req->input('edicion');
+		$precio = 		$req->input('precio');
+		$categoria = 	$req->input('categoria');
+		$titulo = 		$req->input('titulo');
+		$nombreAutor = 	$req->input('autor');
+		$nombreEditorial = $req->input('editorial');
+		$nombreGenero = $req->input('genero');
+
+		$categoria = (int)$categoria;
+		
+		if(is_numeric($clave)){
+            $clave = (int) $clave;
+            $elemento = Libro::find($clave);
+			if($elemento){
+				$elemento->autores = 	$elemento->autores()->get();
+				$elemento->genero = 	$elemento->generos()->get();
+				$elemento->editorial = 	$elemento->editorial()->get()[0]->nombre;
+			}
+            return [0=>$elemento];
+        }
+		if(is_numeric($precio)){
+			$precio = (int) $precio;
+		}
+		else{
+			$precio = 0;
+			$categoria = 1;
+		}
+		$opCategoria = '!=';
+		switch($categoria){
+			case 1: $opCategoria='>='; break; //mayor que
+			case 2: $opCategoria='<='; break; //menor que
+		}
+
+		$elementos = Libro::where('Libro.titulo','LIKE','%'.$titulo.'%')
+			->where('Libro.precio',$opCategoria,$precio);
+		if(isset($nombreAutor) || !(trim($nombreAutor??'') === '')){
+			$elementos->join('AutorLibro', function($join1) use ($nombreAutor){
+				$join1->on('Libro.idLibro','=','AutorLibro.idLibro')
+					->join('Autor',function($join2) use ($nombreAutor){
+						$join2->on('AutorLibro.idAutor','=','Autor.idAutor')
+							->where('Autor.nombre','LIKE','%'.$nombreAutor.'%')
+							->orwhere('Autor.apellido','LIKE','%'.$nombreAutor.'%');
+					});
+			});
+		}
+
+		if(isset($nombreEditorial) || !(trim($nombreEditorial??'') === '')){
+			$elementos->leftJoin('Editorial','Libro.idEditorial','=','Editorial.idEditorial')
+				->where('Editorial.nombre','LIKE','%'.$nombreEditorial.'%')
+			;
+		}
+
+		if(isset($nombreGenero) || !(trim($nombreGenero??'') === '')){
+			$elementos->join('GeneroLibro','Libro.idLibro','=','GeneroLibro.idLibro')
+				->leftJoin('Genero','GeneroLibro.idGenero','=','Genero.idGenero')
+				->where('Genero.nombre','LIKE','%'.$nombreGenero.'%')
+			;
+		}
+		$elementos = $elementos->get();
+
+		if(count($elementos)){
+            foreach($elementos as $key => $libro){
+                $libro = $this->PrepararLibro($libro);
+            }
+        }
+
+		return $elementos;
+	}
 
     function InsertarLibro(Request $req){
     	$tituloLibro = $req->input('titulo');
@@ -452,7 +525,8 @@ class LibroController extends Controller
 	//funciones para esa clase
 	//metodo que prepara el libro para la pantalla requiero un pco mas de datos
 	function PrepararLibro($libro){
-		$libro->autores = $libro->autores()->get();
+		$libro->autores = 	$libro->autores()->get();
+		$libro->genero = 	$libro->generos()->get();
         $libro->editorial = $libro->editorial()->get()[0]->nombre;
 	}
 	//metodo que revisa si ya exite autor relacionado al libro

@@ -2,7 +2,7 @@ var app = angular.module('allApp',[]);
 var marcador = null;
 const SECCION_ACTUAL = "/Empleados"
 
-$("tablaInfo>div>#cuerpoEntero>section").attr(
+$("tablaInfo>div>#cuerpoEntero>section.rowsElement_Empleado").attr(
     {
         'ng-repeat':"empleado in listEmpleado track by $index",
         'ng-init':"mostElemento=false"
@@ -29,17 +29,8 @@ $(".modificarEmpleado").attr(
 
 app.controller('allController',function($scope,$http){
     //inicialisar valores globales
-    $scope.listEmpleado = [
-        new Empleado(
-            0,0,
-            "Cargando",
-            "Empleado",
-            "claro que si",
-            true,
-            true,
-            "Funcionario"
-        )
-    ]
+    $scope.listEmpleado = [];
+    $scope.mensajeVacio = "Cargando empleados, no sea duro";
     
     $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/VerTodoEmpleado",
         {
@@ -50,21 +41,13 @@ app.controller('allController',function($scope,$http){
             let datos = rensopne.data;
             console.log(datos);
             $scope.listEmpleado = datos;
+            $scope.mensajeVacio = "Empleados no... ¿encontrado?";
         },
         function(response){
             let datos = response.data;
             console.log(datos);
-            $scope.listEmpleado=[
-                new Empleado(
-                    -1,-1,
-                    "No se pudo cargar",
-                    "A los Empleados",
-                    "lastima",
-                    false,
-                    false,
-                    "Funcionario"
-                )
-            ];
+            $scope.mensajeVacio = "No se pudo cargar, intente de nuevo mas tarde";
+            $scope.listEmpleado=[];
         }
     );
 
@@ -110,11 +93,12 @@ app.controller('allController',function($scope,$http){
     $scope.DisableIfClave = function(){
         if($scope.clave === undefined)
             return false;
-        return $scope.clave >0;
+        return $scope.clave > 0;
     }
 
     $scope.OnContratarToggle = function (empleado) {
-        $("tablaInfo").prop("disabled",true);
+        let botonToggle = "cel5>label>input";
+        $(botonToggle).prop("disabled",true);
         $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Contratado",
             {
                 _token:$scope.tokenUsr2,
@@ -123,12 +107,12 @@ app.controller('allController',function($scope,$http){
             }
         ).then(
             function(rensopne){
-                $("tablaInfo").prop("disabled",false);
+                $(botonToggle).prop("disabled",false);
                 let datos = rensopne.data;
                 console.log(datos);
             },
             function(response){
-                $("tablaInfo").prop("disabled",false);
+                $(botonToggle).prop("disabled",false);
                 let datos = response.data;
                 console.log(datos);
             }
@@ -175,6 +159,9 @@ app.controller('allController',function($scope,$http){
             apellido:   $scope.apellido,
             rolSelect:  $scope.rolSelect.value
         }
+        if(enviar.clave < 1){
+            enviar.clave = 'nell';
+        }
         console.log(enviar);
         $http.post(DIRECCION_HTTPS+SECCION_ACTUAL+"/Consultar",
             enviar
@@ -187,32 +174,16 @@ app.controller('allController',function($scope,$http){
                         $scope.listEmpleado = datos;
                         return 1;
                     }
-                $scope.listEmpleado=[
-                    new Empleado(
-                        -1,-1,
-                        "No hay empleados",
-                        "No hay empleados con",
-                        "esta descripcio",
-                        false,
-                        false,
-                        "Funcionario"
-                    )
-                ];
+                    
+                $scope.mensajeVacio = "No hay empleado con esas descripciones";
+                $scope.listEmpleado=[];
+                
             },
             function(response){
                 let datos = response.data;
                 console.log(datos);
-                $scope.listEmpleado=[
-                    new Empleado(
-                        -1,-1,
-                        "No se a podido cargar.",
-                        "No se a podido cargar.",
-                        "Intentelo de nuevo mas tarde",
-                        false,
-                        false,
-                        0
-                    )
-                ];
+                $scope.mensajeVacio = "Contraseña repetida, intente con otra";
+                $scope.listEmpleado=[];
             }
         );
     }

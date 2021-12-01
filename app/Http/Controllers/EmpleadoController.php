@@ -97,10 +97,13 @@ class EmpleadoController extends Controller
         $apellido = $req->input('apellido');
         $rolSelect = $req->input('rolSelect');
         $rolSelect = (int)$rolSelect;
-        if(is_numeric($clave)){
+        if(is_numeric($clave??'')){
             $clave = (int)$clave;
             $elemento = Empleado::find($clave);
-            $elemento = $this->PrepararEmpleado($elemento);
+            if($elemento ){
+                
+                $elemento = $this->PrepararEmpleado($elemento);
+            }
             return [0=>$elemento];
         }
         $elementos = Empleado::where('nombre','LIKE','%'.$nombre.'%')
