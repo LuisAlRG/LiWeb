@@ -17,7 +17,7 @@
         <div id="claveSection">
         <label for="clave">Clave</label> 
         <input type="number" name="clave" id="clave"
-            ng-model="clave"
+            ng-model="clave" min=0 max=9000
         > 
         </div>
         <div id="edicionSection">
@@ -175,7 +175,7 @@
                             <ul>
                                 <li ng-repeat="autor in libros.autores"> @{{FormatoAutorNombre(autor)}}</li>
                             </ul>
-                            <p>Autores:</p>
+                            <p>Genero:</p>
                             <ul>
                                 <li ng-repeat="genero in libros.genero"> @{{genero.nombre}}</li>
                             </ul>

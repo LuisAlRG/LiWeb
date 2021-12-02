@@ -106,6 +106,10 @@
                             <ul>
                                 <li ng-repeat="autor in libros.autores"> @{{FormatoAutorNombre(autor)}}</li>
                             </ul>
+                            <p>Genero:</p>
+                            <ul>
+                                <li ng-repeat="genero in libros.genero"> @{{genero.nombre}}</li>
+                            </ul>
                         </div>
                     </section>
                 </div>

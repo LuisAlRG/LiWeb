@@ -37,7 +37,6 @@ $("tablaInfo>div>div>section>div.elementComplete").attr(
 
 app.controller('allController',function($scope,$http){
     //inicialisar valores globales
-    
     let primerElemento = new Libro(0,1,//id libro id editorial
         "Cargando",//titulo
         440,//precio
@@ -57,13 +56,14 @@ app.controller('allController',function($scope,$http){
             let datos = rensopne.data;
             console.log(datos);
             $scope.listLibros = datos;
+            cargarLocal();
         },
         function(response){
             let datos = response.data;
             console.log(datos);
             $scope.listLibros=[
                 new Libro(-1,1,//id libro id editorial
-                "Hoy no es un buen dia para venta",//titulo
+                "Hoy no es un buen día para venta, error de conexion",//titulo
                 440,//precio
                 1,//edicion
                 1//cantidad
@@ -81,8 +81,47 @@ app.controller('allController',function($scope,$http){
         {nombre:"Mayor al precio", value:1},
         {nombre:"Menor al precio", value:2}
     ];
+
+    //cargar posible localstorage
+    let elementosGuardados = localStorage.getItem("guardado");
+    let cargarLocal = function(){
+        if(elementosGuardados!=null){
+            elementosGuardados = elementosGuardados;
+            if(elementosGuardados == "true"){
+                let locCliente = localStorage.getItem("cliente");
+                let locLibroSelct = localStorage.getItem("librosSelct");
+                let locLibrosCantidad = localStorage.getItem("librosCantidad");
+                $scope.cliente = '';
+                if(locCliente && !locCliente?.includes("undefined")){
+                    $scope.cliente = locCliente?locCliente:'';
+                }
+                
+                locLibroSelct = locLibroSelct.split(' ');
+                locLibrosCantidad = locLibrosCantidad.split(' ');
+
+                $scope.listLibros.forEach( (libroSel,index) => {
+                    for(let i=0; locLibroSelct.length > i; i++){
+                        if(libroSel.idLibro == parseInt(locLibroSelct[i])){
+                            let cantidadElegida = parseInt(locLibrosCantidad[i])
+                            for(let j=0; cantidadElegida > j; j++ ){
+                                $scope.accionAderirSeleccion(index);
+                            }
+                            //libroSel.cantidad = parseInt(locLibrosCantidad[i]);
+                            break;
+                        }
+                    }
+                });
+                //localStorage.setItem("guardado",false);
+            }
+        }
+    }
+
     //funciones de llamada
     
+    $scope.QuitarEnLocalStorage = function(){
+        localStorage.setItem("guardado",false);
+    }
+
     //Formatos
     $scope.FormatoDosAutores = function(autores){
         let tresAutores = autores.slice(0,3);
@@ -161,7 +200,7 @@ app.controller('allController',function($scope,$http){
 
                 $scope.listLibros=[
                     new Libro(0,1,//id libro id editorial
-                    "No nay libro con esa informacion",//titulo
+                    "No hay libro con esa información",//titulo
                     440,//precio
                     1,//edicion
                     1//cantidad
@@ -172,7 +211,7 @@ app.controller('allController',function($scope,$http){
                 console.log(datos);
                 $scope.listLibros=[
                     new Libro(-1,1,//id libro id editorial
-                    "Hoy no es un buen dia para venta",//titulo
+                    "Hoy no es un buen día para venta, error de conexion",//titulo
                     440,//precio
                     1,//edicion
                     1//cantidad
@@ -190,9 +229,7 @@ app.controller('allController',function($scope,$http){
 
     $scope.AccionRealizarVenta = function(){
         let sentCliente=    $scope.cliente;
-
         let listaNoRepetido=[];
-        let ultimoElemento= null;
         for(let i=0;i<$scope.listLibrosSelect.length;i++){
             let findIndex = listaNoRepetido.findIndex(libro=>libro.idLibro == $scope.listLibrosSelect[i].idLibro);
             if(findIndex != -1){
@@ -221,6 +258,13 @@ app.controller('allController',function($scope,$http){
         console.log(sentItemsLog);
 
         let nombreid = "realizarCompra";
+
+        //usar local storage
+        localStorage.setItem("guardado",true);
+        localStorage.setItem("cliente",sentCliente);
+        localStorage.setItem("librosSelct",sentLibrosSelct);
+        localStorage.setItem("librosCantidad",sentLibrosCantidad);
+
         document.getElementById(nombreid).submit();
     }
 });

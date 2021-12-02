@@ -62,7 +62,7 @@ Route::post('/LiWeb/Libros/Insertar',		[LibroController::class,"InsertarLibro"])
 Route::post('/LiWeb/Libros/Consultar',		[LibroController::class,"ConsultarLibro"]);
 Route::post('/LiWeb/Libros/Borrar',			[LibroController::class,"BorrarLibro"]);
 
-
+Route::get('/LiWeb/Libro',					function(){return redirect('/LiWeb/Libros');});
 Route::post('/LiWeb/Libro',					[LibroController::class,'ViewLibroModificar'])
 	->middleware(['auth']);
 Route::post('/LiWeb/Libro/Modificar',		[LibroController::class,'ModificarLibro']);
@@ -99,7 +99,7 @@ Route::post('/LiWeb/Libros/Editoriales/Modificar',	[EditorialController::class,'
 Route::post('/LiWeb/Libros/Editoriales/Borrar',		[EditorialController::class,'BorrarEditorial']);
 
 Route::get('/LiWeb/Empleados',					[EmpleadoController::class,'ViewEmpleados'])
-	->middleware(['auth']);
+	->middleware(['auth'])->middleware(['checkAdmin']);
 Route::post('/LiWeb/Empleados/VerTodoEmpleado',	[EmpleadoController::class,'VerTodoEmpleado']);
 Route::post('/LiWeb/Empleados/Contratado',		[EmpleadoController::class,'Contratar']);
 Route::post('/LiWeb/Empleados/Consultar',		[EmpleadoController::class,'ConsultarEmpleado']);

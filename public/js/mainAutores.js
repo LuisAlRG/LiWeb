@@ -2,7 +2,7 @@ var app = angular.module('allApp',[]);
 var marcador = null;
 const SECCION_ACTUAL = "/Libros/Autores";
 
-$("tablaInfo>div>#cuerpoEntero>section.rowsElement_Libro").attr(
+$("tablaInfo>div>#cuerpoEntero>section.rowsElement_Autor").attr(
     {
         'ng-repeat':"autor in listAutores track by $index",
         'ng-init':"mostElemento=false; mostOpcionesAdm = false;"

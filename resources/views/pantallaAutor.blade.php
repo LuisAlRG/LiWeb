@@ -17,7 +17,7 @@
     <form action="buscarAutores" method="post">
         <label for="clave">Clave</label> 
         <input type="number" name="clave" id="clave"
-            ng-model="clave"
+            ng-model="clave" min=0 max=9000
         > 
         <label for="nombre">Nombre(s)</label>
         <input type="text" name="nombre" id="nombre"

@@ -26,7 +26,7 @@ $("tablaInfo>div>div>section>div").attr(
 );
 
 $("tablaInfo>div>div>section>div.elementComplete").attr(
-    {'ng-if':"mostElemento && indxSelecionado == $index"}
+    {'ng-show':"mostElemento && indxSelecionado == $index"}
 );
 
     app.controller('allController',function($scope,$http){
@@ -75,7 +75,7 @@ $("tablaInfo>div>div>section>div.elementComplete").attr(
                 cadena = fechaD+'/'+fechaM+'/'+fechaY;
                 return cadena;
             }
-            return "-"
+            return "-";
         }
 
         $scope.FormatoNombre = function(nombreCompleto){

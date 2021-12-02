@@ -50,7 +50,7 @@ class VentaController extends Controller
     }
 
     function VerTodosVentas(){
-        $ventas = Venta::all();
+        $ventas = Venta::orderBy('idVenta', 'desc')->get();
         if($ventas){
             foreach($ventas as $key => $venta){
                 $venta->vendidos = $venta->PrecioTotal();
@@ -101,7 +101,7 @@ class VentaController extends Controller
             case 2: $operacionCategoria = '<='; break;//antes de la fecha
             case 3: $operacionCategoria = '>='; break;//despues de la fecha
         }
-        $ventas = Venta::where('cliente','LIKE','%'.$cliente.'%');
+        $ventas = Venta::where('cliente','LIKE','%'.$cliente.'%')->orderBy('idVenta', 'desc');
         if($fecha){
             $ventas = $ventas->where('fechaHora',$operacionCategoria,$fecha);
         }
@@ -197,6 +197,9 @@ class VentaController extends Controller
         $listLibrosId =     explode(' ',$listLibrosId);
         $listLibrosCant =   explode(' ',$listLibrosCant);
 
+        if(!$cliente){
+            $cliente= ' ';
+        }
 
         $empleado = Auth::user();
         $empleado = $empleado->empleado()->get()[0];

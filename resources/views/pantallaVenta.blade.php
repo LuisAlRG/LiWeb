@@ -17,7 +17,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }} " ng-model="tokenUsr">
         <label for="clave">Clave de venta</label> 
         <input type="number" name="clave" id="claveID"
-            ng-model="clave"
+            ng-model="clave" min=0 max=9000
         > 
         <label for="fecha">Fecha</label> <br>
         <input type="date" name="fecha" id="fechaVal" 

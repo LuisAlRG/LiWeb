@@ -173,6 +173,25 @@ class EmpleadoSeeder extends Seeder
         $historial->idEmpleado = 1;
         $historial->operacion = "Agrego a un Empleado";
         $historial->save();
+
+        $indInc++;
+
+        $empleado = new Empleado();
+        $empleado->idEmpleado = 0;
+        $empleado->nombre = "Admin";
+        $empleado->apellido = "Nistrador";
+        $password = "Paswor[poderosisimo)DemaciadoPetente";
+        $usuario = new User();
+        $usuario->name = $empleado->nombre;
+        $usuario->email = "liWeb".$indInc.$empleado->apellido."@192.168.1.150";
+        $usuario->password = Hash::make( $password );
+        $usuario->save();
+        $usuario->empleado()->save($empleado);
+        $admin = new Administrador();
+        $admin->gerente = true;
+        $admin->contratado = true;
+        $empleado->administrador()->save($admin);
+        $empleado->save();
     }
 
     function GenerarFecha(){

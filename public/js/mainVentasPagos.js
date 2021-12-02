@@ -153,7 +153,9 @@ app.controller('allController',function($scope,$http){
     $scope.getPrecioConFotmato= function(precio){
         return (precio).toLocaleString('en-US', {style: 'currency', currency: 'USD',})
     }
-
+    $scope.QuitarEnLocalStorage = function(){
+        localStorage.setItem("guardado",false);
+    }
     
     $scope.OnDiferencia = function(precioTotal,precipPagado){
         $scope.precioRetorno = precipPagado - precioTotal;

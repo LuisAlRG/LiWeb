@@ -1,0 +1,82 @@
+@import 'w3';
+
+/*
+    tablaInfo
+    Aqui estan el estilo de la tabla de Generos Simples
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+#parteDerecho{
+    >tablaInfo{
+        >div{
+            section, div>section.rowsElement_Historial{
+                >.cel1{ //todo
+                    @extend .l12;
+                    @extend .m12;
+                    @extend .s12;
+                }
+            }
+
+            //estilo del encabezado
+            >section#tableTop_Historial{
+                @extend .w3-row;
+                @extend .my-green-color;
+                border-bottom: 1px solid black;
+                margin-right: 16px;
+
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+                
+                >div{
+                    @extend .w3-col;
+                    border-left: 1px solid black;
+                    min-height: 2em;
+                    height: 2em;
+                    
+                }
+                :first-child{
+                    border-left: 0px none green;
+                }
+            }
+            //estilo del cuerpo de la taba
+            >div#cuerpoEntero{
+                height: 500px;
+                
+                //estido de renglon de la tabla
+                >section.rowsElement_Historial{
+                    @extend .w3-row;
+                    border-bottom: 1px solid black;
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                    }
+                    >.elementComplete{
+                        
+                        
+                        section{
+                            
+                            >div{
+                                display: block;
+                                @extend .w3-col;
+                                @extend .l6;
+                                @extend .m6;
+                                @extend .s12;
+                                max-height: fit-content;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

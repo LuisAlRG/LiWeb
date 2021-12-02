@@ -1,0 +1,216 @@
+@import 'w3';
+
+/*
+    tablaInfo
+    Aqui estan el estilo de la tabla de Ventas Simples
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+#parteDerecho{
+    >tablaInfo{
+        >div{
+            section, div>section.rowsElement_Libro{
+                >.cel1{ //id
+                    @extend .l1;
+                    @extend .m1;
+                    @extend .s2;
+                }
+                >.cel2{ //titulo
+                    @extend .l3;
+                    @extend .m4;
+                    @extend .s6;
+                }
+                >.cel3{ //autor
+                    @extend .l4;
+                    @extend .m4;
+                    @extend .w3-hide-small;
+                    
+                }
+                >.cel4{ //editorial
+                    @extend .l2;
+                    @extend .w3-hide-medium;
+                    @extend .w3-hide-small;
+                }
+                >.cel5{ //precio
+                    @extend .l2;
+                    @extend .m3;
+                    @extend .s4;
+                }
+            }
+
+            //estilo del encabezado
+            >section#tableTop_Libro{
+                @extend .w3-row;
+                @extend .my-green-color;
+                border-bottom: 1px solid black;
+                margin-right: 16px;
+
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+                >div{
+                    @extend .w3-col;
+                    border-left: 1px solid black;
+                }
+                div:first-child{
+                    border-left: 0px none green;
+                    
+                }
+            }
+            //estilo del cuerpo de la taba
+            >div#cuerpoEntero{
+                height: 480px;
+                
+                //estido de renglon de la tabla
+                >section.rowsElement_Libro{
+                    @extend .w3-row;
+                    border-bottom: 1px solid black;
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                    }
+                    >.cel6{
+                        button#aderirElemento{
+                            @extend .w3-button;
+                            @extend .w3-round-xxlarge;
+                            @extend .my-green-color;
+                        }
+                    }
+                    >.elementComplete{
+                        section{
+                            
+                            >div{
+                                display: block;
+                                @extend .w3-col;
+                                @extend .l6;
+                                @extend .m6;
+                                @extend .s12;
+                                max-height: fit-content;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+    }
+    >tablaPago{
+        >section{
+            @extend .w3-row;
+            border-bottom: 1px solid black;
+            margin-right: 16px;
+            >div{
+                @extend .w3-col;
+                border-left: 1px solid black;
+                border-top: 1px solid grey;
+                
+                font-size: 1em;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 3.5em;
+                max-height: 5em;
+                    /*span{
+                        //flex: 0 0 0px;
+                    }*/
+                text-align: center;
+            }
+            :first-child{
+                border-left: 0px none green;
+            }
+            div.cel1{
+                @extend .l8;
+                @extend .m7;
+                @extend .s6;
+            }
+            div.cel2{
+                @extend .l2;
+                @extend .m2;
+                @extend .s3;
+            }
+            div.cel3{
+                @extend .l2;
+                @extend .m3;
+                @extend .s3;
+            }
+        }
+    }
+    >notaDePago{
+        display: block;
+        @extend .w3-margin;
+        >section{
+            
+            @extend .w3-row;
+            
+            >div{
+
+                border-bottom: 1px solid black;
+                min-height: 3.5em;
+                max-height: 5em;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            >div:nth-child(2n+1){
+                @extend .w3-col;
+                @extend .l6;
+                @extend .m7;
+                @extend .s8;
+                text-align: right;
+                justify-content: right;
+                padding-right: 1em;
+            }
+            >div:nth-child(2n){
+                @extend .w3-col;
+                @extend .l2;
+                @extend .m3;
+                @extend .s4;
+            }
+        }
+        #topPago{
+            >div{
+                @extend .my-green-color;
+                
+            }
+            >div:first-child{
+                border-top-left-radius: 1em;
+            }
+            >div:last-child{
+                border-top-right-radius: 1em;
+            }
+        }
+        #totalCobrar{
+            >div{
+                border-bottom: 1px dotted black;
+            }
+        }
+        #totalPagar{
+
+        }
+        #totalFeria{
+            
+        }
+        #aplicarVenta{
+            button{
+                @extend .my-green-color;
+                @extend .w3-button;
+                width: 100%;
+                margin: 5px 0px;
+                //@extend .w3-margin;
+                border-radius: 1em;
+                font-size: 1.25em;
+            }
+        }
+    }
+}
+

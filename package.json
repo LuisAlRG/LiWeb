@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "sass": "node-sass resources/sass/logInStyle.scss public/css/logInStyle.css | node-sass resources/sass/principalStyle.scss public/css/principalStyle.css"
+        "sass": "node-sass resources/sass/logInStyle.scss public/css/logInStyle.css | node-sass resources/sass/modeloAutores.scss public/css/modeloAutores.css | node-sass resources/sass/modeloEditoriales.scss public/css/modeloEditoriales.css | node-sass resources/sass/modeloGeneros.scss public/css/modeloGeneros.css | node-sass resources/sass/modeloHistorial.scss public/css/modeloHistorial.css | node-sass resources/sass/modeloLibros.scss public/css/modeloLibros.css | node-sass resources/sass/modeloLibrosMod.scss public/css/modeloLibrosMod.css | node-sass resources/sass/modeloLibrosVendidos.scss public/css/modeloLibrosVendidos.css | node-sass resources/sass/modeloVentas.scss public/css/modeloVentas.css | node-sass resources/sass/principalStyle.scss public/css/principalStyle.css | node-sass resources/sass/sobreNosotros.scss public/css/sobreNosotros.css"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",

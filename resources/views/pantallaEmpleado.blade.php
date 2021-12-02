@@ -17,7 +17,7 @@
         <input type="hidden" name="tokenUsr1" value="{{ csrf_token() }} " ng-model="tokenUsr1">
         <label for="clave">Clave</label>
         <input type="number" name="clave" id="clave" min="0"
-            ng-model="clave" 
+            ng-model="clave" min=0 max=9000
         >
         <label for="nombre">Nombre</label> 
         <input type="text" name="nombre" id="nombre"

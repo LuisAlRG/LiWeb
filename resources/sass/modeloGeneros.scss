@@ -1,0 +1,137 @@
+@import 'w3';
+
+/*
+    tablaInfo
+    Aqui estan el estilo de la tabla de Generos Simples
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+#parteDerecho{
+    >tablaInfo{
+        >div{
+            section, div>section.rowsElement_Genero{
+                >.cel1{ //id
+                    @extend .l2;
+                    @extend .m3;
+                    @extend .s2;
+                }
+                >.cel2{ //nombre
+                    @extend .l8;
+                    @extend .m6;
+                    @extend .s7;
+                }
+                >.cel3{ //acciones
+                    @extend .l2;
+                    @extend .m3;
+                    @extend .s3;
+                    
+                }
+            }
+
+            //estilo del encabezado
+            >section#tableTop_Genero{
+                @extend .w3-row;
+                @extend .my-green-color;
+                border-bottom: 1px solid black;
+                margin-right: 16px;
+
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+                
+                >div{
+                    @extend .w3-col;
+                    border-left: 1px solid black;
+                    min-height: 2em;
+                    height: 3.5em;
+                    
+                }
+                :first-child{
+                    border-left: 0px none green;
+                }
+            }
+            //estilo del cuerpo de la taba
+            >div#cuerpoEntero{
+                height: 480px;
+                //estido de renglon de la tabla
+                >section.rowsElement_Genero{
+                    @extend .w3-row;
+                    border-bottom: 1px solid black;
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                    }
+                    >.cel3{
+                        svg{
+                            max-height: 4em ;
+                        }
+                    }
+                    >.elementComplete{
+                        section{
+                            >div{
+                                display: block;
+                                @extend .w3-col;
+                                @extend .l6;
+                                @extend .m6;
+                                @extend .s12;
+                                max-height: fit-content;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+tablaInfo>div{
+    .col-generos{
+        >div:nth-child(1){//Nombre
+            @extend .l9;
+            @extend .m8;
+            @extend .s9;
+        }
+        >div:nth-child(2){//Accion
+            @extend .l3;
+            @extend .m4;
+            @extend .s3;
+            svg{
+                max-height: 4em ;
+            }
+        }
+    }
+    .pieTabla{
+        border-top: 1px solid gray;
+        border-bottom: 1px solid black;
+        @extend .w3-row;
+        >div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            @extend .w3-col;
+        }
+        @extend .col-generos;
+        form{
+            >div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 3.5em;
+                max-height: 5em;
+                text-align: center;
+                @extend .w3-col;
+            }
+            @extend .col-generos;
+        }
+    }
+}

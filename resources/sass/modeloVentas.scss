@@ -1,0 +1,123 @@
+@import 'w3';
+
+/*
+    tablaInfo
+    Aqui estan el estilo de la tabla de Ventas Simples
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+#parteDerecho{
+    >tablaInfo{
+        >div{
+            section, div>section{
+                @extend .w3-row;
+                >div{
+                    @extend .w3-col;
+                }
+                >div.cel1{ //id
+                    @extend .l2;
+                    @extend .m1;
+                    @extend .s4;
+                }
+                >div.cel2{ //cliente
+                    @extend .l3;
+                    @extend .m3;
+                    //@extend .s3;
+
+                    @extend .w3-hide-small;
+                }
+                >div.cel3{ //responsable
+                    @extend .l3;
+                    @extend .m4;
+                    @extend .s4;
+                }
+                >div.cel4{ //fecha
+                    @extend .l2;
+                    @extend .m2;
+                    @extend .s4;
+                }
+                >div.cel5{ //vendidos
+                    @extend .l2;
+                    @extend .m2;
+                    //@extend .s2;
+
+                    @extend .w3-hide-small;
+                }
+            }
+
+            //estilo del encabezado
+            >section#tableTop_Venta{
+                //@extend .w3-row;
+                @extend .my-green-color;
+                border-bottom: 1px solid black;
+                margin-right: 16px;
+
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+
+                >div{
+                    //@extend .w3-col;
+                    border-left: 1px solid black;
+                }
+                :first-child{
+                    border-left: 0px none green;
+                }
+            }
+            //estilo del cuerpo de la taba
+            >div#cuerpoEntero{
+                height: 550px;
+                overflow-y: scroll;
+                //estido de renglon de la tabla
+                >section.renglosElement_Venta{
+                    //@extend .w3-row;
+                    border-bottom: 1px solid black;
+                    >div{
+                        //@extend .w3-col;
+                        overflow: hidden;
+                        >button{
+                            background: none;
+                            border: none;
+                            float: left;
+                            @extend .w3-hide-medium;
+                            margin-right: 45%;
+                            font-size: 0.8em;
+                            width: 2.5em;
+                        }
+                        >button:hover{
+                            background: #999;
+                        }
+                    }
+                    >div.elementComplete{
+                        display:block;
+                        justify-content:baseline;
+                        align-items: center;
+                        @extend .l12;
+                        @extend .m12;
+                        @extend .s12;
+                        max-height: fit-content;
+                        height: auto;
+                        section{
+                            @extend .w3-display-container;
+                            @extend .w3-card-2;
+                            @extend .w3-margin;
+                            p{
+                                margin: 0px;
+                                text-align: left;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+    }
+}

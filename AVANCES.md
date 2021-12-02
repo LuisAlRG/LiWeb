@@ -77,3 +77,10 @@ avance 1 del 30 11 21
     Cambie los seeder para que las ventas einserciones fuesen con fechas aleatorias
     Cambio en las busquedas de libro para que seen busqueda de similitud en vez de exactitud
     agrege la pantalla de acerca de nosostros.
+
+avance 1 del 02 11 21
+    Se agrego middleware que cancela la posibilidad de que un empleado funcionario entre a la seccion de modificar empleados.
+    Se agregaron algunas validaciones en el input numeric de todas las pantallas que uviese consultas en ella.
+    Se agrego la posibilidad de guardad datos en localstorage en l codigo de "mainActVentas, mainVentasPagos" para que al momento de ingresar libros en la lista de libros seleccionados se guarde la cantidad de libros seleccionados y se vuelva a despliegar al requerirlo al regresar a la siguiente pantalla por mdificacion.
+    se agrego 2 nuevo sidder el cual son para crear la base de datos con informacion de zero para no tener el problema de que no existan usuarios dentro de la base de datos que no puedan agregar a otros.
+    

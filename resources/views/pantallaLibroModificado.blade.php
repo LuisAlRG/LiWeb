@@ -16,7 +16,7 @@
 <div>
     <form action="noAccion" method="post">
         <label for="libroID">Clave</label> 
-        <input type="number" name="libroID" id="libroID" value="{{$libro->idLibro}}" disabled>
+        <input type="number" name="libroID" id="libroID" value="{{$libro->idLibro}}" disabled >
         <label for="libroNombre">Nombre</label>
         <input type="text" name="libroNombre" id="libroNombre" value="{{$libro->titulo}}" disabled>
     </form>

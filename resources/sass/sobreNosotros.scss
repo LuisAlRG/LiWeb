@@ -1,0 +1,52 @@
+@import 'w3';
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+body>div{
+    @extend .w3-container;
+    @extend .w3-row;
+    sobreNosotros{
+        @extend .w3-padding;
+        
+        margin-bottom: 1em;
+        border: 2px solid var(--color-primario);
+        border-radius: 1em;
+        min-height: 90%;
+        @extend .w3-display-middle;
+        @extend .w3-col;
+        @extend .l5;
+        @extend .m7;
+        @extend .s11;
+        >section{
+            text-align: center;
+            h1{
+                color: var(--color-primario);
+                font-weight: bold;
+                text-shadow: 2px 2px 4px gray;
+            }
+            h3{
+                color: slategray;
+            }
+            p{
+                color: gray;
+
+                span{
+                    text-shadow: gray;
+                }
+            }
+            figure{
+                img{
+                    width: 70%;
+                }
+            }
+        }
+    }
+}   

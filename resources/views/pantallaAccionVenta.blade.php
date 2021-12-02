@@ -17,7 +17,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }} " id="tokenUsr1">
         <label for="clave">Clave del libro</label> 
         <input type="number" name="clave" id="clave"
-            ng-model="clave"
+            ng-model="clave" min=0 max=9000
         >
         <label for="tituloLibro">Titulo</label> <br>
         <input type="text" name="tituloLibro" id="tituloLibro"
@@ -59,7 +59,7 @@
 @section('botonesAccion')
 <div>
     <div><button ng-click="OnBuscarLibro()">Buscar</button></div> 
-    <div> <a href="Venta"> <button>Cancelar</button></a></div>
+    <div ng-click="QuitarEnLocalStorage()"> <a href="Venta"> <button >Cancelar</button></a></div>
 </div>
 @endsection
 @section('tables')

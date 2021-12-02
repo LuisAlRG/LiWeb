@@ -88,6 +88,7 @@ class VentaSeeder extends Seeder
  
         $venta = new Venta();
         $venta->idEmpleado=7;
+        $venta->cliente="";
         $venta->fechaHora= $this->GenerarFecha();
         $venta->save();
         //Zoología
@@ -134,6 +135,9 @@ class VentaSeeder extends Seeder
                         break;
                 }
                 $venta->cliente=$nombreAleatorio;
+            }
+            else{
+                $venta->cliente="";
             }
             $venta->fechaHora= $this->GenerarFecha();
             $venta->save();

@@ -114,7 +114,7 @@
         <div>@{{" "}}</div>
         <div>
             <button ng-show="PermitirTerminar((precioTotal + (precioTotal*0.25)),pago)"
-                ng-click="OnSubmit()"
+                ng-click="QuitarEnLocalStorage();OnSubmit()"
             >
                 Terminar
             </button>

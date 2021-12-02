@@ -1,0 +1,269 @@
+@import 'w3';
+
+/*
+    tablaInfo
+    Aqui estan el estilo de la tabla de Empleados Simples
+*/
+
+:root{
+    --color-primario: #008000;
+    //green
+    --color-letra: #ffffff;
+}
+
+.my-green-color{
+    background: var(--color-primario);
+    color: var(--color-letra);
+}
+
+#parteDerecho{
+    >tablaInfo{
+        >div{
+            section, div>section.rowsElement_Empleado{
+                >.cel1{ //id
+                    @extend .l2;
+                    @extend .m2;
+                    @extend .s2;
+                }
+                >.cel2{ //nombre
+                    @extend .l3;
+                    @extend .w3-hide-medium;
+                    @extend .w3-hide-small;
+                }
+                >.cel3{ //apellido
+                    @extend .l3;
+                    @extend .m4;
+                    @extend .s4;
+                    
+                }
+                >.cel4{ //rol
+                    @extend .l2;
+                    @extend .m3;
+                    @extend .s4;
+                }
+                >.cel5{ //contratado
+                    @extend .l2;
+                    @extend .m3;
+                    @extend .s2;
+                }
+            }
+
+            //estilo del encabezado
+            >section#tableTop_Empleado{
+                @extend .w3-row;
+                @extend .my-green-color;
+                border-bottom: 1px solid black;
+                margin-right: 16px;
+
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+                
+                >div{
+                    @extend .w3-col;
+                    border-left: 1px solid black;
+                    min-height: 2em;
+                    height: 2em;
+                    
+                }
+                :first-child{
+                    border-left: 0px none green;
+                }
+            }
+            //estilo del cuerpo de la taba
+            >div#cuerpoEntero{
+                height: 480px;
+                
+                //estido de renglon de la tabla
+                >section.rowsElement_Empleado{
+                    @extend .w3-row;
+                    border-bottom: 1px solid black;
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                    }
+                    >.cel5{
+                        svg{
+                            max-height: 4em ;
+                        }
+                        /* The switch - the box around the slider */
+                        .switch {
+                            position: relative;
+                            display: inline-block;
+                            width: 60px;
+                            height: 34px;
+                        }
+                        
+                        /* Hide default HTML checkbox */
+                        .switch input {
+                            opacity: 0;
+                            width: 0;
+                            height: 0;
+                        }
+                        
+                        /* The slider */
+                        .slider {
+                            position: absolute;
+                            cursor: pointer;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-color: #ccc;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+                        }
+                        
+                        .slider:before {
+                            position: absolute;
+                            content: "";
+                            height: 26px;
+                            width: 26px;
+                            left: 4px;
+                            bottom: 4px;
+                            background-color: white;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+                        }
+                        
+                        input:checked + .slider {
+                            background-color: #008000;
+                        }
+                        
+                        input:focus + .slider {
+                            box-shadow: 0 0 1px #2196F3;
+                        }
+                        
+                        input:checked + .slider:before {
+                            -webkit-transform: translateX(26px);
+                            -ms-transform: translateX(26px);
+                            transform: translateX(26px);
+                        }
+                        
+                        /* Rounded sliders */
+                        .slider.round {
+                            border-radius: 34px;
+                        }
+                        
+                        .slider.round:before {
+                            border-radius: 50%;
+                        }
+                    }
+                    >.elementComplete{
+                        section{
+                            >div{
+                                display: block;
+                                @extend .w3-col;
+                                @extend .l6;
+                                @extend .m6;
+                                @extend .s12;
+                                max-height: fit-content;
+                            }
+                            svg{
+                                height: 4em ;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            >div#pieTabla{
+                >section{
+                    @extend .w3-row;
+                    border-top: 1px solid black;
+                    border-bottom: 1px solid black;
+                    >div{
+                        @extend .w3-col;
+                        overflow: hidden;
+                        input{
+                            width: 90%;
+                        }
+                    }
+                    >.cel1{ //id
+                        @extend .l1;
+                        @extend .m1;
+                        @extend .s1;
+                    }
+                    >.cel2{ //nombre
+                        @extend .l5;
+                        @extend .m4;
+                        @extend .s5;
+                    }
+                    >.cel3{ //rol
+                        @extend .l4;
+                        @extend .m4;
+                        @extend .s4;
+                        
+                    }
+                    >.cel4{ //opcion
+                        @extend .l2;
+                        @extend .m3;
+                        @extend .s2;
+                        svg{
+                            max-height: 4em ;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+tablaInfo>div{
+    .col-empleados{
+        >div:nth-child(1){//nombre
+            @extend .l3;
+            @extend .m3;
+            @extend .s3;
+        }
+        >div:nth-child(2){//apellido
+            @extend .l3;
+            @extend .m3;
+            @extend .s3;
+        }
+        >div:nth-child(3){//contrasena
+            @extend .l3;
+            @extend .m2;
+            @extend .s3;
+        }
+        >div:nth-child(4){//rol
+            @extend .l2;
+            @extend .m2;
+            @extend .s2;
+        }
+        >div:nth-child(5){//aderir
+            @extend .l1;
+            @extend .m2;
+            @extend .s1;
+            svg{
+                max-height: 4em ;
+            }
+        }
+    }
+    .pieTabla{
+        border-top: 1px solid gray;
+        border-bottom: 1px solid black;
+        @extend .w3-row;
+        >div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            @extend .w3-col;
+        }
+        @extend .col-empleados;
+        form{
+            >div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 3.5em;
+                max-height: 5em;
+                text-align: center;
+                @extend .w3-col;
+            }
+            @extend .col-empleados;
+        }
+    }
+}
