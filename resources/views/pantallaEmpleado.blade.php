@@ -51,7 +51,7 @@
     </form>
     <div>
         <section id="tableTop_Empleado">
-            <div class="cel1"> <span>Element</span> </div>
+            <div class="cel1"> <span>Clave</span> </div>
             <div class="cel2"> <span>Nombre</span> </div>
             <div class="cel3"> <span>Apellido</span> </div>
             <div class="cel4"> <span>Rol</span> </div>

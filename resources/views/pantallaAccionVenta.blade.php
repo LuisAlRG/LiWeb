@@ -188,7 +188,7 @@
 <!-- Precio y opcion de comprar -->
 <especialVenta>
     <section>
-        <span> Precio total: $ @{{precioTotal}} MX </span>
+        <span> Precio total: @{{ (precioTotal).toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }} MX </span>
         <button  ng-click="AccionRealizarVenta()" ng-show="mostrarBtnVenta();"> Realizar venta </button>
     </section>
 </especialVenta>

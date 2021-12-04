@@ -36,6 +36,7 @@ class EmpleadoController extends Controller
     // funciones de peticion 
     function Autenticar(Request $req){
 
+        /*
         if (isset($_POST["btnSubmit"]))
         {
             $secret = "6LcBh0cdAAAAAKAPnyuz_CnfI1661m_vwgD_AzxX";
@@ -46,6 +47,7 @@ class EmpleadoController extends Controller
                 return view('logIn',['mensajeServidor'=>'El captcha fue rechasado, vuelve a intentar']);
             }
         }
+        */
 
         $name = $req->input('nombreUsuario');
         $pass = $req->input('contrasena');

@@ -14,7 +14,7 @@
                 <h1>LiWeb</h1>
                 <h3>Sistema web de venta y registros de libros de librería</h3>
                 <p>Equipo: Falcones</p>
-                <p>Version 1.0</p>
+                <p>Version 1.1</p>
             </section>
             <section>
                 <figure>

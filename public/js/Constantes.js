@@ -1,4 +1,5 @@
-const DIRECCION_HTTPS = "https://192.168.1.150/LiWeb";
+let nombreHost = window.location.origin;
+const DIRECCION_HTTPS = nombreHost+"/LiWeb";
 const ERROR_PETICION = "Error en la petición, inténtelo mas tarde, o recargue la pagina."
 
 //funcion para saber si esta vacio o null

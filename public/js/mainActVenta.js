@@ -143,7 +143,7 @@ app.controller('allController',function($scope,$http){
             $scope.listLibros[index].cantidad--;
             $scope.listLibrosSelect.push($scope.listLibros[index]);
         }
-            
+        totalPrecio()
     }
 
     $scope.MostrarLirbo= function(libro){
@@ -166,6 +166,7 @@ app.controller('allController',function($scope,$http){
         $scope.listLibrosSelect.splice(index,1);
         let indexListaTotal = $scope.listLibros.findIndex(libro=>libro.idLibro == elementSacado.idLibro);
         $scope.listLibros[ indexListaTotal ].cantidad++;
+        totalPrecio()
     }
 
     $scope.mostrarBtnVenta = function(){
@@ -174,6 +175,13 @@ app.controller('allController',function($scope,$http){
 
     $scope.setIndxSelecionado = function(elIndex){
         $scope.indxSelecionado = elIndex;
+    }
+
+    function totalPrecio() { 
+        $scope.precioTotal = 0;
+        $scope.listLibrosSelect.forEach(element => {
+            $scope.precioTotal += parseFloat(element.precio);
+        });
     }
 
     $scope.OnBuscarLibro = function(){
