@@ -32,13 +32,15 @@ Route::get('/dashboard', function () {
 
 Route::get('/LiWeb',				[EmpleadoController::class,"ViewLogIn"])
 	->name('login');
-Route::post('/LiWeb/Autenticar',	[EmpleadoController::class,"Autenticar"]);
+Route::post('/LiWeb/Autenticar',	[EmpleadoController::class,"Autenticar"])
+	->name('checkCapth');
 Route::get('/LiWeb/Saliendo',		[EmpleadoController::class,"Salir"]);
 
 Route::get('/LiWeb/SobreNosotros',	function(){return view('sobreNosotros');});
 
 Route::get('/LiWeb/MenuPrincipal',	[EmpleadoController::class,"ViewMenuPrincipal"])
-	->middleware(['auth']);
+	->middleware(['auth'])
+	->middleware(['checkNivel']);
 
 Route::get('/LiWeb/Venta',					[VentaController::class, 'ViewVentas'])
 	->middleware(['auth']);
@@ -56,7 +58,8 @@ Route::post('/LiWeb/Vender/LibrosSeleccionados',	[VentaController::class, 'Despl
 Route::post('/LiWeb/AplicarVenta',					[VentaController::class, 'InsertarVenta']);
 
 Route::get('/LiWeb/Libros',					[LibroController::class,"ViewLibros"])
-	->middleware(['auth']);
+	->middleware(['auth'])
+	->middleware(['checkNivel']);
 Route::post('/LiWeb/Libros/VerTodoLibros',	[LibroController::class,"VerTodosLibros"]);
 Route::post('/LiWeb/Libros/Insertar',		[LibroController::class,"InsertarLibro"]);
 Route::post('/LiWeb/Libros/Consultar',		[LibroController::class,"ConsultarLibro"]);
@@ -75,7 +78,8 @@ Route::post('/LiWeb/Libro/QuitarGenero',	[LibroController::class,'QuitarGenero']
 
 
 Route::get('/LiWeb/Libros/Autores',				[AutorController::class,'ViewAutores'])
-	->middleware(['auth']);
+	->middleware(['auth'])
+	->middleware(['checkNivel']);
 Route::post('/LiWeb/Libros/Autores/VerTodos',	[AutorController::class,'VerTodosAutores']);
 Route::post('/LiWeb/Libros/Autores/Consultar',	[AutorController::class,'ConsultarAutor']);
 Route::post('/LiWeb/Libros/Autores/Insertar',	[AutorController::class,'InsertarAutor']);
@@ -83,7 +87,8 @@ Route::post('/LiWeb/Libros/Autores/Modificar',	[AutorController::class,'Modifica
 Route::post('/LiWeb/Libros/Autores/Borrar',		[AutorController::class,'BorrarAutor']);
 
 Route::get('/LiWeb/Libros/Generos',				[GeneroController::class,'ViewGenero'])
-	->middleware(['auth']);
+	->middleware(['auth'])
+	->middleware(['checkNivel']);
 Route::post('/LiWeb/Libros/Generos/VerTodos',	[GeneroController::class,'VerTodoGeneros']);
 Route::post('/LiWeb/Libros/Generos/Consultar',	[GeneroController::class,'ConsultarGenero']);
 Route::post('/LiWeb/Libros/Generos/Insertar',	[GeneroController::class,'InsertarGenero']);
@@ -91,7 +96,8 @@ Route::post('/LiWeb/Libros/Generos/Modificar',	[GeneroController::class,'Modific
 Route::post('/LiWeb/Libros/Generos/Borrar',		[GeneroController::class,'BorrarGenero']);
 
 Route::get('/LiWeb/Libros/Editoriales',				[EditorialController::class,'ViewEditorial'])
-	->middleware(['auth']);
+	->middleware(['auth'])
+	->middleware(['checkNivel']);
 Route::post('/LiWeb/Libros/Editoriales/VerTodos',	[EditorialController::class,'VerTodosEditoriales']);
 Route::post('/LiWeb/Libros/Editoriales/Consultar',	[EditorialController::class,'ConsultarEditorial']);
 Route::post('/LiWeb/Libros/Editoriales/Insertar',	[EditorialController::class,'InsertarEditorial']);

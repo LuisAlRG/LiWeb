@@ -24,8 +24,9 @@ class LibroController extends Controller
 	cantidad
 	*/
 	//funciones de vista
-	function ViewLibros(){
-		$ruta = '';
+	function ViewLibros(Request $req){
+		$ruta = $req->input('nivelEmpleado','');
+		/*
         $usuario = Auth::user();
         $empleado = $usuario->empleado()->first();
 
@@ -33,7 +34,7 @@ class LibroController extends Controller
         if($puesto == 1){
             $ruta = 'funcionario.';
         }
-
+		*/
 		return view($ruta.'pantallaLibro',['mensajeServidor'=>null]);
 	}
 	function ViewLibroModificar(Request $req){

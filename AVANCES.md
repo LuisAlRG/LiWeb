@@ -87,3 +87,11 @@ avance 1 del 02 11 21
 Cambio 1 de 04 11 21
     se tuvieron que correguir algunas cosas de venta
     Problema con la cuenta de capcha por lo que se va a desactivar por estas ocaciones, una disculpa
+
+Cambio 1 de 05 11 21
+    Se regreso el capcha a la paguina de inicio, se intento aplicar middle ware pero se complico de mas
+    
+Cambio 2 de 05 11 21
+    se egrego el middleware al capcha, por ahora solo funciona para la pantalla de log in asi que no hay mucho avance
+    se agrego el middleware de Nivel de usuario para las pantallas con diferentes nivel de empleado
+    algunas modificaciones de correccion ortograficas

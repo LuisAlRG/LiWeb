@@ -17,8 +17,9 @@ class EmpleadoController extends Controller
         return view('logIn',['mensajeServidor'=>null]);
     }
     // /LiWeb/MenuPrincipal
-    function ViewMenuPrincipal(){
-        $ruta = '';
+    function ViewMenuPrincipal(Request $req){
+        $ruta = $req->input('nivelEmpleado','');
+        /*
         $usuario = Auth::user();
         $empleado = $usuario->empleado()->first();
 
@@ -26,7 +27,7 @@ class EmpleadoController extends Controller
         if($puesto == 1){
             $ruta = 'funcionario.';
         }
-
+        */
         return view( $ruta.'menuPrincipal' );
     }
     // /LiWeb/Empleados

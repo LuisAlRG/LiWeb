@@ -15,7 +15,9 @@ class AutorController extends Controller
      * apellido
      */
     //funciones de vistas
-    function ViewAutores(){
+    function ViewAutores(Request $req){
+        $ruta = $req->input('nivelEmpleado','');
+        /*
         $ruta = '';
         $usuario = Auth::user();
         $empleado = $usuario->empleado()->first();
@@ -24,6 +26,7 @@ class AutorController extends Controller
         if($puesto == 1){
             $ruta = 'funcionario.';
         }
+        */
         return view($ruta.'pantallaAutor',['mensajeServidor'=>null]);
     }
     

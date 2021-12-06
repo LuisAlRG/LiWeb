@@ -14,7 +14,9 @@ class GeneroController extends Controller
      * nombre
      */
     //funciones de vista
-    function ViewGenero(){
+    function ViewGenero(Request $req){
+        $ruta = $req->input('nivelEmpleado','');
+        /*
         $ruta = '';
         $usuario = Auth::user();
         $empleado = $usuario->empleado()->first();
@@ -22,7 +24,7 @@ class GeneroController extends Controller
         $puesto = $empleado->QueEs();
         if($puesto == 1){
             $ruta = 'funcionario.';
-        }
+        }*/
         return view($ruta.'pantallaGenero',['mensajeServidor'=>null]);
     }
 

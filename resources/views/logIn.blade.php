@@ -36,9 +36,9 @@
                     data-action='submit'
                     >
                     -->
-                    <!--
+                    
                     <div class="g-recaptcha" data-sitekey="6LcBh0cdAAAAAOPLmaIXbQxZfTQsb3mUytsAHYQH"></div> 
-                    -->
+                    
                     <input type="submit" name="btnSubmit" value="Entrar">
                 </form>
                 <p><span>{{$mensajeServidor}}</span></p>
