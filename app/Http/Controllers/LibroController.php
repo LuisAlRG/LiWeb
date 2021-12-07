@@ -26,15 +26,6 @@ class LibroController extends Controller
 	//funciones de vista
 	function ViewLibros(Request $req){
 		$ruta = $req->input('nivelEmpleado','');
-		/*
-        $usuario = Auth::user();
-        $empleado = $usuario->empleado()->first();
-
-        $puesto = $empleado->QueEs();
-        if($puesto == 1){
-            $ruta = 'funcionario.';
-        }
-		*/
 		return view($ruta.'pantallaLibro',['mensajeServidor'=>null]);
 	}
 	function ViewLibroModificar(Request $req){
@@ -60,99 +51,6 @@ class LibroController extends Controller
         }
     	return $libros;
     }
-/*
-    function ConsultarLibro1(Request $req){
-		$clave = 		$req->input('clave');
-		$edicion = 		$req->input('edicion');
-		$precio = 		$req->input('precio');
-		$categoria = 	$req->input('categoria');
-		$titulo = 		$req->input('titulo');
-		$nombreAutor = 	$req->input('autor');
-		$nombreEditorial = $req->input('editorial');
-		$nombreGenero = $req->input('genero');
-
-		$categoria = (int)$categoria;
-		
-		if(is_numeric($clave)){
-            $clave = (int) $clave;
-            $elemento = Libro::find($clave);
-			$elemento = $this->PrepararLibro($elemento);
-            return [0=>$elemento];
-        }
-		if(is_numeric($precio)){
-			$precio = (int) $precio;
-		}
-		else{
-			$precio = 0;
-			$categoria = 1;
-		}
-		$opCategoria = '!=';
-		switch($categoria){
-			case 1: $opCategoria='>='; break; //mayor que
-			case 2: $opCategoria='<='; break; //menor que
-		}
-		
-		
-		$elementos = Libro::where('titulo','LIKE','%'.$titulo.'%')
-			->where('precio',$opCategoria,$precio)
-			->get();
-			
-		if(count($elementos)){
-            foreach($elementos as $key => $libro){
-				//echo $libro;
-				
-                $libro = $this->PrepararLibro($libro);
-            }
-        }
-		$elementos = $elementos->toArray();
-		$listaFinal = array_filter($elementos,function($var){
-			//primero revisar si hay autor con ese nombre o apellido
-			$pasableAutor = false;
-			if(isset($nombreAutor) || !(trim($nombreAutor??'') === '')){
-				$listAutor = $var->autores()->get();
-				foreach($listAutor as $key => $elAutor){
-					$pasableAutor = str_contains($elAutor->nombre, $nombreAutor) || 
-					str_contains($elAutor->apellido, $nombreAutor);
-					if($pasableAutor)
-						break;
-				}
-			}
-			else{
-				$pasableAutor = true;
-			}
-			//revisar si hay editorial con ese libro
-			$pasableEditorial = false;
-			if(isset($nombreEditorial) || !(trim($nombreEditorial??'') === '')){
-				$listEditorial = $var->editorial()->get();
-				foreach($listEditorial as $key => $elEditorial){
-					$pasableEditorial = str_contains($elEditorial->nombre, $nombreEditorial);
-					if($pasableEditorial)
-						break;
-				}
-			}
-			else{
-				$pasableEditorial = true;
-			}
-			//revisar si hay generos con ese nombre
-			$pasableGenero = false;
-			if(isset($nombreGenero) || !(trim($nombreGenero??'') === '')){
-				$listGenero = $var->generos()->get();
-				foreach($listGenero as $key => $elGenero){
-					$pasableGenero  = str_contains($elGenero->nombre, $nombreGenero);
-					if($pasableGenero)
-						break;
-				}
-			}
-			else{
-				$pasableGenero = true;
-			}
-			$pasable = $pasableAutor && $pasableEditorial && $pasableGenero;
-			return $pasable;
-		});
-		
-		return $listaFinal;
-    }
-*/
 	function ConsultarLibro(Request $req){
 		$clave = 		$req->input('clave');
 		$edicion = 		$req->input('edicion');
@@ -244,11 +142,6 @@ class LibroController extends Controller
     	}
 
     	$editorial = Editorial::where('nombre','=',$nombreEditorial)->first();
-    	/*
-		DB::table('Editorial')
-			->where('nombre','like',$atributo)
-			->get();
-    	*/
     	if(!$editorial){
     		$editorial = new Editorial();
     		$editorial->nombre = $nombreEditorial;
@@ -420,18 +313,6 @@ class LibroController extends Controller
 				return $elemento;
 			}
 		}
-
-		/*
-		$apellido = '';
-		if(str_contains($nombre,'-') || str_contains($nombre,'-')){
-			$nombreCompleto = explode("-",$nombre);
-			$nombre = trim($nombreCompleto[0]);
-			$apellido = trim($nombreCompleto[1]);
-		}
-		else{
-			$nombre = trim($nombre);
-		}
-		*/
 
 		$elementos = Autor::where('nombre','=',$nombre)
 			->where('apellido','=',$apellido)

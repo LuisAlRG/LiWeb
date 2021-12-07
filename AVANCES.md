@@ -98,3 +98,6 @@ Cambio 2 de 05 12 21
 
 cambio 1 de 07 12 21
     correccion ortografica, se cambio en las pantalla las palabras "aderir" y "aderrir" con "adherir"
+
+cambio 1_1 de 07 12 21
+    simplemente se borraron algunos comentarios extras

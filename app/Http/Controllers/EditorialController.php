@@ -16,16 +16,6 @@ class EditorialController extends Controller
     //funciones de vistas
     function ViewEditorial(Request $req){
         $ruta = $req->input('nivelEmpleado','');
-        /*
-        $ruta = '';
-        $usuario = Auth::user();
-        $empleado = $usuario->empleado()->first();
-
-        $puesto = $empleado->QueEs();
-        if($puesto == 1){
-            $ruta = 'funcionario.';
-        }
-        */
         return view($ruta.'pantallaEditorial',['mensajeServidor'=>null]);
     }
 
