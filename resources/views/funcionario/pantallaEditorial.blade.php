@@ -64,7 +64,7 @@
         </div>
         <div class="pieTabla">
             <div>Nombre de Editorial</div>
-            <div>Aderrir</div>
+            <div>Adherir</div>
             <form name="aEditorial" id="aEditorial" action="aderirEditorial">
                 <div>
                     <input type="text"  name="nombreEditorialA" id="nombreEditorialA" required 

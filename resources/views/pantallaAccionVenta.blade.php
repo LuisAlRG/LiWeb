@@ -74,7 +74,7 @@
             <div class="cel3"> <span>Autor</span> </div>
             <div class="cel4"> <span>Editorial</span> </div>
             <div class="cel5"> <span>Cantidad</span> </div>
-            <div class="cel6"> <span>Aderir</span> </div>
+            <div class="cel6"> <span>Adherir</span> </div>
         </section>
         <div id="cuerpoEntero">
             <section class="rowsElement_Libro"

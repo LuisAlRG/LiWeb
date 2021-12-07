@@ -62,7 +62,7 @@
         </div>
         <div class="pieTabla">
             <div>Genero</div>
-            <div>Aderrir</div>
+            <div>Adherir</div>
             <form name="aGenero" id="aGenero" action="aderirGenero">
                 <div>
                     <input type="text" name="nombreGeneroA" id="nombreGeneroA" required 

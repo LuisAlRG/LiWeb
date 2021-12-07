@@ -138,7 +138,7 @@
         <div>Buscar clave</div>
         <div>Nombre</div>
         <div>Apellido</div>
-        <div>Aderrir</div>
+        <div>Adherir</div>
         <form name="aderirAutorOnLibro" id="aderirAutorOnLibro" action="aderirAutorOnLibro" method="post">
             <div>
                 <input type="number" name="idAutorB" id="idAutorB" 
@@ -225,7 +225,7 @@
     <div class="pieTabla">
         <div>Buscar clave</div>
         <div>Genero</div>
-        <div>Aderrir</div>
+        <div>Adherir</div>
         <form name="aGeneroOnLibro" id="aGeneroOnLibro" action="aderirGeneroOnLibro">
             
             <div>

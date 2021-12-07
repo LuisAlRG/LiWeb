@@ -197,7 +197,7 @@
             <div>Editorial</div>
             <div>Genero</div>
             <div>Precio</div>
-            <div>Aderir</div> <br>
+            <div>Adherir</div> <br>
             <form action="Libro" method="post" id="aLibro">
                 
                 <div>

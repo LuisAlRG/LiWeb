@@ -78,20 +78,23 @@ avance 1 del 30 11 21
     Cambio en las busquedas de libro para que seen busqueda de similitud en vez de exactitud
     agrege la pantalla de acerca de nosostros.
 
-avance 1 del 02 11 21
+avance 1 del 02 12 21
     Se agrego middleware que cancela la posibilidad de que un empleado funcionario entre a la seccion de modificar empleados.
     Se agregaron algunas validaciones en el input numeric de todas las pantallas que uviese consultas en ella.
     Se agrego la posibilidad de guardad datos en localstorage en l codigo de "mainActVentas, mainVentasPagos" para que al momento de ingresar libros en la lista de libros seleccionados se guarde la cantidad de libros seleccionados y se vuelva a despliegar al requerirlo al regresar a la siguiente pantalla por mdificacion.
     se agrego 2 nuevo sidder el cual son para crear la base de datos con informacion de zero para no tener el problema de que no existan usuarios dentro de la base de datos que no puedan agregar a otros.
     
-Cambio 1 de 04 11 21
+Cambio 1 de 04 12 21
     se tuvieron que correguir algunas cosas de venta
     Problema con la cuenta de capcha por lo que se va a desactivar por estas ocaciones, una disculpa
 
-Cambio 1 de 05 11 21
+Cambio 1 de 05 12 21
     Se regreso el capcha a la paguina de inicio, se intento aplicar middle ware pero se complico de mas
     
-Cambio 2 de 05 11 21
+Cambio 2 de 05 12 21
     se egrego el middleware al capcha, por ahora solo funciona para la pantalla de log in asi que no hay mucho avance
     se agrego el middleware de Nivel de usuario para las pantallas con diferentes nivel de empleado
     algunas modificaciones de correccion ortograficas
+
+cambio 1 de 07 12 21
+    correccion ortografica, se cambio en las pantalla las palabras "aderir" y "aderrir" con "adherir"

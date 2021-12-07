@@ -144,7 +144,7 @@
             <div>Apellidos</div>
             <div>Contraseña</div>
             <div>Rol</div>
-            <div>Aderir</div>
+            <div>Adherir</div>
             <form action="aderirEmpleado" id="aEmpleado">
             
                 <div>

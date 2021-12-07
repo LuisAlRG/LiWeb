@@ -137,7 +137,7 @@
         <div class="pieTabla">
             <div>Nombre</div>
             <div>Apellido</div>
-            <div>Aderrir</div>
+            <div>Adherir</div>
             <form name="aAutor" id="aAutor" action="aderirAutorOnLibro" method="post">
                 <div>
                     <input type="text" name="nombreAutorA" id="nombreAutorA" required 
